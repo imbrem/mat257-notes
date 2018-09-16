@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{September 14 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+
+\begin{document}
+
+\maketitle
+
+\section*{Continuity}
+
+\begin{definition}
+  Consider a function \[f: A \to \reals^n\]
+\end{definition}
+\(f\) is \underline{continuous} at \(A\) if for every \(\epsilon > 0\), \(\exists \delta > 0\) such that \(|f(x) - f(a)| < \epsilon\) whenever \(|x - a| < \delta, x \in A\).
+\begin{theorem}
+  \(f\) is continuous if and only if for every open \(U \subset \reals^n\), \(f^{-1}(U) = A \cap V\) where \(V\) is open in \(\reals^n\).
+\end{theorem}
+\begin{proof}
+
+  \begin{itemize}
+
+    \item [\(\implies\)] consider \(U\) open in \(\reals^n\). Let \(a \in f^{-1}(U)\). For some \(\epsilon > 0\), \(\exists\) a ball \(B_{f(a)} = B(f(a), \epsilon) \subset U\) because \(U\) is open.
+
+    Since \(f\) is continuous at \(a\), \(\exists \delta > 0\) such that \(f(x) \in B_{f(a)}\) for every \(x \in A \cap B(a, \delta) = B_a\). We can define
+    \[V = \bigcup_{a \in f^{-1}(U)}B_a\]
+
+    \item [\(\impliedby\)] Consider \(a \in A\) and let \(\epsilon > 0\). Let \(U = B(f(a), \epsilon)\). Then \(f^{-1}(U) = A \cap V\) for some open \(V \subset \reals^n\).
+    \[a \in V \implies \exists \delta > 0, B(a, \delta) \subset V\]
+    But everything which lies inside \(V\) gets mapped inside \(U\) which is that first ball that we started with. And this is the condition that we want.
+
+  \end{itemize}
+\end{proof}
+
+\begin{corollary}
+  A composite of continuous functions is continuous
+\end{corollary}
+\begin{proof}
+  Let
+  \[f: A \to \reals^n, g: B \to \reals^p\]
+  be continuous functions where \(B \subset \reals^n\) and \(f(A) \subset B\).
+
+  Consider open \(U \subset \reals^p\). We know
+  \[\exists V \subset \reals^n \text{ open, } g^{-1}(U) = B \cap V\]
+  So we can write
+  \[(g \circ f)^{-1}(U) = f^{-1}(g^{-1}(U)) = f^{-1}(B \cap V) = f^{-1}(V)\]
+  We know that
+  \[\exists W \subset \reals^n \text{ open, }, f^{-1}(V) = A \cap W = (g \circ f)^{-1}(U)\]
+  But this is exactly what we wanted to show
+\end{proof}
+
+\begin{exercise}
+  Let \(f = (f_1,...,f_n)\) be a function from \(\reals\) to \(\reals^n\). Then \(f\) is continuous if and only if \(\forall i \in \{1,...,n\}\), \(f_i\) is continuous.
+\end{exercise}
+\begin{proof}
+  \begin{itemize}
+
+    \item [\(\impliedby\)] We need to estimate the norm \(|f(x) - f(a)|\) with the differences between \(f_i(x_i)\) and \(f_i(a_i)\). We could use a variety of inequalities for this, including
+    \[|f(x) - f(a)| \leq \sum_{i = 1}^n|f_i(x) - f_i(a)|\]
+    The full \(\epsilon\)-\(\delta\) argument is left as an exercise.
+
+    \item [\(\implies\)] We need to estimate the norm \(|f_i(x) - f_i(a)| < |f(x) - f(a)|\). Alternatively, we can do this topologically. The full argument is left as an exercise.
+
+  \end{itemize}
+
+\end{proof}
+\begin{exercise}
+  A linear transformation \(T: \reals^m \to\reals^n\) is \underline{uniformly} continuous
+\end{exercise}
+\begin{definition}
+   There is a norm \(M > 0\) such that \(|T(x)| \leq M|x|\). Hence,
+   \[|T(x) - T(y)| = |T(x - y)| \leq M|x - y|\]
+   Given \(\epsilon\), take \(\delta = \frac{\epsilon}{M}\).
+\end{definition}
+\begin{exercise}
+  Are the following functions continuous?
+  \begin{enumerate}
+    \item \(f(x, y) = \frac{x^2 - y^2}{x^2 + y^2}\) - No
+    \item \(f(x, y) = \frac{x^2 + 3xy + y^2}{x^2 + 4xy + y^2}\) - No
+    \item \(f(x, y) = e^{-\frac{|x - y|}{x^2 - 2xy + y^2}} = e^{-\frac{1}{|x - y|}}\) - Yes
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  \begin{enumerate}
+    \item \(f\) is 1 along the line \(\{f(x, 0) : x \in \reals\}\), but -1 along the line \(\{f(0, y) : y \in \reals\}\), both of which traverse the origin.
+    \item No for the same reason, but we can't check on the axes, since each axis is 1. Instead, we can check on the \(x\) axis and compare that with any line except the \(y\) axis, such as \(y = x\), where the value is \(\frac{5}{6}\)
+    \item Composite of \(z \mapsto e^{\frac{1}{|z|}}\) and \((x, y) \mapsto x - y\)
+  \end{enumerate}
+\end{proof}
+\begin{exercise}
+  Let \(X \subseteq \reals^n\). We define the \underline{distance function}
+  \[d(x, X) = \inf_{a \in X}|x - a|\]
+  \(\forall X \in \mc{P}(\reals^n), d(x, X)\) is uniformly continuous on \(\reals^n\)
+\end{exercise}
+
+\end{document}
