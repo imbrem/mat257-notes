@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{October 2 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\maketitle
+
+Examples:
+\begin{enumerate}
+  \item Let \[f(x, y) = \int_a^{x + y}g\] where \(g: \reals \to \reals\) is continuous. We compute \(Df(c, d)\) as follows:
+  We have that \(f = q \circ s\), where
+  \[q(t) = \int_a^tg, s(x, y) = x + y\]
+  We have
+  \[Df(c, d) =  g'(s(c, d))s'(c, d) = g(c + d)(c + d)\]
+  since \(q'(t) = g(t)\).
+
+  \item Let \[f(x, y) = \int_a^{x^y}g\] We have
+  \[f = g \circ \xi, \xi(x, y) = x^y = e^{y\log x}\]
+  Hence,
+  \[D\xi(x, y) = x^yD(y\log x) = x^y((0, 1)\log x + (1/x, 0)y) = x^y(y/x, \log x)\]
+  \[\implies Df(c, d) = q'(\xi(c, d))\xi'(c, d) = g(c^d)c^d(d/c, \log c)\]
+\end{enumerate}
+
+\section*{Higher-order Derivatives}
+Let \(f: U \to \reals\) be a function where \(U \subseteq \reals^m\) and suppose
+\[D_if = \prt{f}{x_i}: U \to \reals\]
+exists for all \(i\). So we could now consider
+\[D_j(D_if) = \prt{}{x_j}\left(\prt{f}{x_i}\right)\]
+We'll write \(D_{ij}f\) to denote the above. Notice \(i\) is applied \textit{first}. We may also write \(f_{x_ix_j}\) and \(\frac{\partial^2 f}{\partial x_j \partial x_i}\). We have that
+\[\frac{\partial^2 f}{\partial x_j \partial x_i}(a) = \frac{\partial^2 f}{\partial x_i \partial x_j}(a)\]
+if both mixed partials exist and are continuous in a neighborhood of \(a\) (proof uses \(\int\)).
+
+In general, we can consider taking higher order partials as well, as in
+\[\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\]
+Of course we have to worry about the order, but the order is irrelevant if \(f\) is \(\mc{C}^\infty\), i.e. that all partial derivatives of all orders exist (and are hence continuous).
+
+\section*{Multi-index notation}
+In multi-index notation, \(\alpha = (\alpha_1,...,\alpha_m)\) is a vector of non-negative integers. We define the \textit{total order of \(\alpha\)}
+\[|\alpha| = \alpha_1 + ... + \alpha_m\]
+Furthermore, we define
+\[x = (x_1,...,x_m) \implies x^\alpha = x_1^{\alpha_1}...x_m^{\alpha_m}\]
+Once we look at Taylor's theorem, the notation
+\[x! = x_1!...x_m!\]
+will also come in handy.
+
+We can now perform another example:
+\begin{itemize}
+
+  \item [3.] Let
+  \[f(x, y) = \left\{\begin{array}{cc}
+    xy\frac{x^2 - y^2}{x^2 + y^2} & (x, y) \neq (0, 0) \\
+    0 & (x, y) = (0, 0)
+  \end{array}\right.\]
+  Is this function differentiable at the origin? Yes: \(f'(0, 0) = (0, 0)\). Let's check: we need to show that
+  \[\lim_{(x, y) \to (0, 0)}\frac{f(x, y) - f(0, 0) - \cancel{(0, 0)\begin{pmatrix} x \\ y \end{pmatrix}}}{\sqrt{x^2 + y^2}} = \lim_{(x, y) \to (0, 0)}xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}} = 0\]
+  We have that
+  \[\left|xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}}\right| \leq \frac{|xy|}{\sqrt{x^2 + y^2}} \to 0\]
+
+\end{itemize}
+
+\end{document}

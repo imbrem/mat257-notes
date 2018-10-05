@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{September 16 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+
+\begin{document}
+
+\maketitle
+
+\section*{Compactness}
+
+\begin{definition}
+  A subset \(X\) of \(\reals^n\) is \underline{compact} if every open covering of \(X\) has a finite subcover.
+\end{definition}
+
+We're later going to prove a deep theorem about compactness:
+\begin{theorem}
+  A subset \(X\) of \(\reals^n\) is compact if and only if \(X\) is closed and bounded
+\end{theorem}
+We won't do this right now, because it'll involve some work, but we'll use something called the Heine-Borel Theorem: \([0, 1]\) is compact. We're going to prove this exactly the same way as we proved the ``Three Hard Theorems'' from first year calculus. It's a good exercise to try this.
+
+
+Today, we'll do half of this theorem, the easy part: compact \textit{implies} closed and bounded.
+\begin{lemma}
+  If \(X \subset \reals^n\) is compact then \(X\) is closed and bounded.
+\end{lemma}
+\begin{proof}
+  \begin{itemize}
+    \item \(X\) is closed: to say that \(X\) is closed is of course the same thing as saying \(\reals^n \setminus X\) is open. To show this, we take any point in \(\reals^n \setminus X\), and show there's some ball centered at that point which is a subset of \(\reals^n \setminus X\).
+
+    So let \(x \in \reals^n \setminus X\). We want to show that \(\exists \delta > 0\), \(B(a, \delta) \subset \reals^n \setminus X\) for some \(\delta > 0\). Let's just look at all possible balls centered at \(A\). Or we might as well just consider, for some \(k \in \nats\), the closed ball \(\overline{B(a, k^{-1})}\). Let's look at the complement of this closed ball,
+    \[U_k = \reals^n \setminus \overline{B(a, k^{-1})}\]
+    We have that
+    \[\bigcup_kU_k = \reals^n\setminus\{a\}\]
+    So \(\{U_k\}\) is an open cover of \(X\). But \(X\) is compact, so this open cover has a finite subcover. This fact tells us that \(\exists k\), \(X \subset U_k\). But \(U_k\) is the complement of the closed ball of radius \(\frac{1}{k}\), meaning the open ball
+    \[B(a, k^{-1}) \subseteq \reals^n \setminus X\]
+
+    We can clearly see that this implies \(\reals^n \setminus X\) is open, implying \(X\) is closed.
+
+    \item \(X\) is bounded:  consider a cover of \(X\) by all open balls of radius 1 in \(\reals^n\).
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  If \(X \subset \reals^m\) is compact and \(f: X \to \reals^n\) is continuous then \(f(X)\) is pact
+\end{theorem}
+\begin{proof}
+  Let \(\mc{O}\) be an open cover of \(f(X)\). For every \(U \in \mc{O}\), \(f^{-1}(U) = X \cap V_U\) where \(V_U\) is open in \(\reals^m\). So
+  \[\{V_U : U \in \mc{O}\}\]
+  is an open cover of \(X\). Since \(X\) is compact, there is a finite subcover
+  \[V_{U_1},...,V_{U_k}\]
+  So \(U_1,...,U_k\) cover \(f(X)\).
+\end{proof}
+
+\begin{theorem}[Extreme Value Theorem]
+  A continuous function \(f: X \to \reals\) on a nonempty compact subset \(X\) of \(\reals^n\) attains a maximum and minimum
+\end{theorem}
+\begin{proof}
+  Let \(M = \sup\{f(x) : x \in X\}\). \(M < \infty\) since \(f(X)\) is bounded. What if \(M \notin f(X)\)? Since \(f(X)\) is closed, we can draw a small interval around \(M\) which is not in \(f(X)\), contradicting the fact that \(M = \mbox{lub} f(X)\).
+
+  The proof for minima is analogous.
+\end{proof}
+
+\begin{definition}
+  The \(\epsilon\)-neighborhood of \(X\) is given by
+  \[\bigcup_{x \in X}B(x, \epsilon) = \{y \in \reals^n : d(y, X) < \epsilon\}\]
+\end{definition}
+
+\begin{theorem}[\(\epsilon\)-neighborhood theorem]
+  If \(X \subset U \subset \reals^n\) where \(X\) is compact and \(U\) is open, then there is \(\epsilon > 0\) such that the \(\epsilon\)-neighborhood of \(X\) lies in \(U\).
+\end{theorem}
+\begin{proof}
+  Define \(f: X \to \reals\) by \(f(x) = d(x, \reals^n \setminus U)\). We showed this is a continuous function, which is strictly positive (since \(U\) is open). Hence, by the Extreme Value Theorem, it has a positive minimum. Take \(\epsilon\) to be this minimum.
+\end{proof}
+
+\end{document}
