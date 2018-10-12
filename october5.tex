@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{October 5 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\maketitle
+
+\section*{Partial Derivatives}
+\begin{theorem}
+  If \(U \subset \reals^m\), \(f: U \to \reals^n\) is differentiable at \(a\) and \(f = (f_1,...,f_n)\) then each partial derivative \(\prt{f_i}{x_j}(a)\) exists, and
+  \[f'(a) = \begin{pmatrix}
+    \prt{f_1}{x_1}(a) & ... & \prt{f_1}{x_m}(a) \\
+    \vdots & \ddots & \vdots \\
+    \prt{f_n}{x_1}(a) & ... & \prt{f_n}{x_m}(a)
+  \end{pmatrix}\]
+  with
+  \[\prt{f}{x_j}(a) = \left.\prt{}{x}f(a_1,...,a_{j - 1}, x, a_{j + 1},..., a_m)\right|_{x = a_j}\]
+\end{theorem}
+\begin{proof}
+  \begin{itemize}
+
+    \item Case \(n = 1\): Let
+    \[h(x) = (a_1,...,a_{j - 1},x,a_{j + 1},...,a_m): \reals \to \reals^m\]
+    Then
+    \[\prt{f}{x_j}(a) = D(f \circ h)(a_j) = Df(h(a_j)) \circ Dh(a_j)
+     = f'(a) \cdot \begin{pmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{pmatrix}\]
+     where the matrix is \(1 \times m\) and 1 in the \(j^{th}\) place, i.e. the \(j^{th}\) entry in \(f'(a)\).
+
+     \item For \(n\) in general,
+     \[f = (f_1,...,f_n), f'(a) = \begin{pmatrix} f_1'(a) \\ \vdots \\ f_n'(a) \end{pmatrix}\]
+     Hence, we have a row for each \(f_i\), and we can apply the case for \(n = 1\) to each row.
+
+  \end{itemize}
+\end{proof}
+We're going to do some calculations right away with this, since it's very important that this is all straight in your head. One thing we want to look at is the converse of this theorem, which turns out not to be true unless we make additional hypotheses.
+
+But let's fist do some computations, and we'll see that this notion of partial derivatives lets us rethink what the chain rule says, which is very important when you want to use the chain rule.
+
+\subsection*{The Chain Rule}
+
+Suppose we have
+\[F(x) =  f(g_1(x),...,g_n(x)), x = (x_1,...,x_m), g = (g_1,...,g_n)\]
+with \(g\) differentiable at \(a\) and \(f\) differentiable at \(g(a)\). We want to compute \(\prt{F}{x_i}(a)\). Let's say that \(f = f(y_1,...,y_n)\). Then what's the formula?
+\[\prt{F}{x_i}(a) = \sum_{j = 1}^n\prt{f}{y_j}(g(a))\prt{g_j}{x_i}(a)\]
+Why is this? Well, what does the chain rule say?
+\[DF(a) = Df(g(a))Dg(a) =
+\begin{pmatrix} \prt{f}{y_1}(g(a)) & ... & \prt{f}{y_n}(g(a)) \end{pmatrix}
+\begin{pmatrix}
+  \prt{g_1}{x_1}(a) & ... & \prt{g_1}{x_m}(a) \\
+  \vdots & \ddots & \vdots \\
+  \prt{g_n}{x_1}(a) & ... & \prt{g_n}{x_m}(a)
+\end{pmatrix}
+\]
+So the result of this is a row matrix, and by taking \(\prt{F}{x_i}\) is just indexing into it. You should really know this, you should even memorize it. When you come out of calculus, this should be as natural as addition when you come out of elementary school.
+
+These things, sometimes people write them in a kind of symbolic, simpler way, which is useful. Here we have
+\[y_j = g_j(x_1,...,x_m)\]
+and then we're composing to get
+\[z = f(y_1,...,y_n) = f(g(x))\]
+So if you want to take the derivative with respect to \(x_i\), you could write that as
+\[\prt{z}{x_i}\]
+But this is like short form, since \(z\) is not a function of \(x\), it's a function of \(y\). So when we write \(\prt{z}{x_i}\), we're thinking of it as already composite. And the chain rule thinks of this as
+\[\prt{z}{x_i} = \sum_{j = 1}^n\prt{z}{y_j}\prt{y_j}{x_i}\]
+with evaluation, this becomes
+\[\prt{z}{x_i}(a) = \sum_{j = 1}^n\left.\prt{z}{y_j}\right|_{y = g(a)}\left.\prt{y_j}{x_i}\right|_{x = a}\]
+Now how does this notation sometimes show up in a confusing way? Some examples!
+\begin{enumerate}
+  \item Suppose \(F(t) = f(x(t), y(t), z(t), t)\). Let's call \(F(t) = w\). Let's take the derivative with respect to \(t\):
+  \[\frac{dw}{dt} = \prt{f}{x}\frac{dx}{dt} + \prt{f}{y}\frac{dy}{dt} + \prt{f}{z}\frac{dz}{dt} + \\ ?\]
+  What do we write in the fourth place? We want the derivative of \(f\) with respect to the fourth variable, so we just write \(\prt{w}{t}\). So we have
+  \[\frac{dw}{dt} \neq \prt{w}{t}\]
+  See how this is confusing?
+
+  This is \textit{shorthand}, so there can be ambiguity. That ambiguity is somewhat resolved by the different ordinary versus partial derivative notation, but it's still confusing. That's why you've got to unserstand the full, genuine meaning behind the shorthand notation.
+
+  \item Let \(w = f(x(s, t), y(s, t), s, t)\). Now it gets even worse...
+\end{enumerate}
+
+\end{document}
