@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{October 12 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\maketitle
+
+\section*{The Implicit Function Theorem}
+
+In this course, we have three important theorems, of which this is one. Each is a generalization of something you've seen in first year calculus, but we'll see that these generalizations are very far-reaching and involve new techniques. Let's begin with a brief ``plan'' for the next month:
+
+\subsection*{Plan}
+\begin{enumerate}
+  \item Today: the inverse function theorem
+  \item The inverse function theorem, which we'll see is equivalent.
+  \item Proof of the inverse function theorem (which will take a few lectures)
+  \item Implications of the implicit function theorem, in particular applications to extreme value problems, introducing the idea of Lagrange Multipliers. Afterwards, we'll talk about the idea of a differentiable manifold.
+\end{enumerate}
+So this is what we're aiming to do in the next few weeks.
+
+\subsection*{The Inverse Function Theorem}
+Recall: suppose \(f: \reals \to \reals\) is a continuously differentiable function in an open inverval containing \(a\), and \(f'(a) \neq 0\). Then \(f'\) is either greater than or lessthan zero in an open interval containing \(a\). Therefore \(f\) is one-to-one, and so has an inverse defined on an open interval \(W\) containing \(f(a)\). Moreover, \(f^{-1}\) is differentiable, and
+\[(f^{-1})'(f(a)) = \frac{1}{f'(a)}\]
+We're going to discuss a generalization of this idea to several variables.
+
+\begin{theorem}[Inverse Function Theorem]
+  Let \(f: U \to \reals^n\) be a continuously differentiable (\(\mc{C}^1\)) on an open set \(U \subset \reals^n\). Let \(a \in U\) be such that \(\det f'(a) \neq 0\). Then there exist open sets \(a \in V, f(a) \in W\) such that \(f: V \to W\) with a continuous inverse \(f^{-1}: W \to V\). Moreover, \(f^{-1}\) is differentiable on \(W\) and
+  \[\forall y \in W, (f^{-1})'(y) = (f'(f^{-1}(y)))^{-1}\]
+\end{theorem}
+Remark: if we know already that \(f^{-1}\) is differentiable, the formula for it follows from the chain rule:
+\[f(f^{-1})(y) = y \implies f'(f^{-1}(y))(f^{-1})'(y) = I \iff (f^{-1})'(y) = (f(f^{-1}(y)))^{-1}\]
+\begin{corollary}
+  \begin{enumerate}
+    \item \(f^{-1}\) is continuously differentiable (\(\mc{C}^1\))
+    \item If \(f\) is \(\mc{C}^r\) then \(f^{-1}\) is also \(\mc{C}^r\)
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  \begin{enumerate}
+
+    \item  We know that since \(f'\) is continuous, and \(f^{-1}\) is continuous, \(f' \circ f^{-1}\) is continuous. Now what about the inversion? What is the inverse of a matrix? It's given by a formula. So this is really a composite of 3 functions. So what about the formula for the inverse of a matrix? It follows from Cramer's rule that this formula is continuous, since the entries of the inverse matrix \(B\) of \(A\) are given as rational functions of the entries of \(A\), that is,
+    \[b_{ij} = \frac{(-1)^{i + j}\det A^{ji}}{\det A}\]
+    where \(A^{ji}\) is the matrix obtained by deleting the \(j^{th}\) row and \(i^{th}\) column from \(A\). So hence the derivative, being the composition of 3 continuous functions, must be continuous.
+
+    \item We proceed by induction on \(r\). Assume that if \(f\) is \(\mc{C}^{r - 1}\), then \(f^{-1}\) is \(\mc{C}^{r - 1}\).
+
+    If \(f\) is \(\mc{C}^r\), then \(f\) is \(\mc{C}^{r - 1}\) implying that \(f^{-1}\) is \(\mc{C}^{r - 1}\) by the inductive hypotheis. So, using the formula
+    \[(f^{-1})' = (f'(f^{-1}))^{-1}\]
+    is \(\mc{C}^{r - 1}\) implying that \(f^{-1}\) is \(\mc{C}^r\).
+
+  \end{enumerate}
+\end{proof}
+This corollary is just to show that we could have stated the above theorem in a stronger way. Examples:
+\begin{enumerate}
+  \item Continuity of \(f'\) cannot be removed from the hypotheses: consider \(f: \reals \to \reals\),
+  \[f(x) = \left\{\begin{array}{cc}x + x^2\sin\frac{1}{x} & x \neq 0 \\ 0 & x = 0\end{array}\right.\]
+  We have that
+  \[x \neq 0 \implies f'(x) = 1 + 2x\sin\frac{1}{x} - \cos\frac{1}{x}\]
+  but the limit does not exist as \(x \to 0\).
+
+  \item Consider \(f: \reals^2 \to \reals^2\),
+  \[f(x, y) = (e^x\cos y, e^x\sin y)\]
+  We have
+  \[f'(x, y) = \begin{pmatrix} e^x\cos y & -e^x\sin y \\ e^x\sin y & e^x\cos y \end{pmatrix}\]
+  implying that
+  \[\det f'(x, y) = (e^x)^2 = e^{2x} \neq 0 \forall x \in \reals\]
+  But this function is not 1-1, since it is periodic in \(y\). The inverse function theorem says that we can make some neighborhood around a point where \(f\) is one to one, but it \textit{doesn't} say that it's \textit{globally} one to one.
+
+\end{enumerate}
+Remarks:
+\begin{enumerate}
+  \item \(f\) may be invertible even though \(f'(a) = 0\)
+\end{enumerate}
+
+\end{document}
