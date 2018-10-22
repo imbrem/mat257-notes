@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{October 17 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\maketitle
+
+\section*{The Inverse Function Theorem Implies the Implicit Function Theorem}
+
+We have to start with the hypotheses of the implicit function theorem: given a \(\mc{C}^r\) (where \(r \geq 1\)) function
+\(f: U \to \reals^n\)
+where \(U \in \reals^{m + n}\), \(f(a, b) = 0\) and \(\det M \neq 0\), where
+\[M = \left(\prt{f_i}{y_j}(a, b)\right)\]
+Define
+\[F: U \to \reals^m\times\reals^n, (x, y) \mapsto (x, f(x, y))\]
+In particular,
+\[F(a, b) = (a, 0)\]
+This is what we're going to apply the inverse function theorem to. So we've got to show that this function satisfies the hypotheses of the inverse function theorem. So we've got to show that its derivative matrix at the point \((a, b)\) is invertable. So let's compute: the derivative is given by
+\[F'(a, b) = \left(\begin{array}{c|c} I & 0 \\ \hline * & M \end{array}\right) \implies \det F'(a, b) = \det I \det M = \det M \neq 0\]
+These are the conditions under which we can apply the inverse function theorem. So by the inverse function theorem, there exists an open neighborhood \(V\) of \((a, b)\), and an open neighborhood \(W\) of \((0, 0)\) so that \(F: V \to W\) has a \(\mc{C}^r\) inverse
+\(F^{-1}: W \to V\). We can assume \(V = A \times B\), where \(A, B\) are open neighborhoods of \(a, b\). \(F^{-1}(u, v)\) has the form \((u, h(u, v))\). So
+\[F(F^{-1}(u, v)) = F(u, h(u, v)) = (u, f(u, h(u, v))) = (u, v) \implies f(u, h(u, v)) = v\]
+\[\implies f(u, h(u, 0)) = 0\]
+Let \(g(x) = h(x, 0)\), which is \(\mc{C}^r\). Then
+\[f(x, g(x)) = 0\]
+Remark: we can find \(g'(x)\) by \underline{implicit differentiation}. We have
+\[\forall i \in \{1,...,n\}, f_i(x, g(x)) = 0\]
+We can write
+\[\prt{f_i}{x_j}(x, g(x)) + \sum_{k = 1}^n\prt{f_i}{y_k}(x, g(x))\prt{g_k}{x_j}(x) = 0\]
+We can solve for \(\prt{g_k}{x_j}\) because \(\left(\prt{f_i}{y_k}(x, y)\right)\) is invertible near \((a, b)\).
+
+\section*{The Implicit Function Theorem Implies the Inverse Function Theorem}
+
+This time, we start with the hypotheses of the \textit{inverse} function theorem. So here we have a \(\mc{C}^r\) function \(f: U \to \reals^n\) with \(\det f'(a) \neq 0\).
+
+Let \(b = f(a)\), and define
+\[F(x, y) = y - f(x)\]
+This is a \(\mc{C}^r\) function of \((a, b)\) and \(F(a, b) = 0\). We have
+\[\prt{F}{x}(a, b) = \det(-f'(a)) \neq 0\]
+By the implicit function theorem there exist open neighborhoods \(A, B\) of \(a, b\) respectively such that for all \(y \in A\), there is a unique \(\mc{C}^r\) \(x = g(y)\) in \(B\) such that
+\[F(g(y), y) = 0 \iff y - f(g(y)) = 0\]
+Take \(V = f^{-1}(A) \cap B\), \(W = A\). Then
+\[x \in V \implies f(x) \in A\]
+and \(x\) is the unique element of \(B\) such that \(g(f(x)) = 0\), i.e. \(x = g(f(x))\).
+
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{October 22 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\maketitle
+
+\section*{Tangent Space}
+We begin with some examples:
+\begin{enumerate}
+
+  \item Consider an ellipsoid
+  \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\]
+  The tangent plane at a point \((x_0, y_0, z_0)\) of the ellipsoid is given by
+  \[\frac{\cancel{2}x_0}{a^2}(x - x_0) + \frac{\cancel{2}y_0}{b^2}(y - y_0) + \frac{\cancel{2}z_0}{c^2}(z - z_0) = 0\]
+  \[\frac{x_0}{a^2}x + \frac{y_0}{b^2}y + \frac{z_0}{c^2}z = 1\]
+
+  \item Let \(f(x, y) = 0\) and \(g(x, y) = 0\) be curves in \(\reals^2\). Assume the curves are smooth and intersect at point \((a, b)\). The two curves are \underline{orthogonal} at \((a, b)\) if
+  \[\prt{f}{x}\prt{g}{x} + \prt{f}{y}\prt{g}{y} = 0\]
+  at \((a, b)\). The two curves are \underline{tangent} at \((a, b)\) if the gradients are proportional to each other, i.e.
+  \[\prt{f}{x}\prt{g}{y} - \prt{f}{y}\prt{g}{x} = 0\]
+  at \((a, b)\).
+
+  \item Consider the family of parabolas
+  \[y^2 - 2p(x + p/2) = 0\]
+  Here, \(p\) is the parameter. These parabolas open along the \(x\) axis, either to the right or two the left, with \(x\) acting like a function of \(y\).
+
+  This kind of family is what's called \textit{confocal}: these parabolas all have the same focus, 0. Of course, they don't all intersect, but all those which open to the right intersect all those which open to the left. Let's look at the intersections.
+
+  If \(p_1 > 0\) and \(p_2 > 0\) then the two parabolas
+  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0, g(x, y) = y^2 - 2p_2(x + p_2/2) = 0\]
+  intersect where
+  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0 = g(x, y) = y^2 - 2p_2(x + p_2/2)\]
+  Let's show that all the intersections among all these possible parabolas are right angles.
+
+  Let's try to compute the inner product of the gradients. That is, we want to show
+  \[f_xg_x + f_yg_y = 0\]
+  at an intersection point. So what's the product of the \(x\) derivatives? Well it'll just be
+  \[f_xg_x = (-2p_1)(-2p_2) = 4p_1p_2\]
+  And what's the product of the \(y\) derivatives?
+  \[f_yg_y = (2y)(2y) = 4y^2\]
+  So we want to see that
+  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2\]
+  vanishes when both \(f\) and \(g\) are zero.
+
+  If you take \(p_2\) times \(f\), and subtract \(p_1\) times \(g\), you get rid of the \(x\) terms:
+  \[p_2f - p_1g = p_2y^2 - 2p_2p_1(x + p_1/2) - p_1y^2 + 2p_1p_2(x + p_2/2) = (p_1 - p_2)y^2 + (p_2 - p_1)p_1p_2\]
+  So we have
+  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2 = 4\frac{p_2f - p_1g}{p_2 - p_1} = 0\]
+  Since \(f = g = 0\) and \(p_2 - p_1 \neq 0\) at the intersection point.
+
+\end{enumerate}
+So these are some examples of computations with tangent spaces.
+
+\section*{Proof of the Inverse Function Theorem}
+The hypotheses of the inverse function theorem are as follows: \(f: \reals^n \to \reals^n\) is a \(\mc{C}^1\) function in a neighborhood of a point \(a \in \reals^n\) such that
+\[\det f'(a) \neq 0\]
+We have to show that there are open neighborhoods \(V\) of \(a\) and \(W\) of \(f(a)\) such that \(f: V \to W\) and has an inverse \(f^{-1}: W \to V\) which is differentiable. Remember of course that the inverse function theorem includes a very important formula for the inverse, but this is theminimum that we have to prove, since if we prove this we can get the formula for the inverse function just from the Chain Rule. We also already checked before that if we have the formula for the inverse, we can check from the formula that the inverse if \(\mc{C}^1\), or in the general case \(\mc{C}^r\).
+
+One thing that in general it is good to do at the beginning, and it's something that in general we'll do at the beginning of a lot of things in this course, is that when you're given a problem which has a condition depending on the linear part of a function, for example, here, that the linear part is invertible, its always very simple to reduce to the case that the linear part is the identity. So let's just see here why we can make that assumption, that is, that we can assume without loss of generality that
+\[f'(a) = I\]
+So, why? Let
+\[\lambda = f'(a)\]
+If we know this, how can we use \(\lambda\) and \(f\) to find another function such that it's derivative at that point will be the identity? Quite simply, we can write, since \(\lambda\) is invertible,
+\[g = \lambda^{-1} \circ f \implies g'(a) = (\lambda^{-1})Df + (\cancel{D\lambda^{-1}})f = \lambda^{-1}\lambda = I\]
+by the Chain Rule. And if \(g\) has an inverse \(g^{-1}: W' \to V\) where \(W'\) is an open neighborhood of \(g(a)\), then \(f\) has an inverse \(f^{-1}: W \to V\) given by
+\[f = \lambda \circ g \implies f^{-1} = g^{-1} \circ \lambda^{-1}\]
+where \(W' = \lambda(W)\). So knowing the theorem for \(g\), it follows for \(f\).
+So first we'll show the statement above, but we'll check that the inverse is merely continuous instead of differentiable.
+
+Let's stop here, and hopefully do the entire proof next time.
+
+\end{document}
