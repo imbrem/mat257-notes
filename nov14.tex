@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{November 14 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Manifolds}
+
+Consider the following definitions of a manifold:
+\begin{definition}
+  A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) satisfying the following equivalent conditions
+  \begin{enumerate}
+
+    \item For all \(a \in M\), there is a \(\mc{C}^r\) mapping \(f: U \to \reals^{n - k}\) defined on an open neighborhood \(U\) of \(a\) such that \(M \cap U = f^{-1}(0)\). \(f\) has rank \(n - k\) at every \(x \in M \cap U\).
+
+    \item Every point of \(M\) has an open neighborhood \(U\) in \(\reals^n\) such that \(M \cap U\) is the graph of a \(\mc{C}^r\) function \(z = g(y)\), \(z = (z_1,...,z_{n - k}), y = (y_1,...,y_k)\) where
+    \[(y, z) \neq (x_{\sigma(1)},...,x_{\sigma(n)})\]
+    where \(\sigma\) is a permutation of \(1,...,n\).
+
+    \item For all \(a \in M\), there is an open neighborhood \(U\) of \(a\), an open set \(V \subset \reals^n\) and a \(\mc{C}^r\) \underline{diffeomorphism} (a \(\mc{C}^r\) mapping with a \(\mc{C}^r\) inverse) \(h: U \to V\) such that
+    \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\}) =
+    \{y = (y_1,...,y_n) \in V : y_{k + 1} = ... = y_n\}\]
+
+  \end{enumerate}
+\end{definition}
+\begin{claim}
+  The definitions given for a manifold are equivalent
+\end{claim}
+\begin{proof}
+\begin{itemize}
+
+  \item 1 \(\implies\) 2: By the implicit function theorem
+
+  \item 2 \(\implies\) 1: Let \(h(y, z) = z - g(y)\).
+
+  \item 2 \(\implies\) 3: Let \(h(y, z) = (y, z - g(y))\)
+
+  \item 3 \(\implies\) 1: Let \(f(x) = (h_{k + 1}(x),...,h_n(x))\)
+
+\end{itemize}
+\end{proof}
+
+To illustrate the first definition in action, consider the example of the unit sphere \(S^{n - 1} \subset \reals^n\), given by
+\[S^{n - 1} = \{x = (x_1,...,x_n) : f(x) - 1 = 0)\} \text{ where } f(x) = x_1^2 + ... + x_n^2\]
+We have
+\[\forall x \in S^{n - 1}, \grad f(x) = 2(x_1,...,x_n) = 2x \neq 0\]
+so \(f\) has rank 1 at every point of \(S^{n - 1}\). Hence \(S^{n - 1}\) is a manifold.
+
+\subsection{Tangent Spaces}
+
+We now discuss the tangent space \(TM_a\) or \(M_a\) at a point \(a \in M\). If we have a function \(f: \reals^n \to \reals^p\), then \(Df(a)\) is a linear transformation, a function from \(\reals^n\) to \(\reals^p\). But we're going to consider it as a function from \(\reals^n_a\), the copy of \(\reals^n\) at \(a\), to \(\reals^p_{f(a)}\), the copy of \(\reals^p\) at \(f(a)\). To be clear, these copies of \(\reals^n, \reals^p\) are vector spaces we attach to the points \(a, f(a)\), with these points identified with the origin.
+
+\begin{enumerate}
+
+  \item The definition of the tangent space according to the first definition is \(\Ker Df(a) = Df(a)^{-1}(0)\), a vector subspace of \(\reals^n_a\)
+
+  \item Write \(x = (y, z), a = (b, c)\). Then we can think of the tangent space as an affine space through the point \((b, c)\) by writing
+  \[z - c = Dg(b)(y - b)\]
+  But we want to think of it as a vector space with \(a\) as the origin, a vector subspace of \(\reals^n_a\). So we should write it as
+  \[Z = Dg(b)(Y)\]
+  where \(Z \in \reals_{f(a)}^p\), \(Y \in \reals_a^n\). This is because \(f(y, g(y)) = 0\), so
+  \[Df(a)\begin{pmatrix} I \\ Dg(b) \end{pmatrix} = 0 \implies \Ker Df(a) \supseteq \Ima\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\]
+  But in fact, they're equal, because their dimensions are the same.
+
+  So the kernel of \(Df(a)\), and the image of \(\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\), are both equal to the set of points such that
+  \[Z = Dg(b)(Y)\]
+
+  \item In terms of the third definition, we can write the tangent space as
+  \[Dh(a)^{-1}(\reals^k \times \{\mb{0} \in \reals^{n - k}\})\]
+
+\end{enumerate}
+
+\subsection{Definition by Coordinate Charts}
+
+Let's try defining a (\(k\)-dimensional) manifold in another way: we want every point \(a \in M\) to have a ``neighborhood'' around it in \(M\) which ``looks like'' \(\reals^k\).
+
+A \(k\)-dimensional manifold \(M \subset \reals^n\) is a set such that for all \(a \in M\) there is an open neighborhood \(U\) of \(a\) (in \(\reals^n\), \textbf{not} in \(M\)) and an open set \(W \subset \reals^k\) and a \(\mc{C}^r\) mapping \(\varphi: W \to \reals^n\) such that
+\begin{itemize}
+  \item \(\varphi\) is a bijection
+  \item \(\varphi(W) = M \cap U\)
+  \item \(\varphi\) has rank \(k\) at every point of \(W\), i.e. \(D\varphi(x)\) has rank \(k\) for every \(x \in W\).
+  \item We'd like to say ``\(\varphi^{-1}: \varphi(W) = M \cap U \to W\)'' is continuous. But we don't know how to say it, because we haven't given \(M\) a topology. So we can't talk about a function defined on a piece of \(M\) being continuous. So the way we're going to say it is we're going to build the definition of the topology into the phrase that we'll say instead of this.
+
+  We require instead that
+  \((\varphi^{-1})^{-1}(\Omega)\), i.e. \(\varphi(\Omega)\), is \(\varphi(W)\) intersected with an open set of \(\reals^n\) for all \(\Omega\) open in \(W\).
+\end{itemize}
+Note this first and last condition on \(\varphi\) are equivalent to requiring that \(\varphi\) is a homeomorphism between the neighborhood \(M \cap U\) and \(W\).
+
+\end{document}

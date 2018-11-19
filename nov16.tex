@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{November 16 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\maketitle
+
+We begin by recalling two definitions for a manifold which we discussed last time
+\begin{definition}
+  A set \(M \subseteq \reals^n\) is a \(\mc{C}^r\) \underline{submanifold} of \(\reals^n\) of \underline{dimension} \(k\) if
+  \begin{itemize}
+
+    \item [3.] For all \(a \in M\), there is an open neighborhood \(U\) of \(a\) in \(\reals^n\), an open subset \(V \subset \reals^n\) and a \(\mc{C}^r\) diffeomorphism \(h: U \to V\) such that
+    \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0}\})\]
+
+    \item [4.] For all \(a \in M\), there is an open neighborhood \(U\) of \(a\) in \(\reals^n\), an open \(W \subset \reals^n\) and a \(\mc{C}^r\) mapping \(\varphi: W \to \reals^n\) such that
+    \begin{itemize}
+
+      \item \(\varphi\) is a bijection
+
+      \item \(\varphi(W) = M \cap U\)
+
+      \item \(\varphi\) has rank \(k\) at every point of \(W\)
+
+      \item ``\(\varphi^{-1}: \varphi(W) \to W\) is continuous'' i.e. for every open subset \(\Omega\) of \(W\),
+      \[\varphi(\Omega) = \varphi(W) \cap \widetilde U\]
+      where \(U\) is open in \(\reals^n\).
+    \end{itemize}
+
+  \end{itemize}
+\end{definition}
+We'll now show that the fourth definition implies the third:
+\begin{proof}
+  Say \(a = \varphi(b)\) for some \(b \in W\). We can assume
+  \[\prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)}\]
+  has rank \(k\) on \(W\).
+  Define \(\psi: W \times \reals^{n - k} \to\reals^n\) by
+  \[(y, z) \mapsto \varphi(y) + (0, z)\]
+  Then we get the block matrix
+  \[\psi'(y, z) = \begin{pmatrix}
+    \prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)} & 0 \\
+    * & I
+  \end{pmatrix}\]
+  This shows that \(\psi\) has rank \(n\) for all \(y \in W\), since it's determinant is nonzero. But that means that we can apply the inverse function theorem. So by the inverse function theorem, there are open neighborhoods \(V_1'\) of \((b, 0)\) and \(U_1'\) of \(\psi(b, 0) = \varphi(b) = a\) such that \(\psi: V_1' \to U_1'\) has a \(\mc{C}^r\) inverse \(\psi^{-1}: U_1' \to V_1'\).
+
+  We have that
+  \[\psi^{-1}(\varphi(y)) = (y, 0) \in V_1' = \varphi(W) \cap \widetilde U\]
+  where \(U\) is open in \(\reals^n\). Take \(U_1 = U_1' \cap \widetilde U\) and \(V_1 = \psi^{-1}(U_1)\). We have
+  \[M \cap U_1 = \{\varphi(y) : (y, 0) \in V_1\}\]
+  So
+  \[h = \psi^{-1}|_{U_1}\]
+  satisfies the conditions implied by (3) since
+  \[h(M \cap U_1) = \psi^{-1}(M \cap U_1) = \{(y, 0) : (y, 0) \in V_1\} = V_1 \cap (\reals^k \times \{\mb{0}\})\]
+\end{proof}
+This is quite a delicate topological argument, and gi
+
+\end{document}

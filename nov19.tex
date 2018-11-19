@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{November 19 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\maketitle
+
+We begin by looking at the following two definitions for the tangent space to a manifold in terms of definitions 3 and 4 given for a manifold in the previous lecture
+\begin{definition}
+  \(TMa = Dh(a)^{-1}(\reals^k \times \{\mb{0}\})\)
+\end{definition}
+\begin{definition}
+  \label{vfdef} \(TMa = D\varphi(b)(\reals^k_b)\)
+\end{definition}
+We're forgetting about the first two definitions, but why are \textit{these} two definitions equivalent? We used \(h\) to find a coordinate map \(\varphi\) by taking \(\varphi\) to be \(h^{-1}\) restricted to \(\reals^k \times \{\mb{0}\}\). Note that definition \ref{vfdef} is independent from the choice of \(\varphi\). To understand why, consider two maps \(\varphi_1(b_1) = a = \varphi_2(b_2)\) which take some interesecting open subsets \(M_1, M_2\) of \(M\) to spaces \(W_1, W_2\). Then
+\[\varphi_1 = \varphi_2 \circ (\varphi_2^{-1} \circ \varphi_1)\]
+on \(M_1 \cap M_2\), giving
+\[D\varphi_1(b_1) = D\varphi_2(b_2) \circ D(\varphi_2^{-1}\circ\varphi_1)(b_1)\]
+I want to think of this in a different way now. I want to give another definition for the tangent space that doesn't depend on \(h\), doesn't depend on \(\varphi\), doesn't depend on any data other than \(M\). We give the following:
+\begin{definition}
+  \[TM_a = \{\text{tangent vectors } \gamma'(0) \text{ of } \mc{C^1} \text{ curves } \gamma: (-\delta, \delta) \to M \text{ s.t. } \gamma(0) = a\}\]
+\end{definition}
+So what does this even mean? Recall the following definition:
+\begin{definition}
+  A \(\mc{C}^1\) curve in \(\reals^n\) is a \(\mc{C}^1\) mapping, for some open interval \((c, d)\),
+  \[\gamma: (c, d) \to \reals^n, \gamma(t) = (\gamma_1(t),...,\gamma_n(t))\]
+  \label{newdef}
+\end{definition}
+If we fix a point on \(\gamma\), what's the tangent vector to \(\gamma\) at \(\gamma(t_0)\)? It's \(\gamma'(t_0) \in T\reals^n_{\gamma(t_0)}\). We now generalize the above definition
+\begin{definition}
+  Let \(M \subset \reals^n\) be a \(\mc{C}^r\) submanifold of dimension \(k\). We say \(\gamma\) is a \(\mc{C}^1\) curve in \(M\) if \(\gamma((a, b)) \subset M\) for some open inteval \((a, b)\). In this case \(\gamma'(t_0) \in TM_{\gamma(t_0)}\).
+  \label{c1mcurve}
+\end{definition}
+So why is \(\gamma'(t_0)\) an element of \(TM_{\gamma(t_0)}\)? In terms of a previous definition,
+\[TMa = \Ker Df(a)\]
+In our case, we have
+\[f(\gamma(t)) = 0 \implies Df(\gamma(t_0)) \cdot \gamma'(t_0) = 0 \implies \gamma'(t_0) \in \Ker Df(a) = TMa\]
+So, considering this, why is definition \ref{newdef} the tangent space? Let's think about that, first of all, in a simple special case. What if \(M = \reals^k\)? Take \(a \in \reals^k\). We are simply asking that every vector \(v \in \reals_a^k\) through the point \(a\) is the tangent vector to some curve through \(a\), i.e. is \(\gamma'(0)\) where \(\gamma(t) = a + tv\). So if \(M = \reals^k\), for sure that's the right definition of the tangent space.
+
+So now why is this true in general? Which definition of the tangent space do you think we should use? Well, the coordinate chart definition, i.e. definition \ref{vfdef}, is the one that best fits our purposes. In general, consider a coordinate chart \(\varphi\) for \(M\) at \(a\). Say we have a \(\mc{C}^1\) curve in \(W\) such that \(\delta(0) = b\). Then
+\(\gamma(t) = (\varphi \circ \delta)(t)\)
+is a \(\mc{C}^1\) curve in \(M\) such that \(\gamma(0) = a\). So using the Chain Rule,
+\[\gamma'(0) = D\varphi(b) \circ \delta'(0)\]
+But any \(\mc{C}^1\) curve \(\gamma(t)\) in \(M\) such that \(\gamma(0) = b\) is of the form
+\(\gamma = \varphi \circ \delta\)
+where \(\delta\) is a \(\mc{C}^1\) curve in \(W\). We get this from the description of \(\varphi^{-1}\) as restricted to \(M\) of a \(\mc{C}^r\) function \(h\).
+
+What's nice about definition \ref{newdef} is that it depends only on \(M\), not on any external information. So now we know what manifolds and tangent spaces are.
+
+This course is somewhat like firs tyear calculus, in that first you dodifferentiation and then you do integration, and then you put them together with the fundamental theorem of calculus and examine all the interesting consequences. And we are not at the end of quite an important section of the course about the implict function theorem. Soon, we'll stop and begin learning about integration, and then later return and put the two together to obtain some interesting results, including Stokes theorem.
+
+But we have one thing left to do. Usually, in mathematics, we don't just define spaces, we also define the functions between them. And we should do that for manifolds: if we have a mapping between two manifolds, what does it mean for this mapping to be continuous? Furthermore, we will introduce the slightly more general concept of a manifold with boundary.
+
+\end{document}
