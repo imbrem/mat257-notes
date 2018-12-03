@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{November 23 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+
+\begin{document}
+
+\maketitle
+
+\section{Manifolds with boundary}
+
+
+Recall the following definitions:
+\begin{definition}
+  A half space \(\hlfspc^k \subset \reals^k\) is given by
+  \[\{x = (x_1,...,x_k) : x_k \geq 0\}\]
+\end{definition}
+\begin{definition}
+  A subset \(M \subseteq \reals^n\) is a \(k\)-dimensional \(\mc{C}^r\) \underline{manifold with boundary} if for every \(a \in M\), there is an open neighborhood \(U\) of \(a\) in \(\reals^n\), an open subset \(V\) of \(\reals^n\) and a \(\mc{C}^r\) diffeomorphism \(h: U \to V\) such that either
+  \begin{enumerate}[label=(\arabic*)]
+
+    \item The usual condition for a manifold,
+    \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\})\]
+    \label{mnfcnd}
+
+    \item The manifold looks like a half space around \(a\), i.e.
+    \[h(M \cap U) = V \cap (\hlfspc^k \times \{\mb{0} \in \reals^{n - k}\}) = \{y = (y_1,...,y_n) : y_1,...,y_k \geq 0 \land y_{k + 1} = ... = y_n = 0\}\] \label{bndcnd}
+
+  \end{enumerate}
+  \label{mwb}
+\end{definition}
+One thing you could ask is whether both conditions \ref{mnfcnd}, \ref{bndcnd} could be satisfied by the same point \(a\). The answer is no. To show why, suppose \(h_1: U_1 \to V_1\) satisfies \ref{mnfcnd} and \(h_2: U_2 \to V_2\) satisfies \ref{bndcnd} for some \(a\). How can we get a contradiction? If we take
+\[h_2 \circ h_1^{-1}: V_1 \to V_2\]
+we get a \(\mc{C}^r\) diffeomorphism in an open set containing \(a\) taking an open subset of \(\reals^k\) onto an open subset of \(\hlfspc^k\) which is \textit{not} open in \(\reals^k\). What we're contradicting here is the inverse function theorem, which says there would be open neighborhoods \(h_1(a)\) and \(h_2(a)\) which are mapped together with an inverse. Alternatively, we could use the topological arguments that diffeomorphisms, which are homeomorphisms, are open maps.
+
+Once we've established this result, we can really distinguish these two kinds of points. That means, precisely, that we can make the following definitions
+\begin{definition}
+  The \underline{boundary} of \(M\), written \(\partial M\), is the set of points satisfying condition \ref{bndcnd} in definition \ref{mwb}
+\end{definition}
+
+We're going to be interested in manifolds because they generalize the idea of intervals with endpoints in the real line. In fact, an interval with endpoints is a one dimensional manifold with boundary.
+
+\end{document}

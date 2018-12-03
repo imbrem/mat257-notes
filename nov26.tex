@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{November 26 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+
+\begin{document}
+
+\maketitle
+
+\section{Integration}
+
+In the couple of weeks left in the term, we are going to develop the theory of integration. We said what the integral of a closed rectangle on \(\reals^n\) was last time, in complete analogy with first year calculus:
+\begin{definition}
+  If \(f: A \to \reals\) is a bounded function on a closed rectangle \(A \subset \reals^n\), \(f\) is \underline{integrable} on \(A\) if, where \(\mc{P}\) is the set of partitions of \(A\),
+  \[\sup_{P \in \mc{P}} L(f, P) = \inf_{P \in \mc{P}} U(f, P)\]
+  then the common value is called the integral of \(f\) over \(A\), written
+  \[\int_Af\]
+\end{definition}
+Throughout this lecture we'll see that most of the properties you learned in first year calculus will carry over to this more general case. One thing we'll be carrying over today is that instead of expressing things in terms of \(\sup\) and \(\inf\), we can instead express things in terms of \(\epsilon\):
+\begin{lemma}
+  If \(f: A \to \reals\) is a bounded function on a closed rectangle \(A\) then \(f\) is integrable on \(A\) if and only if for every \(\epsilon > 0\), there is apartition \(P\) of \(A\) such that
+  \[U(f, P) - L(f, P) < \epsilon\]
+\end{lemma}
+The proof is exactly like first year, and one direction should be immediate:
+\begin{proof}
+\begin{itemize}
+  \item \(\impliedby\): if there's a partition \(P\) for every \(\epsilon\), then there's no ``room'' between the \(\sup\) and the \(\inf\)
+  \item \(\implies\): if \(\sup = \inf\), then there are partitions \(P, P'\) such that
+  \[U(f, P) - \inf_{P \in \mc{P}} U(f, P) < \frac{\epsilon}{2} \land \sup_{P \in \mc{P}}L(f, P) - L(f, P') < \frac{\epsilon}{2} \implies U(f, P'') - L(f, P'') < \epsilon\]
+  where \(P''\) is a refinement of \(P\) and \(P'\).
+\end{itemize}
+\end{proof}
+Just like in first year. And also, the kind of first calculations of itnegrals that you've done in first year work out the same way here. For example,
+\begin{enumerate}
+
+  \item If \(f = c\) is a constant, then \(f\) is integrable and
+  \[\int_Af = cv(A)\]
+  where \(v(A)\) denotes the volume of \(A\). This is because, for any subrectangle \(S\) of \(P\),
+  \[m_S(f) = c = M_S(f) \implies L(f, P) = \sum m_s(f)v(S) = c\sum v(S) = cV(A)\]
+  with an analogous calculation for \(U(f, P)\)
+
+  \item Let \(f: [0, 1] \times [0, 1] \to \reals\). Then
+  \[f(x, y) = \left\{\begin{array}{cc}
+    0 & \text{if } x \in \rationals \\
+    1 & \text{otherwise}
+  \end{array}\right.\]
+  is not integrable, since for any partition \(P\),
+  \(m_S(f) = 0 \land M_S(f) = 1 \implies L(f, P) = 0 \land U(f, P) = 1\)
+
+\end{enumerate}
+
+\subsection{Basic Properties of the Integral}
+
+Suppose we have two integrable functions
+\[f, g: A \to \reals\]
+Then
+\begin{enumerate}
+
+  \item \(f + g\) is integrable and
+  \[\int_A(f + g) = \int_Af + \int_Ag\]
+
+  \item \[f \leq g \implies \int_Af \leq \int_Ag\]
+
+  \item \(f \cdot g\) is integrable
+
+  \item \(|f|\) is integrable and \[
+  \int_A|f| \geq \left|s22\int_Af\right| \geq \int_Af\]
+  It's enough to show that \(|f|\) is integrable
+  
+  \item Exercise: any increasing function is integrable
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257: Analysis II Evening Lecture Notes}
+\author{
+  Jad Elkhaleq Ghalayini \\
+  \normalsize Based on handwritten notes by Professor Edward Bierstone
+}
+\date{October 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+  colorlinks,
+  linkcolor={red!50!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\defeq}[0]{:=}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Topology of \(\reals^n\)}
+
+\subsection{Metric Spaces}
+
+Let \(T: \reals^n \to \reals^m\) be a linear transformation. We have that
+\[T(x) = T\left(\sum x_ie_i\right) = \sum x_iT(e_i)\]
+Hence, \(\exists c \in \reals^+\) such that
+\[|T(x)| \leq \sum|x_i||T(e_i)| \leq c \cdot \sum|x_i| \leq \sqrt{n}c|x|\]
+with
+\[|T(e_i) = |i^{th} \text{ column of } A| = \sqrt{\sum_{j = 1}^ma_{ji}^2}\]
+so, for example, we can choose
+\[\forall i, |T(e_i)| \leq c = \sqrt{\sum a_{ij}^2}\]
+
+\begin{definition}
+  A \underline{metric space} is a set \(X\)  with a \underline{distance function}
+  \[d: X \times X \to \reals\]
+  satisfying the following axioms, \(\forall x, y, z \in X\),
+  \begin{enumerate}
+    \item \(d(x, y) = d(y, x)\)
+    \item \(d(x, y) \geq 0, d(x, y) = 0 \iff x = y\)
+    \item \(d(x, y) \leq d(x, z) + d(z, y)\)
+  \end{enumerate}
+\end{definition}
+\(\reals^n\) (with any of the norms above) is a metric space.
+
+\subsection{Open and Closed Sets}
+
+\subsubsection{Definitions}
+
+In \(\reals^n\), the closed rectangles
+\[[a_1, b_1] \times ... \times [a_n, b_n]\]
+are higher order analogues of the \underline{closed interval} \([a, b]\), as well as the \underline{closed ball} around \(a \in \reals^n\) of radius \(r \in \reals^+\)
+\[\{x \in \reals^n : |x - a| \leq r\}\]
+Similarly, we define the \underline{open rectangle}
+\[(a_1, b_1) \times ... \times (a_n, b_n)\]
+to be the higher order analogue of the \underline{open interval} \((a, b)\), and the \underline{open ball} around \(a \in \reals^n\) of radius \(r \in \reals^+\)
+\[B(a, r) \defeq \{x \in \reals^n : |x - a| < r\}\]
+\begin{definition}
+  We say that \(U \subset \reals^n\) is \underline{open} if
+  \[\forall x \in U, \exists \text{ an open rectangle (ball) } A, x \in A \subset U\]
+\end{definition}
+Note the definitions in terms of balls and rectangles are equivalent, since if there exists a rectangle, we can find a ball within it (since the rectangle is open in the ball definition) and if there exists a ball, we can find a rectangle within it (since the ball is open in the rectangle definition).
+\begin{definition}
+  We say that \(C \subset \reals^n\) is \underline{closed} if \(\reals^n \setminus C\) is open
+\end{definition}
+Examples of closed sets include closed rectangles and any finite subset of \(\reals^n\). Note that the definitions for these terms based off open balls generalize readily to other metric spaces, and it is possible to define open sets in terms of closed sets instead of vice versa. For more information on this, I highly recommend the notes on topology by Ivan Khatchatourian at \url{http://www.math.toronto.edu/ivan/mat327}.
+
+\subsubsection{Properties}
+
+\begin{proposition}
+ The union of an arbitrary collection \(\mc{U}\) of open sets is open
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+  The intersection \(U \cap V\) of any two open sets \(U, V\) is open
+  \label{interopen}
+\end{proposition}
+\begin{proof}
+\end{proof}
+\begin{corollary}
+  The intersection of finitely many open sets is open
+\end{corollary}
+\begin{proof}
+  Follows trivially from \ref{interopen} by induction.
+\end{proof}
+
+\section{Functions and continuity}
+
+\section{Operations on functions}
+
+\end{document}
