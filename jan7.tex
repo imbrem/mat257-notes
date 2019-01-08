@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 7 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+The agenda for the next part of this course is continuing with the development of the theory of integration. We're essentially working on extending the definition of the integral to more general functions on more general sets, and after that we'll be going back to working on manifolds, and in particular we'll be interested in integrating on manifolds, proving Stokes' Theorem along the way.
+
+We're going to talk about the very important idea of a ``partition of unity'' next time. But what I wanted to do in this lecture is to give some more examples of computing integrals, using Fubini's theorem and the change of variables theorems as tools. So that's how we're going to begin today, there being a lot of this on the next problem set.
+
+Let me begin by recalling what I \textit{think} we did in the last lecture, if I recall correctly. What are the kinds of region on which we integrate? One of the kinds of regions would be the region between the graphs of two functions that are defined on a Jordan-measurable set. Specifically, if we have a subset \(C \subset \reals^n\) that is Jordan-measurable, and two integrable functions \(\varphi(x) \leq \psi(x)\) defined on \(C\), we're interested in integrating over the region bounded by the graphs of the two functions Let's call this region \(S\), that is, define
+\begin{equation}
+  S = \{(x, y) \in \reals^n \times \reals : x \in C, y \in [\varphi(x), \psi(x)]\}
+\end{equation}
+
+We have that \(S\) is a Jordan-measurable set. We want to be able to integrate a continuous function on \(S\). If \(f(x, y)\) is a bounded continuous on \(S\), then we can compute using Fubini's theorem that
+\begin{equation}
+  \int_Sf = \int_C\left(\int_{\varphi(x)}^{\psi(x)}f(x, y)dy\right)dx
+\end{equation}
+We went through the proof of this before, but I want to use it to compute some examples.
+\begin{enumerate}
+
+  \item Consider
+  \begin{equation}
+    \int_0^2\int_{y/2}^1ye^{-x^3}dxdy
+  \end{equation}
+  There's no hope in proceeding naively, since \(e^{-x^3}\) doesn't even have an elementary primitive, i.e. you cannot write down it's integral with only elementary functions. But let's consider what region we're integrating along: the area under the line between \((0, 0)\) and \((2, 1)\). So using the above observation, we can rewrite the integral to be
+  \begin{equation}
+    \int_0^1\left(\int_0^{2x}ye^{-x^3}dy\right)dx = \int_0^1\left.\frac{y^2}{2}e^{-x^3}\right|_0^{2x}dx = 2\int_0^1x^2e^{-x^3}dx = \left.-\frac{2}{3}e^{-x^3}\right|_{0}^{1} = \frac{2}{3}(1 - e^{-1})
+  \end{equation}
+  Here, the change of variable was a useful thing to do, because it enabled us to write down an original integral, which we couldn't do in the original form.
+
+  \item Consider
+  \begin{equation}
+    \int_2^4\int_{4/x}^{\frac{20 - 4x}{8 - x}}(y - 4)dydx
+  \end{equation}
+  So here, again, should we just go ahead and do it as it's written? Well then we'll get \(\frac{y^2}{2} - 4y\) and we'll substitute those things in and we'll just get a terrible mess. But what's the region we're integrating over? \(\frac{4}{x}\) is like a hyperbola, which is 2 when \(x\) is 2 and 1 when \(x\) is 4. The other function on top, what does it look like? It's also a hyperbola: it's a constant plus something over \(8 - x\), so it'll open down. And this is the region we're integrating on: the area between a hyperbola open up and another opening down.
+
+  If we change the order of integration, we'll be integrating on the outside with respect to \(y\), which goes from 1 to 2, and we'll be integrating on the inside with respect to \(x\) with \(x\) going from \(4/y\) to... let's solve:
+  \begin{equation}
+    y = \frac{20 - 4x}{8 - x} = 4 + \frac{12}{x - 8} \implies x - 8 = \frac{12}{y - 4} \iff x = 8 + \frac{12}{y - 4}
+  \end{equation}
+  Hence we can write the above as
+  \begin{equation}
+    \int_1^2\left(\int_{4/y}^{8 + 12/(y - 4)}(y - 4)dx\right)dy = \left.\int_1^2(y - 4)x\right|_{4/y}^{8 + 12/(y - 4)}dy = \int_1^2(y - 4)\left(8 + \frac{12}{y - 4} - \frac{4}{y}\right)dy
+  \end{equation}
+  which is all stuff that's very easy to integrate
+
+  \item Let's see how to integrate a simple function \(z\) over a region of \(3\)-space
+  \begin{equation}
+    S = \{(x, y, z) \in \reals^3 : x^2 + y^2 \leq z^2 \land x^2 + y^2 + z^2 \leq 1\}
+  \end{equation}
+  So, what is this region? The second equation says we're inside the closed ball of radius 1 centered at the origin. The first equation is the region inside two  cones, opening up and down from the origin (kind of like an hour glass). So we want the intersection of these two regions. In terms of the theorem that we wrote down at the beginning, the set \(C\) is like the discs inside the circles formed by the intersections of the top and bottom of the cones and circles, and we're integrating on the region between the semicircles above and below the plane, and the cones above and below the plane. So what's this going to be? Well, by symmetry, it's going to be \textit{zero}.
+
+  Let's make it a little harder. Let's consider only the top, i.e.
+  \[S^+ = \{(x, y, z) \in S : z \geq 0\}\]
+  So, rewriting our integral to be over the disc \(C\), we obtain
+  \begin{equation}
+  \begin{split}
+    \int\int_{x^2 + y^2 \leq \frac{1}{2}}\left(\int_{\sqrt{x^2 + y^2}}^{\sqrt{1 - (x^2 + y^2)}}zdz\right)dxdy \\
+    = \int\int_{x^2 + y^2 \leq \frac{1}{2}}\frac{1}{2}(1 - (x^2 + y^2) - (x^2 + y^2))dxdy \\
+    = \frac{1}{2}\int\int_{x^2 + y^2 \leq \frac{1}{2}}dxdy - \int\int_{x^2 + y^2 - \frac{1}{2}}(x^2 + y^2)dxdy = \frac{1}{2}\pi\frac{1}{2} = \frac{\pi}{4}
+  \end{split}
+  \end{equation}
+  How do we justify that last, ``magical'' step? Well, the prettiest way to do so is to change to polar coordinates, but we haven't justified this quite yet, which is the point of this example. You'll remember from first year caclulus that we can write
+  \begin{equation}
+    \int_a^bf(g(x))g'(x)dx = \int_{g(a)}^{g(b)}f(u)du
+    \label{firstyearsub}
+  \end{equation}
+  This is what we're going to be doing in several variables. But first: polar coordinates? That means writing
+  \begin{equation}
+    x = r\cos\theta, y = r\cos\theta, \theta \in [0, 2\pi], r \in [0, \infty)
+  \end{equation}
+  This gives that
+  \begin{equation}
+    \prt{(x, y)}{(r, \theta)} = \begin{pmatrix}\cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta\end{pmatrix} \implies \det\prt{(x, y)}{(r, \theta)} = r \implies dxdy = drd\theta
+  \end{equation}
+  ``generalizing'' equation \ref{firstyearsub}. On the other hand, we have that
+  \begin{equation}
+    x^2 + y^2 = r^2
+  \end{equation}
+  Since we have that, for this disc, \(\theta\) ranges over the whole interval \([0, 2\pi]\) whereas \(r\) ranges over \([0, 1/\sqrt{2}]\), we can hence rewrite the above integral as
+  \begin{equation}
+    \int_0^{2\pi}\int_0^{\frac{1}{\sqrt{2}}}r^2 \cdot rdrd\theta =
+    \int_0^{2\pi}d\theta\int_0^{\frac{1}{\sqrt{2}}}r^3dr =
+    \left.2\pi\frac{r^4}{4}\right|_{0}^{\frac{1}{\sqrt{2}}} = \frac{\pi}{8}
+  \end{equation}
+
+\end{enumerate}
+
+\end{document}
