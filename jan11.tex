@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 11 2018}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Let's begin where we left off last time
+\begin{theorem}
+  Given \(A \subset \reals^n\) and an open cover \(\mc{O}\) of \(A\), there is a \(\mc{C}^\infty\) partition of unity \(\Phi\) subordinate to \(\mc{O}\), i.e. a countable collection \(\Phi\) of \(\mc{C}^\infty\) functions on \(\reals^n\) such that
+  \begin{enumerate}
+    \item \(\forall \varphi \in \Phi, 0 \leq \varphi \leq 1\)
+    \item Every \(x \in A\) has a neighborhood \(V_x\) such that all but finitely many \(\varphi\) vanish on \(V_x\)
+    \item \(\forall x \in A, \sum_{\varphi \in \Phi}\varphi(x) = 1\)
+    \item For all \(\varphi \in \Phi\), there is \(U \in \mc{O}\) such that \(\varphi\) vanishes outside a compact subset of \(U\).
+  \end{enumerate}
+  \label{cheapway}
+\end{theorem}
+Before we tery to construct such a partition, let's discuss why this is an interesting idea. We're going to use this for several things in this course:
+\begin{itemize}
+  \item To extend the definition of the integral to more general regions
+  \item To prove the change of variables theorem
+  \item To extend the definition of the integral to manifolds
+  \item To prove Stoke's theorem
+\end{itemize}
+So why? Suppose we wanted to extend the definition of the integral to manifolds. Take some shape in 3-space, with a boundary, which is a manifold. Right now, we can integrate over a rectangle. Once we prove the change of variables theorem, we'll be able to integrate over a space diffeomorphic to a rectangle, a sort of deformed rectangle. Now, if we have a coordinate chart, a diffeomorphism from \(\reals^n\) to some part of the manifold, we could use this to extend the definition of the integral from the rectangle to at least some kind of ``rectangular'' piece of the manifold. The question remains: how can we extend the definition to the \textit{entire} manifold? A reasonable way to try to do this is to try to cover the entire manifold by a grid of rectangles. If we add up the integrals on each of those pieces...
+
+That was the way this was doen classically: you'd take a manifold and divide it up by some kind of rectangular grid, and just add up the contributions of every piece. This classical approach, however, ran into a big obstacle, which was: how do you know that you can really cover every manfiold with such a grid? How can you really divide up a really complex surface into rectangles? That is an extremely hard problem: it's true you can do it, but it's an extremely hard problem, and was solved way after the extension of integrals to manifolds.
+
+So how can we avoid this issue? The way this was solved was, you do something a million times simpler. When you cover the manifold with rectangles, you don't care that they all fit together in a nice grid. Just, for every point, you take a rectangle containing that point, and we don't care whether they overlap or not. How do we exploit that? We use a partition of unity! Because what we'll do is, we'll pick a partition of unity such that every one of these bump functions sits in teh interior of one of these rectangles. Now, if we want to integrate our fucntion \(f\) over the manifold, and we have our partition of unity \(\Phi\), and we look at \(\varphi f\), it vanishes outside one of these rectangles, so we can just integrate over the rectangle and get the answer for the manifold. We can then write
+\begin{equation}
+  \int f = \sum\int\varphi f
+\end{equation}
+So the key is to take a function, and make it's support very small, and then work with those small pieces. And we're going to use this in the same way to prove Stoke's theorem. Stoke's theorem is like the FTC. What does the FTC say? It says that
+\begin{equation}
+  \int_a^bf' = f(a) - f(b)
+\end{equation}
+So the integral of \(f\) over the \underline{boundary} of \([a, b]\) is the same as the integral of the derivative of \(f\) over the whole interval. So Stoke's theorem is that the integral of a function over the boundary of a manifold is the same as the integral of the derivative over the whole manifold.
+
+We can prove this for rectangles. Then, if we want to prove it for manifolds, again we need to try to cover the manfolds with a grid like this. If we can do that, we can prove Stoke's theorem for surfaces that we know can be covered by a grid. But we can do it for general manifolds in a really cheap way, again by multiplying with partitions of unity. So that's whay we're going to do in the rest of the course. But first, we have to prove Theorem \ref{cheapway}, because that's what we're going to use to glue together little pieces in a very nice but cheap way.
+
+\begin{proof}
+
+  The way we're going to do this is by considering a number of cases building up to the general case.
+
+  \begin{enumerate}
+
+    \item Assume \(A\) is compact. That means finitely many \(U \in \mc{O}\) cover \(A\). Call them \(U_1,...,U_q\). In this case we're going to construct a \textit{finite} (not countable) partition of unity subordinate to \(\{U_1,...,U_q\}\).
+
+    For each \(i \in \{1,...,q\}\), the first thing that we're going to do is show that we can find a compact set \(D_i \subset U_i\) such that the interiors of the \(D_i\) cover \(A\). How?
+
+    For all \(x \in A\), let \(D_x\) be a closed ball with centre \(x\) lying inside some \(U_i\). Since \(A\) is compact, finitely many of the interiors of the \(D_x\) cover \(A\). Number them \(D_{x_1},...,D_{x_p}\). For each \(i \in \{1,...,q\}\), let
+    \begin{equation}
+      D_i = \bigcup_{D_{x_j} \subset U_i}D_{x_j}
+    \end{equation}
+
+    Let \(\psi_i\) be a \(\mc{C}^\infty\) function \(0 \leq \psi_i \leq 1\) such that \(\psi_i > 0\) on \(D_i\), and is 0 outside a compact subset of \(U_i\). Notice if we do this, then, since the interior of the \(D_i\)'s cover's \(A\),
+    \begin{equation}
+      \forall x \in U \supseteq A, \sum_{i = 1}^q\psi_i(x) > 0
+    \end{equation}
+    where \(U\) is an open neighborhood of \(A\). SO we define our partition of unity as
+    \begin{equation}
+      \Phi = \{\varphi_1,...,\varphi_q\}, \varphi_i = \frac{\psi_i}{\sum_{i = 1}^q\psi_i}
+    \end{equation}
+    \label{compactcase}
+
+    \item Now assume \(A = \bigcup_{i \in \nats}A_i\) where each \(A_i\) is compact and a subset of the interior of \(A_{i + 1}\). Let \(B_i = A_i \setminus \Int A_{i - 1}\). Let \(\mc{O}_i\) be covers of \(B_i\) by the open sets
+    \begin{equation}
+      U \cap (\Int A_{i + 1} \setminus A_{i - 2})
+    \end{equation}
+    for each \(U \in \mc{O}\). By Case \ref{compactcase} there is a finite partition of unity \(\Phi_i\) for \(B_i\) subordinate to \(\mc{O}_i\). Consider
+    \begin{equation}
+      \sigma = \sum_i\sum_{\psi_i \in \Phi_i}\psi_i
+    \end{equation}
+    This is a finite sum in some neighborhood of every \(x \in A\). Take for a partition
+    \begin{equation}
+      \varphi = \frac{\psi}{\sigma}
+    \end{equation}
+    for each \(\psi \in \Phi_i\), for every \(i\).
+
+    \label{compacttowercase}
+
+    \item Assume \(A\) is open. Then \(A = \bigcup_{i \in \nats}A_i\) as in Case \ref{compacttowercase}. How can we get such a representation? Try
+    \begin{equation}
+      A_i = \{x : |x| \leq i, d(x_, \reals^n \setminus A) > i^{-1}\}
+    \end{equation}
+
+    \label{opencase}
+
+    \item Let \(A\) be arbitrary. Apply Case \ref{opencase} to \(\bigcup_{U \in \mc{O}}U\). A partition of unity subordinate to \(\mc{O}\) is also a partition of unity for \(A\) subordinate to \(\mc{O}\)
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}
