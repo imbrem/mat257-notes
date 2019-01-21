@@ -1,0 +1,165 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 16 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Last time, we used partitions of unity to obtain an extended definition of the integral, which we didn't quite finish proving the consistency of of. So let's recall where we were at:
+\begin{theorem}
+  Let \(A \subseteq \reals^n\) be open, and \(f\) be a locally bounded function of \(A\) where the set of discontinuities of \(f\) has measure 0. Then, if \(\Phi\) is a partition of unity for \(A\) subordinate to \(\{A\}\) (note that for this definition a \(\mc{C}^0\) partition is enough, i.e. just continuous)
+  \begin{equation}
+    \int_Af = \sum_{\varphi \in \Phi}\int_A\varphi f
+  \end{equation}
+  provided that
+  \begin{equation}
+    \sum_{\varphi \in \Phi}\int_A\varphi |f|
+  \end{equation}
+  converges.
+\end{theorem}
+What we showed last time is that
+\begin{enumerate}
+
+  \item The existence of the integral and it's value is independent of the parititon of unity chosen to compute it.
+
+  \item The integral \textit{always} exists if \(A\) and \(f\) are both bounded.
+
+  \item We \textit{want} to show that if we're in a situation where the integral exists according to our old definition, so that in particular \(A\) and \(f\) will be bounded, then our new definition agrees with the old one. That is, if moreover, \(A\) is Jordan measurable, then
+  \begin{equation}
+    \int_Af = \sum_{\varphi \in \Phi}\int_A\varphi f
+  \end{equation}
+  where the left hand side is computed using the old definition
+\end{enumerate}
+\begin{proof}
+  For every \(\epsilon > 0\), there is a compact Jordan-measurable subset \(C \subset A\) such that \begin{equation}
+    V(A \setminus C) = \int_{A \setminus C}1 = \int_A\chi_{A \setminus C} < \epsilon
+  \end{equation}
+  So how do we get this \(C\)? We're given that \(A\) is Jordan measurable, so as \(A\) is bounded we can cover the boundary of \(A\) by the interiors of finitely many closed balls \(\mc{B}\) (or rectangles) of total volume \(< \epsilon\). So we can take
+  \begin{equation}
+    C = A \setminus \Int\bigcup\mc{B}
+  \end{equation}
+  (we could also take the union of interiors). Why is \(C\) Jordan measurable? Since the boundary of \(C\) is a subset of the boundary of \(\Int\bigcup\mc{B}\), which is has measure zero, it follows that \(C\) has boundary of measure zero and is hence Jordan measurable.
+
+  Since \(C\) is compact, only finitely many of our partition functions \(\varphi \in \Phi\) are nonzero on \(C\). So we'll take a finite sum, look at the difference, and show that that difference goes to zero: consider any finite subset \(F\) of \(\Phi\) including the ones which are nonzero on \(C\). Consider
+  \begin{equation}
+    \left|\int_Af - \sum_{\varphi \in F}\int_A\varphi f\right|
+    \label{absint}
+  \end{equation}
+  As the absolute value of the integral is less than or equal to the integral of the absolute value, we have that equation \ref{absint} is less than or equal to
+  \begin{equation}
+    \int_A\left|f - \sum_{\varphi \in F}\varphi f\right|
+    \label{intabs}
+  \end{equation}
+  Since \(f\) is bounded, we can choose \(M\) such that \(|f| \leq M\). So equation \ref{intabs} is less than or equal to
+  \begin{equation}
+    M\int_A\left(1 - \sum_{\varphi \in F}\varphi\right)
+    = M \int_A\sum_{\varphi \in \Phi \setminus F}\varphi
+    \label{intrem}
+  \end{equation}
+  Since
+  \begin{equation}
+    \forall \varphi \in \Phi \setminus F, \forall c \in C, \varphi(c) = 0
+  \end{equation}
+  we have that equation \ref{intrem} is less than or equal to
+  \begin{equation}
+    MV(A \setminus C) \leq M\epsilon
+  \end{equation}
+
+\end{proof}
+As I mentioned last time, you can do this in another way which perhaps looks more like the improper integral from first year calculus, and that's integrating with bigger and bigger sets. Let me state that, but I won't prove it, and rather put it on the problem set:
+\begin{theorem}
+  Let \(A\) be open, \(f: A \to \reals\) be locally bounded and let the set of discontinuties of \(f\) have measure zero. Write
+  \begin{equation}
+    A = \bigcup_{n \in \nats}C_n
+  \end{equation}
+  where each \(C_n\) is compact and Jordan Measurble and satisfy \(C_n \subset \Int C_{n + 1}\). Part of the exercise is to show that we can do this. Then \(f\) is integrable on \(A\) if and only if
+  \begin{equation}
+    \left\{\int_{C_i}|f| : n \in \nats\right\}
+  \end{equation}
+  is bounded. Note that if this is the case, the sequence
+  \begin{equation}
+    \left\{\int_{C_i}f : n \in \nats\right\}
+  \end{equation}
+  converges absolutely, and we can write
+  \begin{equation}
+    \int_Af = \lim_{n \to \infty}\int_{C_n}f
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  Exercise.
+\end{proof}
+It's good to appreciate that the improper integral which we defined using a partition of unity can be expressed in this way. It's also really good to do the above exercise as an exercise in using partitions of unity.
+
+There's a little gap in the treatment of partitions of unity last time which I want to fill here. In the first case, where \(A\) was compact, we defined
+\begin{equation}
+  \psi_1,...,\psi_p
+\end{equation}
+such that \(\psi_1 + ... \psi_p > 0\) on an open set \(U \supseteq A\). We then let
+\begin{equation}
+  \varphi_i = \frac{\psi_i}{\psi_1 + ... \psi_p}
+\end{equation}
+This is all well and good, but individual \(\varphi_i\) might be defined on sets that go outside \(U\), and we have to worry about dividing by zero to guarantee that each bump function is \(\mc{C}^\infty\) everywhere. To deal with this, we can simply multiply everything by another bump function (we can find one which is 1 on \(A\) and zero outside a compact set \(U\)).
+
+Let \(f(x)\) be a \(\mc{C}^\infty\) bump function such that \(f = 1\) on \(A\), \(f = 0\) outside a compact subset of \(U\). Then the set of functions
+\begin{equation}
+  \{f \cdot \varphi_i : i \in 1,...,p\}
+\end{equation}
+is a partition of unity as required.
+
+Before we finish, I want to say something about integration by substitution, or change of variables.
+
+\section{Change of Variables}
+
+Recall the single-variable \underline{integration by substitution} formula
+\begin{equation}
+  \int_{g(a)}^{g(b)} f = \int_a^b(f \circ g)g'
+  \label{onesubform}
+\end{equation}
+This holds whenever ``both sides make sense'', e.g. if \(f\) is continuous and \(g\) is continuously differentiable. The hypotheses, however, could be weaker. When we talk about integration by substitution, our \(g\) is going to be the change of variables. But change of variables means like ``invertible''. So not just any \(g\), but in particular 1-to-1. I wanted to point out how, in terms of our formula, we should think about this in the case where \(g\) is one-to-one. So suppose it is so. Then equation \ref{onesubform} can be rewritten as
+\begin{equation}
+  \int_{g([a, b])}f = \int_{[a, b]}(f \circ g)|g'|
+\end{equation}
+since otherwise the equaton would not be correct if \(g\) was decreasing. So this is what our change-of-variables formula is going to look like. We'll look at that next time.
+\end{document}
