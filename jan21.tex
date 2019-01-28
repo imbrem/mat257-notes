@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 21 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Change of Variable}
+Let's begin with some examples
+\begin{enumerate}
+
+  \item Find the volume of an ellipsoid
+  \begin{equation}
+    E = \left\{(x, y, z) \in \reals^3 : \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} \leq 1\right\}
+  \end{equation}
+  We can make a change of variable to ``transform'' this into a sphere. Specifically, we can use the transformation
+  \begin{equation}
+    g : \reals \to \reals^3, (x, y, z) \mapsto (x/a, y/b z/c)
+  \end{equation}
+  to take the ellipsoid to the unit ball, where \((u, v, w) = g(x, y, z)\). So
+  \begin{equation}
+    \iiint_{B_1(\mb{0})}1dudvdw = \iiint_{E}\frac{1}{abc}dxdydz = \frac{1}{abc}\iiint_{E}1dxdydz = \frac{4}{3}\pi \implies V(E) = \frac{4}{3}\pi abc
+  \end{equation}
+  Now what if we didn't know the volume of a ball of radius 1? We could figure it out using change of variables, using spherical coordinates:
+  \begin{equation}
+    \int_{0}^{2\pi}\int_{0}^{\pi}\int_0^1r^2\sin\theta drd\theta d\phi = \int_0^1r^2dr\int_0^\pi\sin\theta d\theta\int_0^{2\pi}d\phi = \frac{1}{3} \cdot 2 \cdot 2\pi = \frac{4\pi}{3}
+  \end{equation}
+  Of course, the volume of the sphere of radius \(r\) can be treated as a special case of the ellipsoid where \(a = b = c = r\), giving volume \(\frac{4}{3}\pi r^3\).
+
+  \item What's the simplest kind of change of variable, save the identity? Of course, a linear change of variable. Consider a linear transformation \(T: \reals^n \to \reals^n\) and suppose \(A \subset \reals^n\) is Jordan measurable and \(B = T(A)\). Show that \(B\) is Jordan measurable and \(V(B) = V(A)|\det T|\). We split this into two cases:
+  \begin{enumerate}
+
+    \item Assume \(T\) is not invertible, i.e. \(\det T = 0\). Then the image \(I\) of \(T\) is a linear subspace of \(\reals^n\) of dimension less than \(N\), and \(B \subset I\). So all of \(B\) has \(n\)-dimensional measure zero, and hence \(V(B) = 0 = V(A)|\det T|\) as desired.
+
+    \item Assume \(T\) is invertible, i.e. \(\det T \neq 0\). Then \(B\) is Jordan measurable and now by the change of variable theorem
+    \begin{equation}
+      V(B) = \int_B1 = \int_A1 \cdot |\det T| = |\det T|\int_A1 = V(A)|\det T|
+    \end{equation}
+    as desired.
+
+  \end{enumerate}
+
+\end{enumerate}
+We're now going to prove the Change of Variables theorem, and it's going to take all week. Well, all the class time this week. Let's consider just one direction:
+\begin{theorem}
+  Let \(A \subset \reals^n\) be open and let \(g: A \to \reals^n\) be one to one and continuously differentiable such that \(\det g'(x) \neq 0\). Then if \(f: g(A) \to \reals\) is integrable, \(f \circ g|\det g'|\) is integrable on \(A\) and
+  \begin{equation}
+    \int_{g(A)}f = \int_A(f \circ g)|\det g'|
+  \end{equation}
+\end{theorem}
+Note that the converse, and hence the full theorem, follows, since
+\begin{itemize}
+  \item As \(g\) is invertible \(f\) is locally bounded if and only if \(f \circ g|\det g'|\) is locally bounded
+  \item The discontinuities of \(f\) have measure zero if and only if the discontinuities of \(f \cdot g|\det g'|\) have measure zero, since \(g\) is differentiable, using the lemma from last time.
+  \item We can use \(g^{-1}\) to go from \(g(A)\) to \(A\).
+\end{itemize}
+We still have to show that if \(F = f \circ g|\det g'|\) is integrable on \(A\), then \(f\) is integrable on \(g(A)\). All we have to do is apply the theorem with \(F), g^{-1}\) instead of \(f, g\). Then
+\begin{equation}
+  F \circ g^{-1}|\det(g^{-1})'| = f \circ \cancel{g \circ g^{-1}} \cancel{|\det g' \circ g^{-1}|}\frac{1}{\cancel{|\det g' \circ g^{-1}|}} = f
+\end{equation}
+as desired.
+
+We can now begin to prove the theorem in a number of steps. We're going to start by looking at a Jordan-measurable open subset \(U\) of \(A\) with closure in \(A\), e.g. an open rectangle with closure in \(A\). The first thing that we're going to do is show that it's ``good enough'' to prove the theorem on such an open subset. How? With a partition of unity! That's going to simplify things a lot, but just one thing I want to note first is that if \(f\) is integrable on \(g(A)\), then \(f\) is integrable on \(g(U)\) and \(f \circ g|\det g'|\) is integrable on \(U\).
+
+\end{document}

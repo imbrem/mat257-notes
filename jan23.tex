@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 23 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}[Change of Variable]
+  Let \(A\) be open in \(\reals^n\) and let \(g: A \to \reals^n\) be one-to-one and \(\mc{C}^1\) such that \(g'(x)\) be invertible on \(A\).
+  If \(f: g(A) \to \reals\) is integrable, then \(f \circ g|\det g'|\) is integrable on \(A\) and
+  \begin{equation}
+    \int_{g(A)}f = \int_Af \circ g|\det g'|
+  \end{equation}
+  \label{changeofvar}
+\end{theorem}
+We observe that, if \(U\) is a Jordan-measurable subset of \(A\) with closure in \(A\), then if \(f: g(A) \to \reals\) is integrable then \(f\) is integrable on \(g(U)\) and \(f \circ g|\det g'|\) is integrable on \(U\).
+
+We're now going to attempt to prove Theorem \ref{changeofvar} in small steps:
+\begin{enumerate}
+
+  \item Suppose \(\mc{O}\) is an open cover of \(A\) by sets like \(U\) above. Suppose that for each \(U\), the theorem holds, i.e. \(f\) is integrable on \(g(U)\) and
+  \begin{equation}
+    \int_{g(U)}f = \int_U(f \circ g)|\det g'|
+  \end{equation}
+  Then the theorem is true. What we're saying here is it's good enough to, instead of proving the thoerem as stated, just prove it for thse Jordan-measurable \(U\)'s. So, why is this true?
+
+  If we have an open covering \(\mc{O}\) of \(A\), taking the images of everything in the cover, the set
+  \begin{equation}
+    \mc{O}' = \{g(U) : U \in \mc{O}\}
+  \end{equation}
+  is an open cover of \(g(A)\) of some kind, since \(g\) is invertible. Now let \(\Phi\) be a \(\mc{C}^0\) partition of unity for \(g(A)\) subordinate to \(\mc{O}'\).
+
+  That means each partition function \(\varphi \in \Phi\) is zero outside of a compact subset of some \(g(U)\). But notice that, if this is true, then \(\varphi \circ g\) must be zero outside of a compact subset of \(U\). This is because \(g\) is invertible. This is the last place in the proof that we're going to use the fact that \(g\) is one-to-one.
+
+  So this tells us that
+  \begin{equation}
+    \Phi' = \{\varphi \circ g : \varphi \in \Phi\}
+  \end{equation}
+  forms a partition of unity for \(A\) subordinate to \(\mc{O}\). So we have that \textit{by our assumption}
+  \begin{equation}
+    \int_{g(A)}\varphi \circ g = \int_{g(U)}\varphi \circ f = \int_U(\varphi \cdot f) \circ g|\det g'| = \int_A(\varphi \cdot f) \circ g|\det g'|
+  \end{equation}
+  by the nature of partitions of unity. So, the thing that we're interested in, the integral of \(f\) over \(g(A)\), can be written, since \(\Phi\) is a partition of unity, as
+  \begin{equation}
+    \int_{g(A)}f = \sum_{\varphi \in \Phi}\int_{g(A)}\varphi f = \sum_{\varphi \in \Phi}\int_A(\varphi \cdot f) \circ g|\det g'| = \int_Af \circ g|\det g'|
+    \label{thisequality}
+  \end{equation}
+  Note that the same equality as \ref{thisequality} with \(|f|\) in place of \(f\) shows that the RHS converges, which is our definition of intregrability.
+
+  We could make the same conclusion that the theorem is true not by assuming this for an open covering of \(A\) but rather looking at the same things for an open covering of \(g(A)\). That is, it's equivalent for this claim to suppose that if we have an open covering \(\mc{O}\) of \(g(A)\) by open subsets of this kind (Jordan measurable, closure lying in \(g(A)\)), then, for all \(V \in \mc{O}\) and all \(f\) integrable on \(V\),
+  \begin{equation}
+    \int_Vf = \int_{g^{-1}(V)}(f \circ g)|\det g'|
+  \end{equation}
+
+  \item It's enough to prove that for every open rectangle \(V\) in \(g(A)\) with closure in \(g(A)\) we have
+  \begin{equation}
+    \int_Vf = \int_{g^{-1}(V)}(f \circ g)|\det g'|
+  \end{equation}
+  whenever \(f\) is integrable on \(V\). If I just said that, that would be no further reduction at all, since this is just what we already said. But that's not what I'm going to say here. What I'm going to say is that it's enough to prove this when \(f\) is the constant function \(1\). So this is a big reduction.
+
+  Again, when I say it's ``enough'' to prove that, the meaning is that if you prove this, then the theorem follows, i.e. it is enough to prove the theorem. Why is this the case, however?
+
+  Let \(P\) be a partition of \(V\). For every subrectangle \(S \in P\), let \(f_S\) be the constant function \(m_S(f)\). We have
+  \begin{equation}
+    \mc{L}(f, P) = \sum_{S \in P}m_S(f)V(S) = \sum_{S \in P}\int_{\Int S}f_S
+    \label{partint}
+  \end{equation}
+  By this assumption for constant functions, we can rewrite equation \ref{partint} as
+  \begin{equation}
+    \sum_{S}\int_{g^{-1}(\Int S)}f_S \circ g|\det g'| \leq \sum_{S}\int_{g^{-1}(\Int S)}f \circ g|\det g'| \leq \int_{g^{-1}(V)}f \circ g|\det g'|
+  \end{equation}
+  So what does this tell us about the integral of \(f\) over \(V\)? We have that
+  \begin{equation}
+    \int_Vf = \sup_P\mc{L}(f, P) \leq \int_{g^{-1}(V)}f \circ g|\det g'|
+  \end{equation}
+  The same argument using uppwr sums gives \(\geq\).
+
+  \item If the theorem is true for \(g : A \to \reals^n\), and \(h: g(A) \to \reals^n\), with the same hypotheses (one-to-one, \(\mc{C}^1\), \(\det h' \neq 0\)) then it is true for \(h \circ g\). Why?
+  \begin{equation}
+    \int_{(h \circ g)(A)}f = \int_{g(A)}(f \circ h)|\det h'| = \int_A((f \circ h) \circ g)|\det h' \circ g||\det g'| = \int_Af \circ (h \circ g)|\det (h \circ g)'|
+  \end{equation}
+  by the Chain Rule.
+
+  
+
+\end{enumerate}
+
+
+\end{document}

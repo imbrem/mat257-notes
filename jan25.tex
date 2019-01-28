@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{January 25 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Change of Variable Theorem}
+We'll continue our reduction of the theorem from last time:
+\begin{itemize}
+
+  \item [4.] The theorem is true if \(g\) is an (invertible) linear transformation. We already showed that, for any \(g\), it's good enough to prove that the theorem is true on an open rectangle \(U\) with the constant function \(f = 1\), i.e. that if \(U\) is an open rectangle in \(A\), then
+  \begin{equation}
+    \int_{g(U)}1 = \int_U|\det g'| \iff \Vol(g(U)) = |\det g|\Vol(U)
+  \end{equation}
+  Note that we've already proved this in linear algebra, using the volume of parallelepipeds. But let's do it analytically.
+
+  We will make use of the fact that any invertible linear transformation (i.e. invertible \(n \times n\) matrix) is a composite of elementary transformations (elementary matrices). Last time we showed that if the theorem is true for \(g, h\), then it is true for \(g \circ h\). Hence, all we need to do is show that the theorem is true for an arbitrary elementary transformation (matrix). We have 3 kinds of elementary matrices:
+  \begin{itemize}
+
+    \item A matrix which has all 1's on the diagonal, except for \(\lambda\) in one place. In this case, \(\det g = \lambda\), so we could use Fubini's theorem to scale by \(\lambda\), giving \(\Vol(g(U)) = \lambda \Vol(U) = |\det g|\Vol(U)\) as desired.
+
+    \item A matrix which has all 1's on the diagonal, except for two adjacent rows which have \(\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\) on the diagonal. We have \(\det g = \pm 1\). Since we're just changing two coordinates, the integral remains unchanged.
+
+    \item The identity matrix, plus \(1\) in a position \(i, j\) with \(i \neq j\). In this case, the determinant is just \(1\). Furthermore, we're just translating the top of our rectangle into a parallelogram. Fubini's theorem tells us that the volume is the same since the limits in terms of \(y\) are the same, and for fixed \(y\) we are integrating over a shifted integral of the same length, the shifting not having an effect since we are integrating a constant.
+
+  \end{itemize}
+  \label{p4}
+
+\end{itemize}
+We can now return to the proof of the theorem: by 3 and \ref{p4}, we can assume that, given \(a \in A, g'(a) = I\), where \(I\) is the identity. Why? Let \(T = g'(a)\) be an invertible linear transformation. Then we can write
+\begin{equation}
+  g = T \circ (T^{-1} \circ g)
+\end{equation}
+By \ref{p4}, this is true for \(T\). By 3, if this is true for \(T\) and \(T^{-1} \circ g\) then it's true for \(g\). So it's enough to prove for the case
+\begin{equation}
+    (T^{-1} \circ g)' = I
+\end{equation}
+To complete the proof, we use induction on \(n\):
+\begin{itemize}
+
+  \item \(n = 1\): by integration by substitution
+
+  \item Assume it's true for \(n - 1\). It's enought to show that, for all \(a \in A\), we can find Jordan measurable open \(U \subset A\) containing \(a\), with closure in \(A\), so that the theorem is true on \(U\) when \(f = 1\).
+
+  We can assume \(g'(A) = I\). We'll express \(g\) as the composition of 2 mappings, each of which changes at most \(n - 1\) coordinates. There are a number of ways to do this. One is defining \(h : A \to \reals^n\) by
+  \begin{equation}
+    h(x) = (g_1(x),...,g_n(x), x_n)
+  \end{equation}
+  Why is this a change of variable? \(h'(a) = I\), so there is an open neighborhood \(U'\) of \(a\) on which \(h\) is one to one and \(\det h'(a) \neq 0\). Now define
+  \begin{equation}
+    k: h(U') \to \reals^n, k(y) = (y_1,...,y_{n - 1}, g_n(h^{-1}(y_n)))
+  \end{equation}
+  We have \(g = k \circ h\),
+  \begin{equation}
+    g'(a) = k'(h(a))h'(a) = I \implies k'(h(a)) = I
+  \end{equation}
+  So there is an open neighborhood \(V\) of \(h(a)\) in \(U'\) on which \(k\) is one to one and
+  \begin{equation}
+    \det k'(g) = 0
+  \end{equation}
+  Let \(U = h^{-1}(V)\). On \(U\), \(g = k \circ h\), and \(h: U \to V\), \(k: V \to \reals^n\).
+
+  So we have to prove the theorem for \(h\) and for \(k\). The proof is going to be the same for both cases, so let's do it for the harder case, \(h\), which changes \(n - 1\) coordinates (versus \(k\), which changes only one).
+
+  We're going to use Fubini's theorem: we'll integrate with respect to \(x_n\). Next time...
+\end{itemize}
+
+\end{document}
