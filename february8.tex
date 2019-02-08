@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{February 8 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Recall that if \(\dim V = n\), then \(\dim \Omega^n(V) = 1\). Furthermore, every \(\omega \in \Omega^n(\reals^n)\) is a multiple of \(\det\).
+
+More generally, we have the following lemma:
+\begin{lemma}
+  If \(\omega \in \Omega^n(V)\), and \(v_1,...,v_n \in V\), let
+  \begin{equation}
+    w_i = \sum_{j = 1}^na_{ij}v_j
+  \end{equation}
+  Then, if \(A = (a_{ij}) \in \reals^{n \times n}\),
+  \begin{equation}
+    \omega(w_1,...,w_n) = \det(A)\omega(v_1,...,v_n)
+    \label{thisthing}
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  Let's express things in terms of an \(n\)-form on \(\reals^n\). Define \(\eta \in \Omega^n(\reals^n)\) by equation \ref{thisthing} as on the columns of \(A\) (being a function taking in \(n\) vectors) as
+  \begin{equation}
+    \eta((a_{11},...,a_{1n}),(a_{21},...,a_{2n}),...,(a_{n_1},...,a_{nn})) = \omega\left(\sum a_{1j}v_i, ... \sum a_{nj}v_j\right)
+    \label{star}
+  \end{equation}
+  We have that, for some \(\lambda \in \reals\)
+  \begin{equation}
+    \eta = \lambda\det \implies \eta(e_1,...,e_n) = \lambda \det(e_1,...,e_n) = \lambda = \omega(v_1,...,v_n)
+  \end{equation}
+  But this tells us that
+  \begin{equation}
+    \omega(w_1,...,w_n) = w(v_1,...,v_n)\det(a_j)
+    \label{eq2}
+  \end{equation}
+  since the left hand side of equation \ref{eq2} is equal to equation \ref{star}. One thing that's good to point out is the following: suppose \(v_1,...,v_n\) were linearly dependent. This would tell us that \(\omega(v_1,...,v_n)\) and hence \(\omega(w_1,...,w_n)\) would be zero.
+\end{proof}
+In general, this shows us that if \(\dim V = n\), any nonzero \(\omega \in \Omega^n(V)\) divides the set of all bases of \(V\) into two groups:
+\begin{itemize}
+  \item Those where \(\omega(v_1,...,v_n) > 0\)
+  \item Those where \(\omega(v_1,...,v_n) < 0\)
+\end{itemize}
+Another way of saying the same thing without using differential forms is saying that \((v_1,...,v_n)\) and \((\omega_1,...,\omega_n)\) are in the same group if one can be transformed into the other with a matrix \(A\) having positive determinant.
+
+\section{Orientations of \(V\)}
+
+\begin{definition}
+Define an \underline{orientation of \(V\)} to be a choice of one of these two groups.
+We can consider this as providing an equivalence relation: two bases are equivalent if they belong to the same group. We will write these as
+\begin{itemize}
+  \item \([v_1,...,v_n]\) to denote the equivalence class of \(v_1,...,v_n\)
+  \item \(-[v_1,...,v_n]\) to denote the equivalence class of the opposite group
+\end{itemize}
+\end{definition}
+\begin{definition}
+  The \underline{standard orientation} of \(\reals^n\) is \([e_1,...,e_n]\)
+\end{definition}
+For example, in \(\reals^3\), the standard orientation is given by \([e_1, e_2, e_3]\), giving the physics right hand rule: if you put your index and middle fingers in the direction of \(e_1, e_2\), your thumb points in the direction of \(e_3\).
+
+Suppose \(V\) has an inner product \(T\). In this case, we can consider orthonormal bases with respect to \(T\). So consider two different orthonormal bases \(v_1,...,v_n\) and \(w_1,...,w_n\) with respect to \(T\). That is,
+\begin{equation}
+  T(v_i, v_j) = T(w_i, w_j) = \delta_{ij}
+\end{equation}
+So we can write one in terms of the other, i.e. find \(A = (a_{ij})\) such that
+\begin{equation}
+  w_i = \sum_{a_{ij}}v_j
+\end{equation}
+where \(\det A = \pm 1\). How do we see that? Well, let's compute:
+\begin{equation}
+  T(w_i, w_j) = T\left(\sum_ka_{ik}v_k, \sum_\ell a_{j\ell}v_\ell\right) = \sum_{k, \ell}a_{ik}a_{j\ell}T(v_k, v_\ell) = \sum_{k, \ell}a_{ik}a_{j\ell}\delta_{k\ell} = \sum_ka_{ik}a_{jk} = \delta_{ij}
+\end{equation}
+So everything is zero here unless \(i = j, k = \ell\), in which this becomes
+\begin{equation}
+  (AA^T)_{ij} = \delta_{ij} \implies AA^T = I \implies \det A^2 = 1 \implies \det A = \pm 1
+\end{equation}
+as desired. We can now obtain the following result
+\begin{lemma}
+  Given inner product \(T\) and orientation \(\mu\) for \(V\), there is a unique \(\omega \in \Omega^n(V)\) such that \(\omega(v_1,...,v_n) = 1\) whenever \(v_1,...,v_n\) are an orthonormal basis and \([v_1,...,v_n] = \mu\).
+\end{lemma}
+The point is, if have an orthonromal basis \(v_1,...,v_n\) where \(\omega(v_1,...,v_n) = 1\) and take \textit{another} orthonormal basis \(w_1,...,w_n\), then
+\begin{equation}
+  \omega(w_1,...,w_n) = \pm\omega(v_1,...,v_n) = \pm 1
+\end{equation}
+which, of course, will be \(1\) if \((w_1,...,w_n) \in \mu\).
+\textit{This} is what we're going to call volume. More precisely, we call \(\omega\) the \underline{volume form} on \(V\). Of course, this is determined by an inner product and an orientation.
+
+For example, the volume element (form) of \(\reals^n\) determined by the standard inner product and the standard orientation is \(\det\).
+We're usually going to use the word ``form'' to mean an alternating tensor at every point, but it doesn't matter, as alternating tensor and form can be used interchangeably.
+
+One thing to mention before we leave this stuff is
+\subsection{The Cross Product}
+We have that
+\begin{equation}
+  \det\begin{pmatrix}
+    v_{11} & v_{12} & v_{13} \\
+    v_{21} & v_{22} & v_{23} \\
+    w_{1} & w_{2} & w_{3}
+  \end{pmatrix} = \langle v_1 \times v_2, w \rangle
+\end{equation}
+where \(v_1 \times v_2\) denotes the cross product. It turns out you can do the same thing with \(n - 1\) vectors in \(\reals^n\). Define \(\varphi \in \Omega^1(V) = \mc{T}^1(V) = V^*\), i.e. let \(\phi\) be a linear function from \(\reals^n \to \reals\), where
+\begin{equation}
+  \varphi(w) = \det\begin{pmatrix} v_1 \\ ... \\ v_{n - 1} \\ w \end{pmatrix}
+\end{equation}
+Then there is a unique \(z \in V\) such that \(\varphi(w) = \langle z, w \rangle\). This is something you proved last year in linear algebra... I hope...
+So we'll call \(z\) the \underline{cross product} of \(v_1,...,v_{n - 1}\), \(v_1 \times v_2 \times ... \times v_{n - 1}\).
+Note that the cross product is an alternating multilinear form. It also satisfies the distributive property.
+
+Wh do we want to use this? Well, we want to start proving the following:
+\begin{equation}
+  \int_{\text{cube}}f(x_1,...,x_n)dx_1 \wedge ... \wedge dx_n = \int_{\text{cube}}f dx_1...dx_n
+\end{equation}
+And we'll get to that next time...
+
+\end{document}
