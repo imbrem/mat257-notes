@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{February 8 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+\DeclareMathOperator{\D}{D}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Vector Fields and Differential Forms}
+Recall the definitions of the \underline{tangent space to \(\reals^n\) at \(a\)}, \(\text{T}\reals^n_a\) or \(\reals^n_a\). We write the standard bases of \(\reals^n_a\) as
+\begin{equation}
+  e_{1,a},...,e_{n,a}
+\end{equation}
+and define the stadard inner product
+\begin{equation}
+  \ip{v_a}{w_a}_a = \ip{v}{w}
+\end{equation}
+Using the definitions from last time, we obtain a \underline{standard orientation} of \(\reals^n_a\)
+\begin{equation}
+  [e_{1,a},...,e_{n,a}]
+\end{equation}
+Recall the following definition:
+\begin{definition}
+  The \underline{tangent vector} to a \(\mc{C}^1\) curve \(\gamma: [0, 1] \to \reals^n\) at \(t \in [0, 1]\) is given by
+  \begin{equation}
+    \gamma'(t)_{\gamma(t)} = (\gamma_1'(t),...,\gamma_n'(t))_{\gamma(t)} = \sum_{i = 1}^n\gamma_i'(t)e_{i, \gamma(t)} \in \reals^n_{\gamma(t)}
+  \end{equation}
+  We write
+  \begin{equation}
+    \gamma'(t)_{\gamma(t)} = \gamma_{*t}(e_{1, t})
+  \end{equation}
+  where \(e_{1, t} \in \reals^1_t\), thinking of the derivative of \(\gamma\) \(\D\gamma\) inducing a mapping
+  \begin{equation}
+    \gamma_{*t}: \reals_t^1 \to \reals^n_{\gamma(t)}, \gamma_{*t}(ae_{1, t}) = \D\gamma(a + t)(e_1)_{\gamma(t)}
+  \end{equation}
+\end{definition}
+Consider now a function \(\varphi : \reals^n \to \reals^p\), and consider the curve \((\varphi \circ \gamma): [0, 1] \to \reals^p\). What's the tangent vector to \(\varphi \circ \gamma\) at \(t\)? Well, by definition, it's
+\begin{equation}
+  (\varphi \circ \gamma)_{*t}(e_{1, t}) = \D(\varphi \circ \gamma)(t)(e_1)_{\varphi(\gamma(t))} \label{starphi}
+\end{equation}
+By the Chain Rule, \ref{starphi} simplifies to
+\begin{equation}
+  \D\varphi(\gamma(t)) \circ \D\gamma(t) (e_1)_{\varphi(\gamma(t))} = \varphi_{*\gamma(t)}(\D\gamma(t)(e_1)_{\gamma(t)}) = \varphi_{*\gamma(t)} \circ \gamma_{*t}(e_{1, t})
+\end{equation}
+Writing this in words, the tangent vector to \(\varphi \circ \gamma\) at \(t\) is equal to the linear mapping between tangent spaces \(\varphi_{*\gamma(t)}: \reals^n_{\gamma(t)} \to \reals^p_{\varphi(\gamma(t))}\) applied to the tangent vector to \(\gamma\) at \(t\).
+
+We're now going to consider functions which, for every point in \(\reals^n\), give us a vector in the tangent space at that point. And that's what's called a \textit{vector field}. Formally,
+\begin{definition}
+  A \underline{vector field} \(F\) on \(\reals^n\) is a function such that for every point \(a\), \(F(a) \in \reals^n_a\), i.e.
+  \begin{equation}
+    F(a) = (F_1(a),...,F_n(a))_a
+  \end{equation}
+\end{definition}
+This trivially gives the following definition
+\begin{definition}
+  A vector field \(F\) is \(\mc{C}^r\) if each component \(F_i\) is \(\mc{C}^r\).
+\end{definition}
+Now, why is it that we really want to think of these things as having values in different tangent spaces? Let's look at some examples:
+\begin{enumerate}
+
+  \item In the plane, let's look at \(F(x, y) = (x, y)_{(x, y)}\), i.e. the vector \((x, y)\) ``pointing out of'' \(x, y\). In terms of the basis,
+  \begin{equation}
+    xe_{1, (x, y)} + ye_{2, (x, y)}
+  \end{equation}
+  We can imagine plotting this with every point having, coming out of it, the line between it and the origin, with a ``source'' at the origin. Imagining these to be the velocity vectors of a particle at each point, the points accelerate outwards from the origin with increasing rapidity.
+
+  \item Consider now \(F(x, y) = (x, -y)\). If we trace a particle following the velocity vectors, this gives us a ``saddle'' shape.
+
+  \item Consider the following important example
+  \begin{equation}
+    F(x) = \grad f(x) = \left(\prt{f}{x_1}(x),...,\prt{f}{x_n}\right)_x
+  \end{equation}
+  \(F\) is \(\mc{C}^r\) if \(f\) is \(\mc{C}^{r + 1}\). Finding if such an \(f\) exists is an interesting problem in differential equations. We can think of it as finding a potential function whose gradient at each point is equal to the vector field.
+
+\end{enumerate}
+We can apply operations on vectors pointwise to vector fields:
+\begin{equation}
+  (F + G)(x) = F(x) + G(x)
+\end{equation}
+\begin{equation}
+  \ip{F}{G}(x) = \ip{F(x)}{G(x)}
+\end{equation}
+\begin{equation}
+  (f \cdot F)(x) = f(x)F(x)
+\end{equation}
+In \(\reals^n\) we can take the cross product
+\begin{equation}
+  (F_1 \times ... \times F_{n - 1})(x) = F_1(x) \times ... \times F_{n - 1}(x)
+\end{equation}
+There are several very important classical operations we're going to be interested in, chief of them being \(\grad\), \(\Div\) and \(\curl\).
+\begin{definition}
+ We define the \underline{divergence of \(F\)}, \(\Div F\), as
+ \begin{equation}
+  \Div F = \sum_{i = 1}^n\D_iF_i = \sum_{i = 1}^n\prt{F_i}{x_i}
+ \end{equation}
+ This is often considered to be the ``inner product'' of \(F\) with a certain \underline{operator},
+ \begin{equation}
+  \ip{\nabla}{F}
+ \end{equation}
+ where
+ \begin{equation}
+  \nabla = \sum\prt{}{x_i}e_i
+ \end{equation}
+\end{definition}
+\begin{definition}
+  We define the \underline{curl of \(F\)} (in \(\reals^3\)), \(\curl F\), as
+  \begin{equation}
+    \curl F = \nabla \times F = (\D_2F_3 - \D_3F_2)e_1 + (\D_3F_1 - \D_1F_2)e_2 + (\D_1F_2 - \D_2F_1)e_3
+  \end{equation}
+\end{definition}
+We're going to prove a very general version of Stokes' theorem, but we want to see what holds in these special cases. Maybe that's enough for today
+
+\end{document}
