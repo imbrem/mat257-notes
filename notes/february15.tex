@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{February 15 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+\DeclareMathOperator{\D}{D}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Let's begin with a \(\mc{C}^r\) mapping \(f: \reals^n \to \reals^p\). Well first of all, we know what the tangent mapping is, or rather we know what the derivative is. And we want to interpret this derivative as a linear mapping induced by \(f\)
+\begin{equation}
+  f_{*a}: \reals^n_a \to \reals^p_{f(a)}, f_{*a}(v_a) = Df(a)(v)_{f(a)}
+\end{equation}
+Now, by duality, we want to say that \(f_{\*a}\) induces in the other direction a mapping that we'll call \(f^*_a\) that takes alternating \(k\)-tensors on the tangent space \(\reals^p_{f(a)}\) to alternating \(k\)-tensors on the tangent space \(\reals^n_a\), i.e.
+\begin{equation}
+  f_a^*: \Omega^k(\reals^p_{f(a)}) \to \Omega^k(\reals^n_a)
+\end{equation}
+Let's try the case where \(k = 1\). In this case, alternating 1-tensors are just 1-tensors, which are just elements of the dual space, i.e.
+\begin{equation}
+  \Omega^1(\reals^n_a) = \mc{T}^1(\reals^n_a) = (\reals^n_a)^*
+\end{equation}
+So, if \(T \in (\reals^p_{f(a)})^*\), we can write
+\begin{equation}
+  f_a^*(T)(v_a) = T(f_{*a}(v_a))
+\end{equation}
+In general, we do the exact same thing for \(\omega \in \Omega^k(\reals^p_{f(a)})\):
+\begin{equation}
+  f_a^*(\omega)(v_{1,a},...,v_{k,a}) = \omega(f_{*a}(v_1),...,f_{*a}(v_k))
+\end{equation}
+Now, we want to show that \(f\) induces a mapping \(f^*\) inducing a linear mapping whih takes, instead of pointwise objects as above, \(k\)-forms on \(\reals^p\) to \(k\)-forms on \(\reals^n\), with a \(k\)-form on \(\reals^p\) taking the form
+\begin{equation}
+  \omega: b \in \reals^p \mapsto \omega(b) \in \Omega^k(\reals^p_b)
+\end{equation}
+So we can write
+\begin{equation}
+  (f^*\omega)(a) = f^*_a(\omega(f(a)))
+  \label{novs}
+\end{equation}
+which is the same as saying
+\begin{equation}
+  (f^*\omega)(a)(v_{1, a},...,v_{k, a}) = \omega(f(a))(f_{*a}(v_{1,a}),...,f_{*a}(v_{n,a}))
+\end{equation}
+that is, just repeating what the definition is about. So this is the formal definition. I understand that everyone would like to forget this as soon as possible, so I'm going to try to help.
+\begin{proposition}
+  Let \(f: \reals^n \to \reals^p\) be \(\mc{C}^r\). Then
+  \begin{equation}
+    f^*(dy_i) = \sum_{j = 1}^n\prt{f_i}{x_j}dx_j = df_i = d(y_i \circ f)
+  \end{equation}
+  where
+  \begin{equation}
+    dy_i = \sum\prt{y_i}{x_j}dx_j
+  \end{equation}
+  Recall also that
+  \begin{equation}
+    f_*\left(\prt{}{x_j}\right) = \sum\prt{f_j}{x_i}\prt{}{y_j}
+  \end{equation}
+\end{proposition}
+Before we prove this, recall that equation \ref{novs} is true for every \(k\), including \(k = 0\). And what's a 0-form? It's just a function. So in this case, with a function (zero form) \(g\),
+\begin{equation}
+  f^*(g) = g \circ f
+\end{equation}
+Let's get to the proof:
+\begin{proof}
+  By definition,
+  \begin{equation}
+    f^*(dy_i)(a)(v_a) = dy_i(f(a))(f_{*a}v_a)
+    \label{mprod}
+  \end{equation}
+  Now, what is the right hand side here? It's the matrix of partial derivatives of \(f(a)\) applied to \(v_a\). So if \(v_a = (v_1,...,v_n)\), then equation \ref{mprod} is equal to
+  \begin{equation}
+    dy_i(f(a))\left(\sum_{k = 1}^p\mb{e}_{k, f(a)}
+      \sum_{j = 1}^n\prt{f_k}{x_j}(a)v_j\right)
+      = \sum_{j = 1}^n\prt{f_i}{x_j}(a)v_j
+      = \sum_{j = 1}^n\prt{f_i}{x_j}(a)dx_j(a)v_a
+  \end{equation}
+  Since this is true for any \(v_a\), it follows that
+  \begin{equation}
+    f^*(dy_i) = \sum_{j = 1}^n\prt{f_i}{x_j}dx_j
+  \end{equation}
+  as desired.
+\end{proof}
+Let's do an example: assume \(gx\) is a \(\mc{C}^r\) function on \(\reals^n\):
+\begin{equation}
+  f^*(dg) = f^*\left(\sum_{i = 1}\prt{g}{y_i}dy_i\right) = \sum_{i = 1}^p\prt{g}{y_i} \circ ff^*(dy_i) = \sum_{i = 1}^n\prt{g}{y_i} \circ f\sum_{j = 1}^n\prt{f}{x_j}dx_j
+\end{equation}
+Changing the order of the summation and using the chain rule, we obtain
+\begin{equation}
+  \sum_{j = 1}^n\left(\sum_{i = 1}^n\prt{g}{y_i}\circ f \circ \prt{f_i}{x_j}\right)dx_j = \sum_{j = 1}^n\prt{(g \circ f)}{x_j}dx_j = d(g \circ f)
+\end{equation}
+Let's extend the proposition with some ``trivial'' facts:
+\begin{proposition}
+  Let \(f: \reals^n \to \reals^p\) be \(\mc{C}^r\). Then
+  \begin{enumerate}
+
+    \item \(f^*(\omega_1 + \omega_2) = f^*(\omega_1) + f^*(\omega_2)\), i.e. \(f^*\) is linear
+
+    \item \(f^*(g \cdot w) = (g \circ f)f^*\omega\)
+
+    \item \(f^*(\omega \wedge \eta) = f^*(\omega) \wedge f^*(\eta)\)
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Immediate from the definitions
+\end{proof}
+\begin{proposition}
+  Suppose \(f: \reals^n \to \reals^p\). Then
+  \begin{equation}
+    f^*(gdx_1 \wedge ... \wedge dx_n) = g \circ f\det g' \cdot dx_1 \wedge ... \wedge dx_n
+  \end{equation}
+\end{proposition}
+This is why the natural object of integration is not functions but rather differential forms. Because if we understand that the object we're integrating is a differential form, not a function, then the formula for change of variable is built into the definition of a differential form.
+\begin{equation}
+  \int gdx_1 \wedge ... \wedge dx_n = \int gdx_1...dx_n
+\end{equation}
+Let's get to the proof:
+\begin{proof}
+  Consider
+  \begin{equation}
+    f^*(dx_1 \wedge ... \wedge dx_n)(a)(e_{1,a},...,e_{n,a})
+  \end{equation}
+\end{proof}
+
+\end{document}
