@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{March 8 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+\DeclareMathOperator{\D}{D}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point I left off last time.
+
+\section{Independence of Parametrization}
+
+Let's say \(c\) is a \(\mc{C}^1\) singular \(k\)-cube in \(\reals^n\), and we want to look at a re-parametrization, i.e. a map
+\begin{equation}
+  p : [0, 1]^k \to [0, 1]^k
+\end{equation}
+which is \(\mc{C}^1\), one-to-one, onto, and \(\det p'(x) \geq 0\), i.e. the Jacobian does not reverse orientations.
+If \(\omega\) is a \(k\)-form then
+\begin{equation}
+  \int_c\omega = \int_{c \circ p}\omega
+\end{equation}
+You should compare this with the situation with functions: what if we were integrating a function over \(p([0, 1]^k) = [0, 1]^k\). You'd have to say there's a change of variable formula
+\begin{equation}
+  \int_{[0, 1]^k}f \circ p|\det p'| = \int_{p([0, 1]^k)}f
+\end{equation}
+This is clearly a very different case, and indeed why differential forms are the ``natural'' thing to integrate over: the forumla for change of variables is ``built in'' to the definition. Let's see how:
+\begin{proof}
+  By definition,
+  \begin{equation}
+    \int_{c \circ p}\omega = \int_{[0, 1]^k}(c \circ p)^*\omega = \int_{[0, 1]^k}p^*(c^*\omega)
+    \label{intdef}
+  \end{equation}
+  \(c^*\omega\) is a \(k\)-form on \([0, 1]^k\), so we know it looks like
+  \begin{equation}
+    c^*\omega = f(x)\bigwedge_{i = 1}^kdx_i \implies p^*(c^*\omega) = (f \circ p)\det p' \bigwedge_{i = 1}^k dx_i
+  \end{equation}
+  So we can rewrite equation \ref{intdef} as
+  \begin{equation}
+    \int_{[0, 1]^k}(f \circ p)\det p'dx_1 \wedge ... dx_k = \int_{[0, 1]^k}(f \circ p)\det p'
+  \end{equation}
+  Since \(\det p' \geq 0\), the above becomes
+  \begin{equation}
+    \int_{[0, 1]^k}(f \circ p)|\det p'| = \int_{p([0, 1]^k)}f = \int_{[0, 1]^k}fdx_1 \wedge ... \wedge dx_k = \int_{[0, 1]^k}c^*\omega = \int_c\omega
+  \end{equation}
+
+\end{proof}
+
+\section{Vector Fields and Differential Forms on a submanifold \(M\) of \(\reals^n\)}
+
+We haven't talked about manifolds in a while, since differential calculus, and now we want to talk about them in terms of integral calculus. So let's start off with the definitions:
+\begin{definition}
+  A \underline{vector field \(F\) on \(M\)} is a function \(F\) defined on \(M\) such that
+  \begin{equation}
+    \forall x \in M, F(x) \in TM_x
+  \end{equation}
+\end{definition}
+Recall the definition of a \(\mc{C}^r\) coordinate chart \(\varphi: W \subset \reals^k \to M \subset \reals^n\), where \(M\) has dimension \(k\). The derivative gives an isomorphism of vector spaces
+\begin{equation}
+  \varphi_{*a} : \reals_a^k \to TM_{\varphi(a)}
+\end{equation}
+If \(\varphi\) is a coordinate chart for \(M\) then there is a vector field \(G\) on \(W\) such that
+\begin{equation}
+  \varphi_{*a}(G(a)) = F(\varphi(a))
+\end{equation}
+With this in mind, how should we say what it means for \(F\) to be \(\mc{C}^r\)? We know what it means for \(G\) to be \(\mc{C}^r\), so we'll say that \(F\) is \(\mc{C}^r\) if \(G\) is \(\mc{C}^r\) for any coordinate chart \(\varphi: W \to M\). Note that this definition is independent of the choice of coordinate chart: suppose we have two \(\mc{C}^r\) coordinate charts \(\varphi: W \to M\), \(\psi : V \to M\) such that
+\begin{equation}
+  \varphi(a) = \psi(b)
+\end{equation}
+We can say that there are vector fields \(G\) on \(W\) and \(H\) on \(V\) such that
+\begin{equation}
+  \varphi_{*\xi}(G(\xi)) = F(\varphi(\xi)), \psi_{*\eta}(H(\eta)) = F(\psi(\eta))
+\end{equation}
+If \(\varphi(a) = \psi(b)\) then we have that
+\begin{equation}
+  \varphi_{*a}(G(a) = F(\varphi(a))) = F(\psi(b)) = \psi_{*b}(H(b))
+\end{equation}
+So
+\begin{equation}
+  H(b) = \psi_{*b}^{-1}(F(\psi(b)))
+\end{equation}
+But \(\psi = \varphi \circ \varphi^{-1} \circ \psi\), giving
+\begin{equation}
+  \psi_{*b} = \varphi_{*a} \circ (\varphi^{-1} \circ \psi)_{*b}
+\end{equation}
+Hence,
+\begin{equation}
+  H(b) = \psi_{*b}^{-1}(F(\psi(b))) = ((\varphi^{-1} \circ \psi)_{*b})^{-1} \circ \varphi^{-1}_{*a}(F(\psi(b))) = (\psi^{-1} \circ \varphi)_{*a}(G(a))
+\end{equation}
+It's better not to try to write this down in complete detail (this was about the third attempt)... 
+
+\end{document}
