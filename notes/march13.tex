@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{March 13 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+\DeclareMathOperator{\D}{D}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+Let's take off from last time: assume \(\omega\) is a \(p\)-form on a \(\mc{C}^{r+1}\) submanifold \(M\) of \(\reals^n\). That means that \(\omega\) maps each point \(a \in M\) to an alternating \(p\)-tensor \(\omega(a)\) on the tangent space to the manifold at \(a\), i.e.
+\begin{equation}\omega : a \mapsto \omega(a) \in \Omega^p(M_a)\end{equation}
+Consider two coordinate charts
+\begin{equation}\varphi: W \to M, \psi: V \to M\end{equation}
+We have, on the intersection \(\varphi(W) \cap \psi(V)\),
+\begin{equation}\psi = \varphi \circ (\varphi^{-1} \circ \psi) \implies \psi^*\omega = (\varphi^{-1} \circ \psi)^*(\varphi^*\omega)\end{equation}
+We used this to conclude that \(\varphi^*\) is \(\mc{C}^r\) if and only if \(\psi^*\) is \(\mc{C}^r\). So we say \(\omega\) is \(\mc{C}^r\) if \(\varphi^*\omega\) is \(\mc{C}^r\) for every coordinate chart \(\varphi\).
+\begin{proposition}
+  If \(\omega\) is a \(\mc{C}^r\) \(p\)-form on \(M\) then there is a unique \(\mc{C}^{r - 1}\) \((p + 1)\) form \(d\omega\) on \(M\) such that
+  \begin{equation}
+    \varphi^*(d\omega) = d(\varphi*\omega)
+  \end{equation}
+  for every coordinate chart \(\varphi\)
+\end{proposition}
+\begin{proof}
+  Given \(\varphi\), we define \(d\omega\) on \(\varphi(W)\) by the formula
+  \begin{equation}
+    d\omega(a)(v_1,...,v_{p + 1}) = d(\varphi^*\omega)(x)(w_1,...,w_{p + 1})
+    \label{dphi}
+  \end{equation}
+  where \(a = \varphi(x)\) and each \(w_i\) is the thing that the tangent mapping takes to \(v_i\), i.e.
+  \begin{equation}
+    v_i = \varphi_{*x}(w_i)
+  \end{equation}
+  For the skeptics among you, let's call equation \ref{dphi} \(d^\varphi\omega\), since it might depend on \(\varphi\). Last time, we observed that \(d^\varphi\omega\) is the unique \(p + 1\) form such that
+  \begin{equation}
+    \varphi^*(d^\varphi\omega) = d(\varphi^*\omega) \label{pullback}
+  \end{equation}
+  In the overlap of two charts \(\varphi: W \to \reals^n\), \(\psi: V \to \reals^n\), we have
+  \begin{equation}
+    \psi^*(d^\varphi\omega) = ((\varphi^{-1} \circ \psi)^* \circ \varphi^*)(d^\varphi\omega) = (\varphi^{-1} \circ \psi^{-1})^*d(\varphi^*\omega) = d((\varphi^{-1} \circ \psi)^* \circ \varphi^*\omega) = d(\psi^*\omega)
+  \end{equation}
+  But remember, \(d^\psi\omega\) was the unique thing satisfying equation \ref{pullback} substituting \(\psi\) for \(\varphi\). And hence we have that
+  \begin{equation}
+    d^\varphi\omega = d^\psi\omega
+  \end{equation}
+  So we can just call this \(d\omega\).
+\end{proof}
+
+\section{Orientiation of a sumbanifold \(M\) of \(\reals^n\)}
+means there is a \underline{consistent} orientiation \(\mu_x\) on every tangent space \(M_x \subset \reals^k\). This means for every coordinate system \(\varphi: W \to \reals^n\), any two points \(a, b \in W\),
+\begin{equation}
+  [\varphi_{*a}(e_{1,a}),...,\varphi_{*a}(e_{k,a})] = \mu_{\varphi(a)} \iff [\varphi_{*b}(e_{1,b}),...,\varphi_{*b}(e_{k,b})] = \mu_{\varphi(b)}]
+  \label{forevery}
+\end{equation}
+\begin{definition}
+  An \underline{orientable manifold} is a manifold \(M\) for which it's possible to choose consistent orientations \(\mu_x\) at every point.
+\end{definition}
+Suppose the orientations \(\mu_x\) can be chosen consistently. Given any coordinate chart, we're going to call it either \underline{orientation preserving} or \underline{orientation reversing}. Specifically,
+\begin{definition}
+  A coordinate chart \(\varphi: W \to \reals^k\) is \underline{orientation preserving} if
+  \begin{equation}
+    [\varphi_{*a}(e_{1,a}),...,\varphi_{*a}(e_{k, a})] = \mu_{\varphi(a)}
+  \end{equation}
+  for one point \(a\) or every point \(a\) (these are equivalent by equation \ref{forevery}).
+  If \(\varphi: W \to \reals^k\) is \underline{orientation reversing} (i.e. not orientation preserving), then if \(T: \reals^k \to \reals^k\) is a linear transformation with \(\det T < 0\), then \(\varphi \circ T\) is orientation preserving.
+\end{definition}
+So, every orientable manifold can be covered by orientation preserving coordinate charts (i.e. orientation preserving with respect to a consistent choice of orientations). Suppose now \(\varphi, \psi\) are two coordinate systems such that \(\varphi(a) = \psi(b)\) and
+\begin{equation}
+  [\varphi_{*a}(e_{1,a}),...,\varphi_{*b}(e_{k, a})] = \mu_x = [\psi_{*b}(e_{1,b}),...,\psi_{*b}(e_{k,b})]
+\end{equation}
+then \(\det(\varphi^{-1}, \psi)'(b) > 0\) (at every point in the overlap \(\varphi(W) \cap \psi(V)\)). We now obtain the following definitions:
+\begin{definition}
+If \(M\) is orientable, then a particular choice of consistent orientations \(\mu_x\) for \(x \in M\) is called an \underline{orientation of \(M\)}. An \underline{oriented manifold} \(M\) is a manifold together with an orientation.
+\end{definition}
+Let's now look at an example: the Möbius strip is \underline{not} orientable:s
+\begin{proof} (Sketch): consider an orientation at one point along the strip. Move it along the strip until it returns back to where it started. Now it's reversed, so we have an inconsistency.
+\end{proof}
+Obviously, this is not very rigorous, but we'll look at another approach next time.
+
+\end{document}
