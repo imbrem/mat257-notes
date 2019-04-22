@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MAT257 Notes}
+\author{Jad Elkhaleq Ghalayini}
+\date{March 18 2019}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Vol}{vol}
+\DeclareMathOperator{\D}{D}
+
+\newcommand{\reals}[0]{\mathbb{R}}
+\newcommand{\nats}[0]{\mathbb{N}}
+\newcommand{\ints}[0]{\mathbb{Z}}
+\newcommand{\rationals}[0]{\mathbb{Q}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sbrac}[1]{\left[#1\right]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\eval}[3]{\left.#3\right|_{#1}^{#2}}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\hlfspc}[0]{\mathbb{H}}
+\newcommand{\loint}[0]{\operatorname{L}\int}
+\newcommand{\hiint}[0]{\operatorname{U}\int}
+\newcommand{\indic}[1]{\chi_{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{The Volume Element}
+
+We already talked about the volume element in the context of alternating tensors. Of course, we're going to apply that to the tangent space at every point of an oriented \(k\)-dimensional manifold \(M \subseteq \reals^n\) (with or without bound). Consider a particular orientation \(\mu\). If we look at the tangent space \(M_x\) at a point \(x \in M\), it has an orientation \(\mu_x\) and also has an inner product \(T_x\) given by the standard inner product in \(\reals^n\).
+
+These two things, as we saw before, are what we need to talk about a volume element (at the point \(x\)), which is an alternating \(k\)-tensor on the tangent space
+\begin{equation}
+  \omega(x) \in \Omega^k(M_x)
+\end{equation}
+which is the unique element in the space of alternating \(k\)-tensors such that if \(v_1,...,v_k\) is a positively oriented orthonormal basis of \(M_x\),
+\begin{equation}
+  \omega(x)(v_1,...,v_k) = 1
+\end{equation}
+In particular, for any \(w_1,...,w_k \in M_x\),
+\begin{equation}
+  \omega(x)(w_1,...,w_k)
+\end{equation}
+is the \textit{oriented} \(k\)-dimensional volume of the parallelopiped determined by \(w_1,...,w_k\), implying it's absolute value is the \(k\)-dimensional volume of the parallelopiped determined by \(w_1,...,w_k\). I didn't say these \(w_1,...,w_k\) were linearly independent, but if they weren't the \(k\)-dimensional volume would be zero. Also notice that if \(w_1,...,w_k\) are linearly independent, then
+\begin{equation}
+  [w_1,...,w_k] = [v_1,...,v_k] \implies \omega(x)(w_1,...,w_k) > 0
+\end{equation}
+For an example, note that \(\det\) is the volume element of \(\reals^n\) (at every point) with the standard inner product and orientation.
+Note that, taken over the whole manifold, \(\omega\) is by definition a (nonzero, and \(\mc{C}^r\) if \(M\) is \(\mc{C}^r\)) \(k\)-form. We often call this form \(dV\), but be careful: it's not necessarily the differential of some \((k - 1)-\) form ``\(V\)''. In low dimensions,
+\begin{itemize}
+  \item Where \(k = 1\), \(dV\) is often written \(ds\) for \underline{length}
+  \item Where \(k = 2\), \(dV\) is often written \(dA\) or \(dS\) for \underline{surface area}
+\end{itemize}
+We're going to use these for specific versions of Stokes' Theorem.
+
+\section{The Volume of \(M\)}
+\begin{definition}
+  Provided it exists (e.g., if \(M\) is compact), we define the \underline{volume} of \(M\) to be
+  \begin{equation}
+    \int_MdV
+  \end{equation}
+\end{definition}
+Let's look at some examples:
+\begin{enumerate}
+
+  \item Let \(M\) be some \(n\)-dimensional submanifold of \(\reals^n\) with the standard orientation. Then
+  \begin{equation}
+    dV = dx_1 \wedge ... \wedge dx^n
+  \end{equation}
+  Hence we have that
+  \begin{equation}
+    \int_MdV = \int_M1
+  \end{equation}
+  giving us that the volume of \(M\) agrees with our old definition.
+
+  \item Another situation that we've looked at before is the case where \(M\) is a \(1\)-dimensional oriented submanifold of \(\reals^n\) (a curve). Note that all \(1\)-dimensional submanifolds are orientable.
+
+  It doesn't make sense in general to say ``let's compute the length of this'', because the length may not even be finite. But let's compute the length of a finite piece. This means in general that we'll be looking at an oriented 1-cube in \(M\)
+  \begin{equation}
+    c: [0, 1] \to M
+  \end{equation}
+  Let's try to compute the length of \(c([0, 1])\), i.e. just that piece. That means we're going to integrate
+  \begin{equation}
+    \int_{c([0, 1])}ds = \int_{c}ds = \int_{[0, 1]}c^*(ds) = \int_{[0, 1]}\sqrt{\dot{c_1}^2 + ... + \dot{c_n}^2}
+  \end{equation}
+  Why? Say \(c^*(ds) = f(t)dt\). That means that
+  \begin{equation}
+    f(t) = c^*(ds)(t)(e_{1, t}) = ds(c(t))(c_{*,t}(e_{1, t})) = ds(c(t))(c'(t)_{c(t)}) = |c'(t)|
+  \end{equation}
+
+  \item Let's see how to compute \(k\)-dimensional volume (in fact, the integral of a \(k\)-form in general) on a \(k\)-dimensional manifold: let \(M\) be a \(k\)-dimensional oriented submanifold of \(\reals^n\) with orientation \(\mu\), and let \(\omega\) be a \(k\)-form on \(M\). We can write
+  \begin{equation}
+    \omega = \lambda dV
+  \end{equation}
+  where \(\lambda\) is a function on \(M\). Let \(\varphi: W \to M\) be a \(\mc{C}^{r + 1}\) one-to-one function of constant rank \(k\) (e.g. a coordinate chart). Provided the integral exists, then, we have
+  \begin{equation}
+    \int_{\varphi(W)}\omega = \int\omega\varphi^*(\omega) = \int_W\lambda \circ \varphi\varphi^*dV
+  \end{equation}
+  Say, for \(x \in W\),
+  \begin{equation}
+    \varphi^*dV = h(x)dx_1 \wedge ... \wedge dx_k
+  \end{equation}
+  How do we compute \(h(x)\). It's:
+  \begin{equation}
+    (\varphi^*dV)(x)(e_{1,x},...,e_{k,x})
+  \end{equation}
+
+\end{enumerate}
+
+\end{document}
