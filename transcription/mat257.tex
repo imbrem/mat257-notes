@@ -859,7 +859,7 @@ We're now going to attempt to prove Theorem \ref{changeofvar1d} in small steps:
     \int_{(h \circ g)(A)}f = \int_{g(A)}(f \circ h)|\det h'| = \int_A((f \circ h) \circ g)|\det h' \circ g||\det g'| = \int_Af \circ (h \circ g)|\det (h \circ g)'|
   \end{equation}
   by the Chain Rule.
-  \label{p3}
+  \label{proof:cov_p3}
 
 
   \item The theorem is true if \(g\) is an (invertible) linear transformation. We already showed that, for any \(g\), it's good enough to prove that the theorem is true on an open rectangle \(U\) with the constant function \(f = 1\), i.e. that if \(U\) is an open rectangle in \(A\), then
@@ -878,11 +878,11 @@ We're now going to attempt to prove Theorem \ref{changeofvar1d} in small steps:
     \item The identity matrix, plus \(1\) in a position \(i, j\) with \(i \neq j\). In this case, the determinant is just \(1\). Furthermore, we're just translating the top of our rectangle into a parallelogram. Fubini's theorem tells us that the volume is the same since the limits in terms of \(y\) are the same, and for fixed \(y\) we are integrating over a shifted integral of the same length, the shifting not having an effect since we are integrating a constant.
 
   \end{itemize}
-  \label{p4}
+  \label{proof:cov_p4}
 
 
 \end{enumerate}
-We can now return to the proof of the theorem: by \ref{p3} and \ref{p4}, we can assume that, given \(a \in A, g'(a) = I\), where \(I\) is the identity. Why? Let \(T = g'(a)\) be an invertible linear transformation. Then we can write
+We can now return to the proof of the theorem: by \ref{proof:cov_p3} and \ref{proof:cov_p4}, we can assume that, given \(a \in A, g'(a) = I\), where \(I\) is the identity. Why? Let \(T = g'(a)\) be an invertible linear transformation. Then we can write
 \begin{equation}
   g = T \circ (T^{-1} \circ g)
 \end{equation}
@@ -962,20 +962,22 @@ Now that we finished this, what to do? We've been talking about the integral on 
 
 Consider the following definitions of a manifold:
 \begin{definition}
-  A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) satisfying the following equivalent conditions
-  \begin{enumerate}
+  A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) such that for all \(a \in M\), there is a \(\mc{C}^r\) mapping \(f: U \to \reals^{n - k}\) defined on an open neighborhood \(U\) of \(a\) such that \(M \cap U = f^{-1}(0)\). \(f\) has rank \(n - k\) at every \(x \in M \cap U\).
+  \label{def:manifold1}
+\end{definition}
 
-    \item For all \(a \in M\), there is a \(\mc{C}^r\) mapping \(f: U \to \reals^{n - k}\) defined on an open neighborhood \(U\) of \(a\) such that \(M \cap U = f^{-1}(0)\). \(f\) has rank \(n - k\) at every \(x \in M \cap U\).
+\begin{definition}
+  A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) such that every point of \(M\) has an open neighborhood \(U\) in \(\reals^n\) such that \(M \cap U\) is the graph of a \(\mc{C}^r\) function \(z = g(y)\), \(z = (z_1,...,z_{n - k}), y = (y_1,...,y_k)\) where
+  \[(y, z) \neq (x_{\sigma(1)},...,x_{\sigma(n)})\]
+  where \(\sigma\) is a permutation of \(1,...,n\).
+  \label{def:manifold2}
+\end{definition}
 
-    \item Every point of \(M\) has an open neighborhood \(U\) in \(\reals^n\) such that \(M \cap U\) is the graph of a \(\mc{C}^r\) function \(z = g(y)\), \(z = (z_1,...,z_{n - k}), y = (y_1,...,y_k)\) where
-    \[(y, z) \neq (x_{\sigma(1)},...,x_{\sigma(n)})\]
-    where \(\sigma\) is a permutation of \(1,...,n\).
-
-    \item For all \(a \in M\), there is an open neighborhood \(U\) of \(a\), an open set \(V \subset \reals^n\) and a \(\mc{C}^r\) \underline{diffeomorphism} (a \(\mc{C}^r\) mapping with a \(\mc{C}^r\) inverse) \(h: U \to V\) such that
-    \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\}) =
-    \{y = (y_1,...,y_n) \in V : y_{k + 1} = ... = y_n\}\]
-
-  \end{enumerate}
+\begin{definition}
+  A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) such that for all \(a \in M\), there is an open neighborhood \(U\) of \(a\), an open set \(V \subset \reals^n\) and a \(\mc{C}^r\) \underline{diffeomorphism} (a \(\mc{C}^r\) mapping with a \(\mc{C}^r\) inverse) \(h: U \to V\) such that
+  \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\}) =
+  \{y = (y_1,...,y_n) \in V : y_{k + 1} = ... = y_n\}\]
+  \label{def:manifold3}
 \end{definition}
 \begin{claim}
   The definitions given for a manifold are equivalent
@@ -983,13 +985,13 @@ Consider the following definitions of a manifold:
 \begin{proof}
 \begin{itemize}
 
-  \item 1 \(\implies\) 2: By the implicit function theorem
+  \item \ref{def:manifold1} \(\implies\) \ref{def:manifold2}: By the implicit function theorem
 
-  \item 2 \(\implies\) 1: Let \(h(y, z) = z - g(y)\).
+  \item \ref{def:manifold2} \(\implies\) \ref{def:manifold1}: Let \(h(y, z) = z - g(y)\).
 
-  \item 2 \(\implies\) 3: Let \(h(y, z) = (y, z - g(y))\)
+  \item \ref{def:manifold2} \(\implies\) \ref{def:manifold3}: Let \(h(y, z) = (y, z - g(y))\)
 
-  \item 3 \(\implies\) 1: Let \(f(x) = (h_{k + 1}(x),...,h_n(x))\)
+  \item \ref{def:manifold3} \(\implies\) \ref{def:manifold1}: Let \(f(x) = (h_{k + 1}(x),...,h_n(x))\)
 
 \end{itemize}
 \end{proof}
@@ -1028,6 +1030,7 @@ We now discuss the tangent space \(TM_a\) or \(M_a\) at a point \(a \in M\). If 
 
 Let's try defining a (\(k\)-dimensional) manifold in another way: we want every point \(a \in M\) to have a ``neighborhood'' around it in \(M\) which ``looks like'' \(\reals^k\).
 
+\begin{definition}[Coordinate Charts]
 A \(k\)-dimensional manifold \(M \subset \reals^n\) is a set such that for all \(a \in M\) there is an open neighborhood \(U\) of \(a\) (in \(\reals^n\), \textbf{not} in \(M\)) and an open set \(W \subset \reals^k\) and a \(\mc{C}^r\) mapping \(\varphi: W \to \reals^n\) such that
 \begin{itemize}
   \item \(\varphi\) is a bijection
@@ -1038,7 +1041,35 @@ A \(k\)-dimensional manifold \(M \subset \reals^n\) is a set such that for all \
   We require instead that
   \((\varphi^{-1})^{-1}(\Omega)\), i.e. \(\varphi(\Omega)\), is \(\varphi(W)\) intersected with an open set of \(\reals^n\) for all \(\Omega\) open in \(W\).
 \end{itemize}
+\label{def:bycoords}
+\end{definition}
 Note this first and last condition on \(\varphi\) are equivalent to requiring that \(\varphi\) is a homeomorphism between the neighborhood \(M \cap U\) and \(W\).
+
+We'll now show that Definition \ref{def:bycoords} implies Definition \ref{def:manifold3}:
+\begin{proof}
+  Say \(a = \varphi(b)\) for some \(b \in W\). We can assume
+  \[\prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)}\]
+  has rank \(k\) on \(W\).
+  Define \(\psi: W \times \reals^{n - k} \to\reals^n\) by
+  \[(y, z) \mapsto \varphi(y) + (0, z)\]
+  Then we get the block matrix
+  \[\psi'(y, z) = \begin{pmatrix}
+    \prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)} & 0 \\
+    * & I
+  \end{pmatrix}\]
+  This shows that \(\psi\) has rank \(n\) for all \(y \in W\), since it's determinant is nonzero. But that means that we can apply the inverse function theorem. So by the inverse function theorem, there are open neighborhoods \(V_1'\) of \((b, 0)\) and \(U_1'\) of \(\psi(b, 0) = \varphi(b) = a\) such that \(\psi: V_1' \to U_1'\) has a \(\mc{C}^r\) inverse \(\psi^{-1}: U_1' \to V_1'\).
+
+  We have that
+  \[\psi^{-1}(\varphi(y)) = (y, 0) \in V_1' = \varphi(W) \cap \widetilde U\]
+  where \(U\) is open in \(\reals^n\). Take \(U_1 = U_1' \cap \widetilde U\) and \(V_1 = \psi^{-1}(U_1)\). We have
+  \[M \cap U_1 = \{\varphi(y) : (y, 0) \in V_1\}\]
+  So
+  \[h = \psi^{-1}|_{U_1}\]
+  satisfies the conditions implied by (3) since
+  \[h(M \cap U_1) = \psi^{-1}(M \cap U_1) = \{(y, 0) : (y, 0) \in V_1\} = V_1 \cap (\reals^k \times \{\mb{0}\})\]
+\end{proof}
+This is quite a delicate topological argument, and gi\TODO{finish this sentence}
+
 
 \subsection{Functions Between Manifolds}
 
