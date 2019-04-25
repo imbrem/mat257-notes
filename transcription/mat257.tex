@@ -642,9 +642,91 @@ This holds whenever ``both sides make sense'', e.g. if \(f\) is continuous and \
 \begin{equation}
   \int_{g([a, b])}f = \int_{[a, b]}(f \circ g)|g'|
 \end{equation}
-since otherwise the equaton would not be correct if \(g\) was decreasing. So this is what our change-of-variables formula is going to look like. We'll look at that next time.
+since otherwise the equaton would not be correct if \(g\) was decreasing. So this is what our change-of-variables formula is going to look like. Let's formalize this into a theorem:
 
-\TODO{rest}
+\begin{theorem}[Change of Variables]
+  Let \(A \subset \reals^n\) be open, \(g: A \to \reals^n\) be one to one, continuously differentiable and let, for all \(x \in A\), \(g'(x) \neq 0\). Then
+  \begin{equation}
+    f : g(A) \to \reals
+  \end{equation}
+  is integrable if and only if
+  \begin{equation}
+    f \circ g|\det g'|
+  \end{equation}
+  is integrable on \(A\). In this case,
+  \begin{equation}
+    \int_{g(A)}f = \int_Af \circ g|\det g'|
+  \end{equation}
+  \label{covtheorem}
+\end{theorem}
+Let's look at some examples, starting with polar coordinates: we use coordinates \(r \in \reals^+_0, \theta \in [0, 2\pi]\) and write
+\begin{equation}
+  x = r\cos\theta, y = r\sin\theta
+\end{equation}
+We have
+\begin{equation}
+  D = \prt{(x, y)}{(r, \theta)} = \begin{pmatrix}
+    \cos\theta & -r\sin\theta \\
+    \sin\theta & r\cos\theta
+  \end{pmatrix} \implies \det D = r
+\end{equation}
+So we can write
+\begin{equation}
+  \iint_Af(x, y)dxdy = \iint_Af(r\cos\theta, r\sin\theta)rdrd\theta
+\end{equation}
+We now examine a corollary of Theorem \ref{covtheorem}.
+
+\begin{corollary}
+  Let \(A \subset C \subset \reals^n\) where \(A\) is open, \(C\) is compact and Jordan-measurable and \(C \setminus A\) has measure zero. If \(g\) is a continuously differentiable function from a neighborhood of \(C\) to \(\reals^n\) wich satisfies the conditions of theorem \ref{covtheorem} on \(A\), then
+  \begin{equation}
+    f: g(C) \to \reals
+  \end{equation}
+  is integrable if and only if
+  \begin{equation}
+    f \circ g|\det g'|
+  \end{equation}
+  is iintegrable on \(C\), and in this case
+  \begin{equation}
+    \int_{g(C)}f = \int_Cf \circ g|\det g'|
+  \end{equation}
+  \label{corcov}
+\end{corollary}
+\begin{lemma}
+  Assume \(A \subset \reals^n\) is open and \(g: A \to \reals^n\) is continuously differentiable. If \(B \subset A\) has measure zero, then \(g(B)\) has measure zero.
+\end{lemma}
+\begin{proof}
+  Enough to prove that \(g(B \cap C)\) has measure zero for any \(C \subset A\) compact, since \(A\) has an exhaustion by countably many compact sets \(C_1 \subset C_2 \subset ...\)
+
+  To do so, remember that a countable intersection of measure 0 sets is measure 0. Using \(\mc{C}_1\), which is more than uniformly continuous, we have that
+  \begin{equation}
+    \forall x \in C, \forall y \in U, |g(x) - g(y)| \leq c|x - y|
+  \end{equation}
+  where \(U\) is some neighborhood of \(C\). So \(g\) maps a ball of radius \(\epsilon\) to a ball of radius \(c\epsilon\).
+\end{proof}
+We now proceed to prove Corollary \ref{corcov}
+\begin{proof}
+  \(g(C) \setminus g(A) \subseteq g(C \setminus A)\), and so it is of measure zero. We hence have that
+  \begin{equation}
+    \int_{g(A)}f = \int_{g(C)}f
+  \end{equation}
+  \begin{equation}
+    \int_A(f \circ g)|\det g'| = \int_{C}(f \circ g)|\det g'|
+  \end{equation}
+  giving the desired equality by Theorem \ref{covtheorem}
+\end{proof}
+Let's move on to another example: what are called spherical coordinates. We use coordinates \(r \in \reals^+_0, \phi \in [0, 2\pi], \theta \in [0, \pi]\) where
+\begin{equation}
+  x = r\cos\phi\sin\theta, y = r\sin\phi\sin\theta, z = r\cos]theta
+\end{equation}
+We have... this is going to hurt...
+\begin{equation}
+  D = \prt{(x, y, z)}{(r, \theta, \phi)} = \begin{pmatrix}
+    \cos\phi\sin\theta & r\cos\phi\cos\theta & -r\sin\phi\sin\theta \\
+    \sin\phi\sin\theta & r\sin\phi\cos\theta & r\cos\phi\sin\theta \\
+    \cos\theta & -r\sin\theta & 0
+  \end{pmatrix} \implies \det D = r^2\sin\theta
+\end{equation}
+
 
 \subsection{Parametrically Defined Curves}
 
