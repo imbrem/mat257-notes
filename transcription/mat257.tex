@@ -80,7 +80,53 @@ This document is a collection of notes for the course MAT257: Analysis II, as ta
 
 \TODO{this}
 
-\subsection{Tangent Planes}
+\subsection{Tangent Space}
+
+We begin with some examples:
+\begin{enumerate}
+
+  \item Consider an ellipsoid
+  \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\]
+  The tangent plane at a point \((x_0, y_0, z_0)\) of the ellipsoid is given by
+  \[\frac{\cancel{2}x_0}{a^2}(x - x_0) + \frac{\cancel{2}y_0}{b^2}(y - y_0) + \frac{\cancel{2}z_0}{c^2}(z - z_0) = 0\]
+  \[\frac{x_0}{a^2}x + \frac{y_0}{b^2}y + \frac{z_0}{c^2}z = 1\]
+
+  \item Let \(f(x, y) = 0\) and \(g(x, y) = 0\) be curves in \(\reals^2\). Assume the curves are smooth and intersect at point \((a, b)\). The two curves are \underline{orthogonal} at \((a, b)\) if
+  \[\prt{f}{x}\prt{g}{x} + \prt{f}{y}\prt{g}{y} = 0\]
+  at \((a, b)\). The two curves are \underline{tangent} at \((a, b)\) if the gradients are proportional to each other, i.e.
+  \[\prt{f}{x}\prt{g}{y} - \prt{f}{y}\prt{g}{x} = 0\]
+  at \((a, b)\).
+
+  \item Consider the family of parabolas
+  \[y^2 - 2p(x + p/2) = 0\]
+  Here, \(p\) is the parameter. These parabolas open along the \(x\) axis, either to the right or two the left, with \(x\) acting like a function of \(y\).
+
+  This kind of family is what's called \textit{confocal}: these parabolas all have the same focus, 0. Of course, they don't all intersect, but all those which open to the right intersect all those which open to the left. Let's look at the intersections.
+
+  If \(p_1 > 0\) and \(p_2 > 0\) then the two parabolas
+  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0, g(x, y) = y^2 - 2p_2(x + p_2/2) = 0\]
+  intersect where
+  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0 = g(x, y) = y^2 - 2p_2(x + p_2/2)\]
+  Let's show that all the intersections among all these possible parabolas are right angles.
+
+  Let's try to compute the inner product of the gradients. That is, we want to show
+  \[f_xg_x + f_yg_y = 0\]
+  at an intersection point. So what's the product of the \(x\) derivatives? Well it'll just be
+  \[f_xg_x = (-2p_1)(-2p_2) = 4p_1p_2\]
+  And what's the product of the \(y\) derivatives?
+  \[f_yg_y = (2y)(2y) = 4y^2\]
+  So we want to see that
+  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2\]
+  vanishes when both \(f\) and \(g\) are zero.
+
+  If you take \(p_2\) times \(f\), and subtract \(p_1\) times \(g\), you get rid of the \(x\) terms:
+  \[p_2f - p_1g = p_2y^2 - 2p_2p_1(x + p_1/2) - p_1y^2 + 2p_1p_2(x + p_2/2) = (p_1 - p_2)y^2 + (p_2 - p_1)p_1p_2\]
+  So we have
+  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2 = 4\frac{p_2f - p_1g}{p_2 - p_1} = 0\]
+  Since \(f = g = 0\) and \(p_2 - p_1 \neq 0\) at the intersection point.
+
+\end{enumerate}
+So these are some examples of computations with tangent spaces.
 
 \TODO{this}
 
