@@ -80,17 +80,24 @@ This document is a collection of notes for the course MAT257: Analysis II, as ta
 
 \TODO{rewrite}
 
-In the couple of lectures that are left this term, we are going to talk about Fubini's theorem, which is about how to integrate over a high-dimensional rectangle by repeatedly performing individual integrals. Let's start with an example. Suppose we want to integrate over a rectangle \begin{equation}
+We are now going to talk about Fubini's theorem, which is about how to integrate over a high-dimensional rectangle by repeatedly performing individual integrals. Let's start with an example. Suppose we want to integrate over a rectangle
+\begin{equation}
   A = [a, b] \times [c, d] \subseteq \reals^2
 \end{equation}
 and let's suppose, to make it easy, we have a continuous, non-negative function \(f\), defined on this rectangle, say
-\begin{equation}z = f(x, y) \geq 0\end{equation}
+\begin{equation}
+  z = f(x, y) \geq 0
+\end{equation}
 The idea is that if we fix a point on the \(x\)-axis, say \(x\), we can consider the ``slice'' in the \(y\)-direction determined by this point. We could find, for example, the area of that slice, and it's reasonable to expect that the integral of \(f\) on the rectangle, we could obtain by integrating the area of that slice along the length of the rectangle.
 
 The idea then is to try to find the area of such a slice, which would be in this case, for some \(x\),
-\begin{equation}h(x) = \int_c^dg_x(y)dy = \int_c^df(x, y)dy\end{equation}
+\begin{equation}
+  h(x) = \int_c^dg_x(y)dy = \int_c^df(x, y)dy
+\end{equation}
 where \(g_x(y) = f(x, y)\) fixing \(x\). It's reasonable to expect that
-\begin{equation}\int_Af = \int_a^bh = \int_a^b\left(\int_c^df(x, y)dy\right)dx\end{equation}
+\begin{equation}
+  \int_Af = \int_a^bh = \int_a^b\left(\int_c^df(x, y)dy\right)dx
+\end{equation}
 So that's the idea of Fubini's theorem: that we should be able to integrate a function over a rectangle by repeated one-dimensional integrals. Of course, we're not interested in integrating only continuous functions, we want to look at more general, integrable functions, but if you think about that, supposing \(f\) is integrable, this could run into a problem: one of the functions \(g_x\) might not be integrable on \([c, d]\). After all, it's set of discontinuities could be \(x_0 \times [c, d]\) for some \(x_0\), so \(\int_c^dg_{x_0}\) makes no sense!
 
 So we'll have to formulate something maybe a little bit more technical, but it's to capture that problem. Suppose we just have \(f: A \to \reals\) bounded. The function may or may not be integrable, meaning the supremum of lower sums is equal to the infimum of lower sums. Whether the function is integrable or not, we can still look at the supermum of lower sums and the infimum of lower sums, which is what we'll do.
@@ -98,56 +105,91 @@ So we'll have to formulate something maybe a little bit more technical, but it's
 We'll define the \underline{lower} and \underline{upper integrals} of \(f\) on \(A\), \(\loint_Af\) and \(\hiint_Af\) respectively, to be the supremum of all the lower sums \(L(f, \mc{P})\) and infimum of all the upper sums \(U(f, \mc{P})\) respectively. We can now write down our theorem as the previous formula, but taking into account that we don't know that the function \(g_x\) mentioned before, we just replace it by the lower or upper integral:
 \begin{theorem}
   Suppose \(A \subset \reals^m\) and \(B \subset \reals^n\) are closed rectangles and \(f: A \times B \to \reals\) is integrable. For all \(x \in A\), define
-  \begin{equation}g_x: B \to \reals, g_x(y) = f(x, y)\end{equation}
+  \begin{equation}
+    g_x: B \to \reals, g_x(y) = f(x, y)
+  \end{equation}
   Set
-  \begin{equation}\mc{L}(x) = \loint_Bg_x = \loint_Bf(x, y)dy, \mc{U}(x) = \hiint_Bg_x = \hiint_Bf(x, y)dy\end{equation}
+  \begin{equation}
+    \mc{L}(x) = \loint_Bg_x = \loint_Bf(x, y)dy, \mc{U}(x) = \hiint_Bg_x = \hiint_Bf(x, y)dy
+  \end{equation}
   Then \(\mc{L}(x), \mc{U}(x)\) are integrable on \(A\) and
-  \begin{equation}\int_{A \times B}f = \int_A\mc{L} = \int_A\mc{U} = \int_A\left(\loint_Bf(x, y)dy\right)dx = \int_A\left(\hiint_Bf(x, y)dy\right)dx\end{equation}
+  \begin{equation}
+    \int_{A \times B}f = \int_A\mc{L} = \int_A\mc{U} = \int_A\left(\loint_Bf(x, y)dy\right)dx = \int_A\left(\hiint_Bf(x, y)dy\right)dx
+  \end{equation}
 \end{theorem}
-We'll prove this next time, but now some remarks:
+Before we prove this, some remarks:
 \begin{enumerate}
 
   \item We also have
-  \begin{equation}\int_{A \times B}f = \int_B\left(\loint_A(f(x, y)dx)\right)dy = \int_B\left(\hiint_A(f(x, y)dx)\right)dy\end{equation}
+  \begin{equation}
+    \int_{A \times B}f = \int_B\left(\loint_A(f(x, y)dx)\right)dy = \int_B\left(\hiint_A(f(x, y)dx)\right)dy
+  \end{equation}
 
   \item If \(g_x\) is integrable on \(B\) for every \(x \in A\), then
-  \begin{equation}\int_{A \times B}f = \int_A\left(\int_Bf(x, y)dy\right)dx\end{equation}
+  \begin{equation}
+    \int_{A \times B}f = \int_A\left(\int_Bf(x, y)dy\right)dx
+  \end{equation}
 
-  \item If \begin{equation}A = [a_1, b_1] \times [a_2, b_2] \times ... \times [a_n, b_n]\end{equation}
+  \item If
+  \begin{equation}
+    A = [a_1, b_1] \times [a_2, b_2] \times ... \times [a_n, b_n]
+  \end{equation}
   we can apply Fubini's theorem repeatedly to obtain
-  \begin{equation}\int_Af = \int_{a_n}^{b_n} \left(... \int_{a_2}^{b_2}\left(\int_{a_1}^{b_1}f(x_1,...,x_n)dx_1\right)dx_2...\right) dx_n\end{equation}
+  \begin{equation}
+    \int_Af = \int_{a_n}^{b_n} \left(... \int_{a_2}^{b_2}\left(\int_{a_1}^{b_1}f(x_1,...,x_n)dx_1\right)dx_2...\right) dx_n
+  \end{equation}
   if \(f\) is ``sufficiently nice'' (otherwise we'll have to sprinkle in some L's or U's).
 
 \end{enumerate}
 
 Now here's an application to \(\int_Cf\) when \(f\) is integrable on a Jordan-measurable set \(C \subset \reals^n\). What we're going to use is Fubini's theorem in a rectangle with the formula
-\begin{equation}\int_Cf = \int_Af\indic{C}\end{equation}
+\begin{equation}
+  \int_Cf = \int_Af\indic{C}
+\end{equation}
 where \(A \supseteq C\) is a closed rectangle.
 Let's do some quick examples:
 \begin{enumerate}
 
 \item Let's say we were integrating on the region
-\begin{equation}C = [-1, 1] \times [-1, 1] \setminus \{x \in \reals^2, x_1^2 + x_2^2 < 1\}\end{equation}
+\begin{equation}
+  C = [-1, 1] \times [-1, 1] \setminus \{x \in \reals^2, x_1^2 + x_2^2 < 1\}
+\end{equation}
 i.e. the unit square with the unit circle removed from it. We have
-\begin{equation}\int_Cf = \int_{[-1, 1]^2}f\indic{C}\end{equation}
+\begin{equation}
+  \int_Cf = \int_{[-1, 1]^2}f\indic{C}
+\end{equation}
 We can write
-\begin{equation}\indic{C} = \left\{\begin{array}{cc}
-  1 & \text{if } -1 \leq y \leq -\sqrt{1 - x^2} \text{ or } \sqrt{1 - x^2} \leq y \leq 1 \\
-  0 & \text{otherwise}
-\end{array}\right.\end{equation}
+\begin{equation}
+  \indic{C} = \left\{\begin{array}{cc}
+    1 & \text{if } -1 \leq y \leq -\sqrt{1 - x^2} \text{ or } \sqrt{1 - x^2} \leq y \leq 1 \\
+    0 & \text{otherwise}
+  \end{array}\right.
+\end{equation}
 We can write
-\begin{equation}\int_{-1}^1f(x, y)\indic{C}(x, y)dy = \int_{-1}^{-\sqrt{1 - x^2}}f(x, y)dy + \int_{\sqrt{1 - x^2}}^1f(x, y)dy\end{equation}
+\begin{equation}
+  \int_{-1}^1f(x, y)\indic{C}(x, y)dy = \int_{-1}^{-\sqrt{1 - x^2}}f(x, y)dy + \int_{\sqrt{1 - x^2}}^1f(x, y)dy
+\end{equation}
 i.e. the limits of integration correspond to the boundary of \(C\). So we get
-\begin{equation}\int_Cf = \int_{-1}^1\left(\int_{-1}^{-\sqrt{1 - x^2}}f(x, y)dy + \int_{\sqrt{1 - x^2}}^1f(x, y)dy\right)dx\end{equation}
+\begin{equation}
+  \int_Cf = \int_{-1}^1\left(\int_{-1}^{-\sqrt{1 - x^2}}f(x, y)dy + \int_{\sqrt{1 - x^2}}^1f(x, y)dy\right)dx
+\end{equation}
 
 \item Say we want to integrate over a triangle \(C\), under the line from \((0, 0)\) to \((a, a)\). We have
-\begin{equation}\int_Cf = \int_0^a\left(\int_y^af(x, y)dx\right)dy\end{equation}
+\begin{equation}
+  \int_Cf = \int_0^a\left(\int_y^af(x, y)dx\right)dy
+\end{equation}
 We could have done it the other way, integrating first with respect to \(y\) and then with respect to \(x\), and get
-\begin{equation}\int_Cf = \int_0^a\left(\int_0^xf(x, y)dy\right)dx\end{equation}
+\begin{equation}
+  \int_Cf = \int_0^a\left(\int_0^xf(x, y)dy\right)dx
+\end{equation}
 This shows the form might not be the same in different directions. And it could be important to exploit the difference. For example, what if our function \(f(x, y)\) only depends on one of the variables, say \(y\) (i.e. \(f\) is \textit{independent} of \(x\)). Then
-\begin{equation}\int_0^a\left(\int_0^xf(y)dy\right)dx\end{equation}
+\begin{equation}
+  \int_0^a\left(\int_0^xf(y)dy\right)dx
+\end{equation}
 doesn't simplify very much, but
-\begin{equation}\int_0^a\left(\int_y^af(y)dx\right)dy = \int_0^a(a - y)f(y)dy\end{equation}
+\begin{equation}
+  \int_0^a\left(\int_y^af(y)dx\right)dy = \int_0^a(a - y)f(y)dy
+\end{equation}
 So this double integral reduces to a single integral with respect to \(y\).
 
 \TODO{rest}
