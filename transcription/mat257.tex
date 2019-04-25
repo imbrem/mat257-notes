@@ -241,7 +241,7 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
 \subsubsection{Continuity}
 
 \begin{definition}
-  Consider a function \[f: A \to \reals^n\]
+  Consider a function \begin{equation}f: A \to \reals^n\end{equation}
 \end{definition}
 \(f\) is \underline{continuous} at \(A\) if for every \(\epsilon > 0\), \(\exists \delta > 0\) such that \(|f(x) - f(a)| < \epsilon\) whenever \(|x - a| < \delta, x \in A\).
 \begin{theorem}
@@ -254,10 +254,10 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
     \item [\(\implies\)] consider \(U\) open in \(\reals^n\). Let \(a \in f^{-1}(U)\). For some \(\epsilon > 0\), \(\exists\) a ball \(B_{f(a)} = B(f(a), \epsilon) \subset U\) because \(U\) is open.
 
     Since \(f\) is continuous at \(a\), \(\exists \delta > 0\) such that \(f(x) \in B_{f(a)}\) for every \(x \in A \cap B(a, \delta) = B_a\). We can define
-    \[V = \bigcup_{a \in f^{-1}(U)}B_a\]
+    \begin{equation}V = \bigcup_{a \in f^{-1}(U)}B_a\end{equation}
 
     \item [\(\impliedby\)] Consider \(a \in A\) and let \(\epsilon > 0\). Let \(U = B(f(a), \epsilon)\). Then \(f^{-1}(U) = A \cap V\) for some open \(V \subset \reals^n\).
-    \[a \in V \implies \exists \delta > 0, B(a, \delta) \subset V\]
+    \begin{equation}a \in V \implies \exists \delta > 0, B(a, \delta) \subset V\end{equation}
     But everything which lies inside \(V\) gets mapped inside \(U\) which is that first ball that we started with. And this is the condition that we want.
 
   \end{itemize}
@@ -268,15 +268,15 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
 \end{corollary}
 \begin{proof}
   Let
-  \[f: A \to \reals^n, g: B \to \reals^p\]
+  \begin{equation}f: A \to \reals^n, g: B \to \reals^p\end{equation}
   be continuous functions where \(B \subset \reals^n\) and \(f(A) \subset B\).
 
   Consider open \(U \subset \reals^p\). We know
-  \[\exists V \subset \reals^n \text{ open, } g^{-1}(U) = B \cap V\]
+  \begin{equation}\exists V \subset \reals^n \text{ open, } g^{-1}(U) = B \cap V\end{equation}
   So we can write
-  \[(g \circ f)^{-1}(U) = f^{-1}(g^{-1}(U)) = f^{-1}(B \cap V) = f^{-1}(V)\]
+  \begin{equation}(g \circ f)^{-1}(U) = f^{-1}(g^{-1}(U)) = f^{-1}(B \cap V) = f^{-1}(V)\end{equation}
   We know that
-  \[\exists W \subset \reals^n \text{ open, }, f^{-1}(V) = A \cap W = (g \circ f)^{-1}(U)\]
+  \begin{equation}\exists W \subset \reals^n \text{ open, }, f^{-1}(V) = A \cap W = (g \circ f)^{-1}(U)\end{equation}
   But this is exactly what we wanted to show
 \end{proof}
 
@@ -287,7 +287,7 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
   \begin{itemize}
 
     \item [\(\impliedby\)] We need to estimate the norm \(|f(x) - f(a)|\) with the differences between \(f_i(x_i)\) and \(f_i(a_i)\). We could use a variety of inequalities for this, including
-    \[|f(x) - f(a)| \leq \sum_{i = 1}^n|f_i(x) - f_i(a)|\]
+    \begin{equation}|f(x) - f(a)| \leq \sum_{i = 1}^n|f_i(x) - f_i(a)|\end{equation}
     The full \(\epsilon\)-\(\delta\) argument is left as an exercise.
 
     \item [\(\implies\)] We need to estimate the norm \(|f_i(x) - f_i(a)| < |f(x) - f(a)|\). Alternatively, we can do this topologically. The full argument is left as an exercise.
@@ -300,7 +300,7 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
 \end{exercise}
 \begin{definition}
    There is a norm \(M > 0\) such that \(|T(x)| \leq M|x|\). Hence,
-   \[|T(x) - T(y)| = |T(x - y)| \leq M|x - y|\]
+   \begin{equation}|T(x) - T(y)| = |T(x - y)| \leq M|x - y|\end{equation}
    Given \(\epsilon\), take \(\delta = \frac{\epsilon}{M}\).
 \end{definition}
 \begin{exercise}
@@ -320,7 +320,7 @@ That's what we're going to be talking about tonight (note: I cannot attend, so n
 \end{proof}
 \begin{exercise}
   Let \(X \subseteq \reals^n\). We define the \underline{distance function}
-  \[d(x, X) = \inf_{a \in X}|x - a|\]
+  \begin{equation}d(x, X) = \inf_{a \in X}|x - a|\end{equation}
   \(\forall X \in \mc{P}(\reals^n), d(x, X)\) is uniformly continuous on \(\reals^n\)
 \end{exercise}
 
@@ -348,11 +348,11 @@ Today, we'll do half of this theorem, the easy part: compact \textit{implies} cl
     \item \(X\) is closed: to say that \(X\) is closed is of course the same thing as saying \(\reals^n \setminus X\) is open. To show this, we take any point in \(\reals^n \setminus X\), and show there's some ball centered at that point which is a subset of \(\reals^n \setminus X\).
 
     So let \(x \in \reals^n \setminus X\). We want to show that \(\exists \delta > 0\), \(B(a, \delta) \subset \reals^n \setminus X\) for some \(\delta > 0\). Let's just look at all possible balls centered at \(A\). Or we might as well just consider, for some \(k \in \nats\), the closed ball \(\overline{B(a, k^{-1})}\). Let's look at the complement of this closed ball,
-    \[U_k = \reals^n \setminus \overline{B(a, k^{-1})}\]
+    \begin{equation}U_k = \reals^n \setminus \overline{B(a, k^{-1})}\end{equation}
     We have that
-    \[\bigcup_kU_k = \reals^n\setminus\{a\}\]
+    \begin{equation}\bigcup_kU_k = \reals^n\setminus\{a\}\end{equation}
     So \(\{U_k\}\) is an open cover of \(X\). But \(X\) is compact, so this open cover has a finite subcover. This fact tells us that \(\exists k\), \(X \subset U_k\). But \(U_k\) is the complement of the closed ball of radius \(\frac{1}{k}\), meaning the open ball
-    \[B(a, k^{-1}) \subseteq \reals^n \setminus X\]
+    \begin{equation}B(a, k^{-1}) \subseteq \reals^n \setminus X\end{equation}
 
     We can clearly see that this implies \(\reals^n \setminus X\) is open, implying \(X\) is closed.
 
@@ -365,9 +365,9 @@ Today, we'll do half of this theorem, the easy part: compact \textit{implies} cl
 \end{theorem}
 \begin{proof}
   Let \(\mc{O}\) be an open cover of \(f(X)\). For every \(U \in \mc{O}\), \(f^{-1}(U) = X \cap V_U\) where \(V_U\) is open in \(\reals^m\). So
-  \[\{V_U : U \in \mc{O}\}\]
+  \begin{equation}\{V_U : U \in \mc{O}\}\end{equation}
   is an open cover of \(X\). Since \(X\) is compact, there is a finite subcover
-  \[V_{U_1},...,V_{U_k}\]
+  \begin{equation}V_{U_1},...,V_{U_k}\end{equation}
   So \(U_1,...,U_k\) cover \(f(X)\).
 \end{proof}
 
@@ -382,7 +382,7 @@ Today, we'll do half of this theorem, the easy part: compact \textit{implies} cl
 
 \begin{definition}
   The \(\epsilon\)-neighborhood of \(X\) is given by
-  \[\bigcup_{x \in X}B(x, \epsilon) = \{y \in \reals^n : d(y, X) < \epsilon\}\]
+  \begin{equation}\bigcup_{x \in X}B(x, \epsilon) = \{y \in \reals^n : d(y, X) < \epsilon\}\end{equation}
 \end{definition}
 
 \begin{theorem}[\(\epsilon\)-neighborhood theorem]
@@ -400,80 +400,80 @@ Today, we'll do half of this theorem, the easy part: compact \textit{implies} cl
 
 Examples:
 \begin{enumerate}
-  \item Let \[f(x, y) = \int_a^{x + y}g\] where \(g: \reals \to \reals\) is continuous. We compute \(Df(c, d)\) as follows:
+  \item Let \begin{equation}f(x, y) = \int_a^{x + y}g\end{equation} where \(g: \reals \to \reals\) is continuous. We compute \(Df(c, d)\) as follows:
   We have that \(f = q \circ s\), where
-  \[q(t) = \int_a^tg, s(x, y) = x + y\]
+  \begin{equation}q(t) = \int_a^tg, s(x, y) = x + y\end{equation}
   We have
-  \[Df(c, d) =  g'(s(c, d))s'(c, d) = g(c + d)(c + d)\]
+  \begin{equation}Df(c, d) =  g'(s(c, d))s'(c, d) = g(c + d)(c + d)\end{equation}
   since \(q'(t) = g(t)\).
 
-  \item Let \[f(x, y) = \int_a^{x^y}g\] We have
-  \[f = g \circ \xi, \xi(x, y) = x^y = e^{y\log x}\]
+  \item Let \begin{equation}f(x, y) = \int_a^{x^y}g\end{equation} We have
+  \begin{equation}f = g \circ \xi, \xi(x, y) = x^y = e^{y\log x}\end{equation}
   Hence,
-  \[D\xi(x, y) = x^yD(y\log x) = x^y((0, 1)\log x + (1/x, 0)y) = x^y(y/x, \log x)\]
-  \[\implies Df(c, d) = q'(\xi(c, d))\xi'(c, d) = g(c^d)c^d(d/c, \log c)\]
+  \begin{equation}D\xi(x, y) = x^yD(y\log x) = x^y((0, 1)\log x + (1/x, 0)y) = x^y(y/x, \log x)\end{equation}
+  \begin{equation}\implies Df(c, d) = q'(\xi(c, d))\xi'(c, d) = g(c^d)c^d(d/c, \log c)\end{equation}
 \end{enumerate}
 
 \subsubsection{Higher-order Derivatives}
 Let \(f: U \to \reals\) be a function where \(U \subseteq \reals^m\) and suppose
-\[D_if = \prt{f}{x_i}: U \to \reals\]
+\begin{equation}D_if = \prt{f}{x_i}: U \to \reals\end{equation}
 exists for all \(i\). So we could now consider
-\[D_j(D_if) = \prt{}{x_j}\left(\prt{f}{x_i}\right)\]
+\begin{equation}D_j(D_if) = \prt{}{x_j}\left(\prt{f}{x_i}\right)\end{equation}
 We'll write \(D_{ij}f\) to denote the above. Notice \(i\) is applied \textit{first}. We may also write \(f_{x_ix_j}\) and \(\frac{\partial^2 f}{\partial x_j \partial x_i}\). We have that
-\[\frac{\partial^2 f}{\partial x_j \partial x_i}(a) = \frac{\partial^2 f}{\partial x_i \partial x_j}(a)\]
+\begin{equation}\frac{\partial^2 f}{\partial x_j \partial x_i}(a) = \frac{\partial^2 f}{\partial x_i \partial x_j}(a)\end{equation}
 if both mixed partials exist and are continuous in a neighborhood of \(a\) (proof uses \(\int\)).
 
 In general, we can consider taking higher order partials as well, as in
-\[\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\]
+\begin{equation}\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\end{equation}
 Of course we have to worry about the order, but the order is irrelevant if \(f\) is \(\mc{C}^\infty\), i.e. that all partial derivatives of all orders exist (and are hence continuous).
 
 \subsubsection{Multi-index notation}
 In multi-index notation, \(\alpha = (\alpha_1,...,\alpha_m)\) is a vector of non-negative integers. We define the \textit{total order of \(\alpha\)}
-\[|\alpha| = \alpha_1 + ... + \alpha_m\]
+\begin{equation}|\alpha| = \alpha_1 + ... + \alpha_m\end{equation}
 Furthermore, we define
-\[x = (x_1,...,x_m) \implies x^\alpha = x_1^{\alpha_1}...x_m^{\alpha_m}\]
+\begin{equation}x = (x_1,...,x_m) \implies x^\alpha = x_1^{\alpha_1}...x_m^{\alpha_m}\end{equation}
 Once we look at Taylor's theorem, the notation
-\[x! = x_1!...x_m!\]
+\begin{equation}x! = x_1!...x_m!\end{equation}
 will also come in handy.
 
 We can now perform another example:
 \begin{itemize}
 
   \item [3.] Let
-  \[f(x, y) = \left\{\begin{array}{cc}
+  \begin{equation}f(x, y) = \left\{\begin{array}{cc}
     xy\frac{x^2 - y^2}{x^2 + y^2} & (x, y) \neq (0, 0) \\
     0 & (x, y) = (0, 0)
-  \end{array}\right.\]
+  \end{array}\right.\end{equation}
   Is this function differentiable at the origin? Yes: \(f'(0, 0) = (0, 0)\). Let's check: we need to show that
-  \[\lim_{(x, y) \to (0, 0)}\frac{f(x, y) - f(0, 0) - \cancel{(0, 0)\begin{pmatrix} x \\ y \end{pmatrix}}}{\sqrt{x^2 + y^2}} = \lim_{(x, y) \to (0, 0)}xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}} = 0\]
+  \begin{equation}\lim_{(x, y) \to (0, 0)}\frac{f(x, y) - f(0, 0) - \cancel{(0, 0)\begin{pmatrix} x \\ y \end{pmatrix}}}{\sqrt{x^2 + y^2}} = \lim_{(x, y) \to (0, 0)}xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}} = 0\end{equation}
   We have that
-  \[\left|xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}}\right| \leq \frac{|xy|}{\sqrt{x^2 + y^2}} \to 0\]
+  \begin{equation}\left|xy\frac{x^2 - y^2}{x^2 + y^2}\frac{1}{\sqrt{x^2 + y^2}}\right| \leq \frac{|xy|}{\sqrt{x^2 + y^2}} \to 0\end{equation}
 
 \end{itemize}
 
 \subsection{Partial Derivatives}
 \begin{theorem}
   If \(U \subset \reals^m\), \(f: U \to \reals^n\) is differentiable at \(a\) and \(f = (f_1,...,f_n)\) then each partial derivative \(\prt{f_i}{x_j}(a)\) exists, and
-  \[f'(a) = \begin{pmatrix}
+  \begin{equation}f'(a) = \begin{pmatrix}
     \prt{f_1}{x_1}(a) & ... & \prt{f_1}{x_m}(a) \\
     \vdots & \ddots & \vdots \\
     \prt{f_n}{x_1}(a) & ... & \prt{f_n}{x_m}(a)
-  \end{pmatrix}\]
+  \end{pmatrix}\end{equation}
   with
-  \[\prt{f}{x_j}(a) = \left.\prt{}{x}f(a_1,...,a_{j - 1}, x, a_{j + 1},..., a_m)\right|_{x = a_j}\]
+  \begin{equation}\prt{f}{x_j}(a) = \left.\prt{}{x}f(a_1,...,a_{j - 1}, x, a_{j + 1},..., a_m)\right|_{x = a_j}\end{equation}
 \end{theorem}
 \begin{proof}
   \begin{itemize}
 
     \item Case \(n = 1\): Let
-    \[h(x) = (a_1,...,a_{j - 1},x,a_{j + 1},...,a_m): \reals \to \reals^m\]
+    \begin{equation}h(x) = (a_1,...,a_{j - 1},x,a_{j + 1},...,a_m): \reals \to \reals^m\end{equation}
     Then
-    \[\prt{f}{x_j}(a) = D(f \circ h)(a_j) = Df(h(a_j)) \circ Dh(a_j)
-     = f'(a) \cdot \begin{pmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{pmatrix}\]
+    \begin{equation}\prt{f}{x_j}(a) = D(f \circ h)(a_j) = Df(h(a_j)) \circ Dh(a_j)
+     = f'(a) \cdot \begin{pmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{pmatrix}\end{equation}
      where the matrix is \(1 \times m\) and 1 in the \(j^{th}\) place, i.e. the \(j^{th}\) entry in \(f'(a)\).
 
      \item For \(n\) in general,
-     \[f = (f_1,...,f_n), f'(a) = \begin{pmatrix} f_1'(a) \\ \vdots \\ f_n'(a) \end{pmatrix}\]
+     \begin{equation}f = (f_1,...,f_n), f'(a) = \begin{pmatrix} f_1'(a) \\ \vdots \\ f_n'(a) \end{pmatrix}\end{equation}
      Hence, we have a row for each \(f_i\), and we can apply the case for \(n = 1\) to each row.
 
   \end{itemize}
@@ -485,36 +485,36 @@ But let's fist do some computations, and we'll see that this notion of partial d
 \subsubsection{The Chain Rule}
 
 Suppose we have
-\[F(x) =  f(g_1(x),...,g_n(x)), x = (x_1,...,x_m), g = (g_1,...,g_n)\]
+\begin{equation}F(x) =  f(g_1(x),...,g_n(x)), x = (x_1,...,x_m), g = (g_1,...,g_n)\end{equation}
 with \(g\) differentiable at \(a\) and \(f\) differentiable at \(g(a)\). We want to compute \(\prt{F}{x_i}(a)\). Let's say that \(f = f(y_1,...,y_n)\). Then what's the formula?
-\[\prt{F}{x_i}(a) = \sum_{j = 1}^n\prt{f}{y_j}(g(a))\prt{g_j}{x_i}(a)\]
+\begin{equation}\prt{F}{x_i}(a) = \sum_{j = 1}^n\prt{f}{y_j}(g(a))\prt{g_j}{x_i}(a)\end{equation}
 Why is this? Well, what does the chain rule say?
-\[DF(a) = Df(g(a))Dg(a) =
+\begin{equation}DF(a) = Df(g(a))Dg(a) =
 \begin{pmatrix} \prt{f}{y_1}(g(a)) & ... & \prt{f}{y_n}(g(a)) \end{pmatrix}
 \begin{pmatrix}
   \prt{g_1}{x_1}(a) & ... & \prt{g_1}{x_m}(a) \\
   \vdots & \ddots & \vdots \\
   \prt{g_n}{x_1}(a) & ... & \prt{g_n}{x_m}(a)
 \end{pmatrix}
-\]
+\end{equation}
 So the result of this is a row matrix, and by taking \(\prt{F}{x_i}\) is just indexing into it. You should really know this, you should even memorize it. When you come out of calculus, this should be as natural as addition when you come out of elementary school.
 
 These things, sometimes people write them in a kind of symbolic, simpler way, which is useful. Here we have
-\[y_j = g_j(x_1,...,x_m)\]
+\begin{equation}y_j = g_j(x_1,...,x_m)\end{equation}
 and then we're composing to get
-\[z = f(y_1,...,y_n) = f(g(x))\]
+\begin{equation}z = f(y_1,...,y_n) = f(g(x))\end{equation}
 So if you want to take the derivative with respect to \(x_i\), you could write that as
-\[\prt{z}{x_i}\]
+\begin{equation}\prt{z}{x_i}\end{equation}
 But this is like short form, since \(z\) is not a function of \(x\), it's a function of \(y\). So when we write \(\prt{z}{x_i}\), we're thinking of it as already composite. And the chain rule thinks of this as
-\[\prt{z}{x_i} = \sum_{j = 1}^n\prt{z}{y_j}\prt{y_j}{x_i}\]
+\begin{equation}\prt{z}{x_i} = \sum_{j = 1}^n\prt{z}{y_j}\prt{y_j}{x_i}\end{equation}
 with evaluation, this becomes
-\[\prt{z}{x_i}(a) = \sum_{j = 1}^n\left.\prt{z}{y_j}\right|_{y = g(a)}\left.\prt{y_j}{x_i}\right|_{x = a}\]
+\begin{equation}\prt{z}{x_i}(a) = \sum_{j = 1}^n\left.\prt{z}{y_j}\right|_{y = g(a)}\left.\prt{y_j}{x_i}\right|_{x = a}\end{equation}
 Now how does this notation sometimes show up in a confusing way? Some examples!
 \begin{enumerate}
   \item Suppose \(F(t) = f(x(t), y(t), z(t), t)\). Let's call \(F(t) = w\). Let's take the derivative with respect to \(t\):
-  \[\frac{dw}{dt} = \prt{f}{x}\frac{dx}{dt} + \prt{f}{y}\frac{dy}{dt} + \prt{f}{z}\frac{dz}{dt} + \\ ?\]
+  \begin{equation}\frac{dw}{dt} = \prt{f}{x}\frac{dx}{dt} + \prt{f}{y}\frac{dy}{dt} + \prt{f}{z}\frac{dz}{dt} + \\ ?\end{equation}
   What do we write in the fourth place? We want the derivative of \(f\) with respect to the fourth variable, so we just write \(\prt{w}{t}\). So we have
-  \[\frac{dw}{dt} \neq \prt{w}{t}\]
+  \begin{equation}\frac{dw}{dt} \neq \prt{w}{t}\end{equation}
   See how this is confusing?
 
   This is \textit{shorthand}, so there can be ambiguity. That ambiguity is somewhat resolved by the different ordinary versus partial derivative notation, but it's still confusing. That's why you've got to unserstand the full, genuine meaning behind the shorthand notation.
@@ -530,7 +530,61 @@ Now how does this notation sometimes show up in a confusing way? Some examples!
 
 \subsection{The Inverse Function Theorem}
 
-\TODO{this}
+
+In this course, we have three important theorems, of which this is one. Each is a generalization of something you've seen in first year calculus, but we'll see that these generalizations are very far-reaching and involve new techniques.
+
+Recall: suppose \(f: \reals \to \reals\) is a continuously differentiable function in an open inverval containing \(a\), and \(f'(a) \neq 0\). Then \(f'\) is either greater than or lessthan zero in an open interval containing \(a\). Therefore \(f\) is one-to-one, and so has an inverse defined on an open interval \(W\) containing \(f(a)\). Moreover, \(f^{-1}\) is differentiable, and
+\begin{equation}(f^{-1})'(f(a)) = \frac{1}{f'(a)}\end{equation}
+We're going to discuss a generalization of this idea to several variables.
+
+\begin{theorem}[Inverse Function Theorem]
+  Let \(f: U \to \reals^n\) be a continuously differentiable (\(\mc{C}^1\)) on an open set \(U \subset \reals^n\). Let \(a \in U\) be such that \(\det f'(a) \neq 0\). Then there exist open sets \(a \in V, f(a) \in W\) such that \(f: V \to W\) with a continuous inverse \(f^{-1}: W \to V\). Moreover, \(f^{-1}\) is differentiable on \(W\) and
+  \begin{equation}\forall y \in W, (f^{-1})'(y) = (f'(f^{-1}(y)))^{-1}\end{equation}
+\end{theorem}
+Remark: if we know already that \(f^{-1}\) is differentiable, the formula for it follows from the chain rule:
+\begin{equation}f(f^{-1})(y) = y \implies f'(f^{-1}(y))(f^{-1})'(y) = I \iff (f^{-1})'(y) = (f(f^{-1}(y)))^{-1}\end{equation}
+\begin{corollary}
+  \begin{enumerate}
+    \item \(f^{-1}\) is continuously differentiable (\(\mc{C}^1\))
+    \item If \(f\) is \(\mc{C}^r\) then \(f^{-1}\) is also \(\mc{C}^r\)
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  \begin{enumerate}
+
+    \item  We know that since \(f'\) is continuous, and \(f^{-1}\) is continuous, \(f' \circ f^{-1}\) is continuous. Now what about the inversion? What is the inverse of a matrix? It's given by a formula. So this is really a composite of 3 functions. So what about the formula for the inverse of a matrix? It follows from Cramer's rule that this formula is continuous, since the entries of the inverse matrix \(B\) of \(A\) are given as rational functions of the entries of \(A\), that is,
+    \begin{equation}b_{ij} = \frac{(-1)^{i + j}\det A^{ji}}{\det A}\end{equation}
+    where \(A^{ji}\) is the matrix obtained by deleting the \(j^{th}\) row and \(i^{th}\) column from \(A\). So hence the derivative, being the composition of 3 continuous functions, must be continuous.
+
+    \item We proceed by induction on \(r\). Assume that if \(f\) is \(\mc{C}^{r - 1}\), then \(f^{-1}\) is \(\mc{C}^{r - 1}\).
+
+    If \(f\) is \(\mc{C}^r\), then \(f\) is \(\mc{C}^{r - 1}\) implying that \(f^{-1}\) is \(\mc{C}^{r - 1}\) by the inductive hypotheis. So, using the formula
+    \begin{equation}(f^{-1})' = (f'(f^{-1}))^{-1}\end{equation}
+    is \(\mc{C}^{r - 1}\) implying that \(f^{-1}\) is \(\mc{C}^r\).
+
+  \end{enumerate}
+\end{proof}
+This corollary is just to show that we could have stated the above theorem in a stronger way. Examples:
+\begin{enumerate}
+  \item Continuity of \(f'\) cannot be removed from the hypotheses: consider \(f: \reals \to \reals\),
+  \begin{equation}f(x) = \left\{\begin{array}{cc}x + x^2\sin\frac{1}{x} & x \neq 0 \\ 0 & x = 0\end{array}\right.\end{equation}
+  We have that
+  \begin{equation}x \neq 0 \implies f'(x) = 1 + 2x\sin\frac{1}{x} - \cos\frac{1}{x}\end{equation}
+  but the limit does not exist as \(x \to 0\).
+
+  \item Consider \(f: \reals^2 \to \reals^2\),
+  \begin{equation}f(x, y) = (e^x\cos y, e^x\sin y)\end{equation}
+  We have
+  \begin{equation}f'(x, y) = \begin{pmatrix} e^x\cos y & -e^x\sin y \\ e^x\sin y & e^x\cos y \end{pmatrix}\end{equation}
+  implying that
+  \begin{equation}\det f'(x, y) = (e^x)^2 = e^{2x} \neq 0 \forall x \in \reals\end{equation}
+  But this function is not 1-1, since it is periodic in \(y\). The inverse function theorem says that we can make some neighborhood around a point where \(f\) is one to one, but it \textit{doesn't} say that it's \textit{globally} one to one.
+
+\end{enumerate}
+Remarks:
+\begin{enumerate}
+  \item \(f\) may be invertible even though \(f'(a) = 0\)
+\end{enumerate}
 
 \subsection{The Implicit Function Theorem}
 
