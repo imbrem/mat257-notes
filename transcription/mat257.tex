@@ -62,74 +62,74 @@ This document is a collection of notes for the course MAT257: Analysis II, as ta
 
 \subsection{Differentiability}
 Let's recall for a moment what it means for a function to be differentiable at a point:
-\[\exists f'(a) = \lim_{h \to 0}\frac{f(a + h) - f(a)}{h}\]
+\begin{equation}\exists f'(a) = \lim_{h \to 0}\frac{f(a + h) - f(a)}{h}\end{equation}
 Of course, we can bring everything to the right and write
-\[\lim_{h \to 0}\frac{f(a + h) - (f(a) + f'(a)h)}{h} = 0\]
+\begin{equation}\lim_{h \to 0}\frac{f(a + h) - (f(a) + f'(a)h)}{h} = 0\end{equation}
 The advantage of stating it this way is that we see that the linear function
-\[f(a) + f'(a)h\]
+\begin{equation}f(a) + f'(a)h\end{equation}
 is the \textit{best linear approximation} to \(f(a + h)\) at \(h = 0\). In fact, it's the unique linear function \(y = b + mh\) such that
-\[\lim_{h \to 0}\frac{f(a + h) - (b + mh)}{h} = 0\]
+\begin{equation}\lim_{h \to 0}\frac{f(a + h) - (b + mh)}{h} = 0\end{equation}
 Should this be called linear? I don't know. Maybe it would be better to call it affine.
 
 From the point of view of linear algebra, we would say that a function which takes
-\[h \mapsto f'(a) \times h\]
+\begin{equation}h \mapsto f'(a) \times h\end{equation}
 is a linear transformation. So the derivative can be thought of as a number, but it can also be thought of as a linear transformation from the real line to itself. And this is how we're going to define, and work with, derivatives in higher dimensions.
 
 \subsection{Functions of several variables}
 
 We're not going to be working on the real line, instead, we'll be working on \(\reals^n\): the space of \(n\)-tuples of real numbers. Instead of functions \(f(x)\) of a single real variable \(x\), we will hence be working with functions of \(n\) real variables, or if you like, functions of a single vector variable, where \(x \in \reals^n\), of the form
-\[f(x) = f(x_1,...,x_n)\]
+\begin{equation}f(x) = f(x_1,...,x_n)\end{equation}
 Such a function is differentiable at a point \(a = (a_1,...,a_n)\) if ``there's a thing that plays the role of the derivative.'' We could think about a deriative in \(\reals\) as a real number, but we could also think about it as a linear transformation, which is what we're going to do. That is, a derivative exists, if there exists a linear transformation
-\[\lambda: \reals^n \to \reals\]
+\begin{equation}\lambda: \reals^n \to \reals\end{equation}
 such that
-\[\lim_{h \to 0}\frac{f(a + h) - (f(a) + \lambda(h))}{|h|} = 0\]
+\begin{equation}\lim_{h \to 0}\frac{f(a + h) - (f(a) + \lambda(h))}{|h|} = 0\end{equation}
 What's a linear transformation from \(\reals^n \to \reals\). Well first of all, what's \(h\)? \(h = (h_1,...,h_n)\) is a vector. So \(\lambda\) can be thought of as a sort of row matrix such that
-\[\lambda(h) = \begin{pmatrix}\lambda_1 & ... & \lambda_n\end{pmatrix}\begin{pmatrix} h_1 \\ \vdots \\ h_n\end{pmatrix}\]
+\begin{equation}\lambda(h) = \begin{pmatrix}\lambda_1 & ... & \lambda_n\end{pmatrix}\begin{pmatrix} h_1 \\ \vdots \\ h_n\end{pmatrix}\end{equation}
 Sometimes, we'll write \(\lambda(h)\) simply as \(\lambda h\). This right away is why linear algebra is important. As you can imagine, if we want to analyze the effect of a given derivative on this function, we're going to need to analyze this matrix, so linear algebra is going to be really crucial. In fact, a lot of the things that we do in the course can be done and were done classically with a really minimal amount of linear algebra. In fact this \(\lambda\) is a matrix, but it's entries are what we call the partial derivatives of \(f\), so we can work only with a collection of partial derivatives. However, what we'll see is, from a conceptual perspective, there's a lot to be gained from the linear agebraic approach.
 
 Analysis involves making approximations and estimations, like \(\epsilon-\delta\) proofs in calculus. Of course, \(\epsilon-\delta\) proofs involve measuring the size of a quantity or distance, and those are going to be really essential concepts in this course. That already shows up in the \(|h|\) in the equation above, which is defined
-\[|h| = \sqrt{h_1^2 + ... + h_n^2}\]
+\begin{equation}|h| = \sqrt{h_1^2 + ... + h_n^2}\end{equation}
 the \underline{norm} of \(h\). It's a measure of the size of \(h\). If we write the norm
-\[|x - y|\]
+\begin{equation}|x - y|\end{equation}
 this is a measure of the size of the difference between \(x\) and \(y\), or the \underline{distance} between \(x\) and \(y\). But especially in high dimension, even in one dimension but especially in high dimensions, there may be many different ways of measuring distance which are essentially equivalent.
 
 \subsection{Equivalent Norms}
 This is one norm, but in fact there are many different but equivalent norms. For example, some norms include
-\[|x| = \left(\sum_{i = 1}^nx_i^2\right)^{1/2}\]
-\[||x|| = \max\{|x_1|,...,|x_n|\}\]
-\[|||x||| = \sum_{i = 1}^n|x_i|\]
+\begin{equation}|x| = \left(\sum_{i = 1}^nx_i^2\right)^{1/2}\end{equation}
+\begin{equation}||x|| = \max\{|x_1|,...,|x_n|\}\end{equation}
+\begin{equation}|||x||| = \sum_{i = 1}^n|x_i|\end{equation}
 These are all equivalent, which means that if you pick any two of them, the first one is less than or equal to a constant times the second one. Why is that? What's the relationship between them?
 
 It's a very good idea, in, anything, I guess, to understand things geometrically. And this actually can be seen just on the level of a picture of \(\reals^2\). After all, what if we take our first norm. What does it mean to say that the norm is less than or equal to \(r\)? It means that our point is inside a circle of radius \(r\). On the other hand, what does it mean for the \textit{second} norm to be less than or equal to \(r\)? It means that both norms have to be inside the square of side length \(r\) centered at the origin. And finally, what does it mean for the third norm to be less than or equal to \(r\)? That means we're inside the smaller square, or diamond, formed by the points
-\[(0, r), (0, -r), (r, 0), (-r, 0)\]
+\begin{equation}(0, r), (0, -r), (r, 0), (-r, 0)\end{equation}
 Of course, there would be \(n\)-dimensional versions of this picture. But what does this picture say about the relationship between these norms? It tells us that
-\[||x|| \leq |x| \leq |||x|||\]
+\begin{equation}||x|| \leq |x| \leq |||x|||\end{equation}
 How do we prove this analytically? We just take the square of everything!
 
 Now how do we show that
-\[|||x||| \leq a|x|\]
+\begin{equation}|||x||| \leq a|x|\end{equation}
 for some constant \(a\)? We can also think about this geometrically: take our circle of radius \(r\). We need the first diamond which is outside of the circle. And what distance is the corner of the diamond from the origin? In the plane, it's \(\sqrt{2}r\). In higher dimensions, it's \(\sqrt{n}r\). So what this tells us is that
-\[|||x||| \leq \sqrt{n}|x|\]
+\begin{equation}|||x||| \leq \sqrt{n}|x|\end{equation}
 or, analytically,
-\[|||x||| = \ip{x}{u(x)} \leq |x||u(x)|\]
+\begin{equation}|||x||| = \ip{x}{u(x)} \leq |x||u(x)|\end{equation}
 where
-\[u_i(x) = \text{sgn}(x_i) = \left\{\begin{array}{ccc} 1 & \text{if} & x_i \geq 0 \\ -1 & \text{if} & x_i < 0 \end{array}\right.\]
+\begin{equation}u_i(x) = \text{sgn}(x_i) = \left\{\begin{array}{ccc} 1 & \text{if} & x_i \geq 0 \\ -1 & \text{if} & x_i < 0 \end{array}\right.\end{equation}
 Now, how do we show that
-\[|x| \leq a||x||\]
+\begin{equation}|x| \leq a||x||\end{equation}
 Well, let's again look at our square of side \(r\). Clearly, the circle circumscribing this square has radius \(\sqrt{n}r\), in \(n\) dimensions. We should finish this by doing the exercise of proving this analytically
 
 
 You all know that \(\reals^n\) is the space of \(n\)-tuples of real numbers,
-\[x = (x_1,...,x_n)\]
+\begin{equation}x = (x_1,...,x_n)\end{equation}
 \(\reals^n\), of course, is a vector space with the operations
-\[x + y = (x_1 + y_1,...,x_n + y_n)\]
-\[ax = (ax_1,...,ax_n)\]
+\begin{equation}x + y = (x_1 + y_1,...,x_n + y_n)\end{equation}
+\begin{equation}ax = (ax_1,...,ax_n)\end{equation}
 These are the vector space operations on \(\reals^n\) that everyone should be familiar with from linear algebra. We, however, are going to be even more interested in the \textit{metric} properties of such a metric space, and these are going to be dependent on the idea of norm that we talked about last time.
 
 We defined a number of norms, including the norm
-\[|x| = \sqrt{x_1^2 + ... + x_n^2}\]
+\begin{equation}|x| = \sqrt{x_1^2 + ... + x_n^2}\end{equation}
 Of course, this norm is intimately connected with the usual inner product on \(\reals^n\),
-\[\ip{x}{y} = x_1y_1 + ... + x_ny_n\]
+\begin{equation}\ip{x}{y} = x_1y_1 + ... + x_ny_n\end{equation}
 What are the basic relations between this and the vector space structure? These should be things you're familiar with, but let's recall.
 
 Let's consider two vectors \(x, y \in \reals^n\). We know that
@@ -142,13 +142,13 @@ Let's consider two vectors \(x, y \in \reals^n\). We know that
 \begin{itemize}
 
   \item [2.] We have equality if \(x, y\) are linearly dependent. But what if \(x, y\) are linearly independent. Then, by definition
-  \[\forall \lambda \in \reals, y - \lambda x \neq 0\]
-  \[\implies 0 < |y - \lambda x|^2
-  = \ip{y}{y} - 2\lambda\ip{x}{y} + \lambda^2\ip{x}{x}\]
-  \[= |y|^2 - 2\lambda\ip{x}{y} + \lambda^2|x|^2\]
+  \begin{equation}\forall \lambda \in \reals, y - \lambda x \neq 0\end{equation}
+  \begin{equation}\implies 0 < |y - \lambda x|^2
+  = \ip{y}{y} - 2\lambda\ip{x}{y} + \lambda^2\ip{x}{x}\end{equation}
+  \begin{equation}= |y|^2 - 2\lambda\ip{x}{y} + \lambda^2|x|^2\end{equation}
   This is a quadratic polynomial in \(\lambda\) which is never 0, so hence has a discriminant
-  \[4\ip{x}{y}^2 - 4|x|^2|y|^2 < 0 \implies \ip{x}{y}^2 < |x|^2|y|^2\]
-  \[\implies |\ip{x}{y}| < |x||y|\]
+  \begin{equation}4\ip{x}{y}^2 - 4|x|^2|y|^2 < 0 \implies \ip{x}{y}^2 < |x|^2|y|^2\end{equation}
+  \begin{equation}\implies |\ip{x}{y}| < |x||y|\end{equation}
   as desired.
 
   \item [3.] \(|x + y|^2  = \ip{x + y}{x + y} = |x|^2 + |y|^2 + 2\ip{x}{y}
@@ -159,12 +159,12 @@ Let's consider two vectors \(x, y \in \reals^n\). We know that
 What if we have two vectors \(x\) and \(y\), and we want to define the angle between them. How should we do that? We can try
 
 \begin{definition}
-\[\angle(x, y) = \arccos\frac{\ip{x}{y}}{|x||y|}\]
+\begin{equation}\angle(x, y) = \arccos\frac{\ip{x}{y}}{|x||y|}\end{equation}
 \end{definition}
 Why should this, however, be the definition? It comes from the elementary geometric relationship between the length of \(y - x\) and the lengths of \(x\), \(y\) when formed into a triangle:
-\[|y - x|^2 = |x|^2 + |y|^2 - 2|x||y|\cos\theta\]
+\begin{equation}|y - x|^2 = |x|^2 + |y|^2 - 2|x||y|\cos\theta\end{equation}
 which can be rewritten to the familiar
-\[\ip{x}{y} = |x||y|\cos\theta\]
+\begin{equation}\ip{x}{y} = |x||y|\cos\theta\end{equation}
 
 \subsection{Linear transformations from \(\reals^n \to \reals^m\)}
 
@@ -175,50 +175,50 @@ Usually, we represent linear transformations by a matrix. But the matrix, of cou
 The standard basis of \(\reals^n\) is composed of \(e_1,...,e_n\), where each \(e_k\) is 0 everywhere except in the \(k^{th}\) place, where it is 1.
 
 Let's assume \(T: \reals^n \to \reals^m\) is a linear transformation. What do we mean by the matrix of \(T\) with respect to the standard basis? Let
-\[e_1,...,e_n \in \reals^n\]
-\[f_1,...,f_m \in \reals^m\]
+\begin{equation}e_1,...,e_n \in \reals^n\end{equation}
+\begin{equation}f_1,...,f_m \in \reals^m\end{equation}
 be the standard bases.
 
 Our transformation is a matrix \(A\) that we multiply a certain vector \(x = (x_1,...,x_n) \in \reals^n\) by to get a vector \(y = (y_1,...,y_m) \in \reals^m\). Let's label the elements of \(A\) \(a_{11},...,a_{mn}\), getting
-\[\begin{pmatrix} y_1 \\ \vdots \\ y_m \end{pmatrix} =
+\begin{equation}\begin{pmatrix} y_1 \\ \vdots \\ y_m \end{pmatrix} =
 \begin{pmatrix}
   a_{11} & ... & a_{1n} \\
   \vdots & \ddots & \vdots \\
   a_{m1} & ... & a_{mn}
 \end{pmatrix}\begin{pmatrix}
   x_1 \\ \vdots \\ x_n
-\end{pmatrix}\]
+\end{pmatrix}\end{equation}
 But note we can write
-\[x = \sum_{i = 1}^nx_ie_i\]
+\begin{equation}x = \sum_{i = 1}^nx_ie_i\end{equation}
 And note that
-\[T(e_i) = \sum_{j = 1}^ma_{ji}f_j\]
+\begin{equation}T(e_i) = \sum_{j = 1}^ma_{ji}f_j\end{equation}
 i.e. the \(i^{th}\) column.
 
 So what we're really doing is taking one sum of basis vectors into another.
 
 Now what if we have a separate linear transformation? If \(S: \reals^m \to \reals^\ell\) is another linear transformation, that means we can compose them: we can apply \(S\) to \(T(x)\). Then
-\[S \circ T: \reals^n \to \reals^\ell\]
+\begin{equation}S \circ T: \reals^n \to \reals^\ell\end{equation}
 Let's suppose \(S\) has a matrix \(B\). And what's the matrix of \(S \circ T\)? It is, of course, \(BA\).
 
 Ok, finally, what about \textit{bounding} the size of a matrix applied to a vector? This is going to be a basic bound that we use all the time.
 
 If \(T: \reals^n \to \reals^m\) is a linear transformation, then there is a constant \(M \geq 0\) such that
-\[|Tx| \leq M|x|\]
+\begin{equation}|Tx| \leq M|x|\end{equation}
 Why?
-\[T(x) = T\left(\sum x_ie_i\right) = \sum x_iT(e_i)\]
+\begin{equation}T(x) = T\left(\sum x_ie_i\right) = \sum x_iT(e_i)\end{equation}
 Let's estimate the norm:
-\[|T(x)| \leq \sum_{i = 1}^n|x_iT(e_i)| = \sum_{i = 1}^n|x_i||T(e_i)|\]
+\begin{equation}|T(x)| \leq \sum_{i = 1}^n|x_iT(e_i)| = \sum_{i = 1}^n|x_i||T(e_i)|\end{equation}
 So how can we use this to get that \(M\)? We can just take
-\[C = \max_{i}|T(e_i)|\]
+\begin{equation}C = \max_{i}|T(e_i)|\end{equation}
 then
-\[|T(x)| \leq C\sum|x_i|\]
+\begin{equation}|T(x)| \leq C\sum|x_i|\end{equation}
 This is not quite what we wanted, because this is not that single barred norm of \(x\). This was a different norm of \(x\). But what was the relationship between the two norms?
-\[\sum|x_i| \leq \sqrt{n}|x|\]
+\begin{equation}\sum|x_i| \leq \sqrt{n}|x|\end{equation}
 So we have
-\[|T(x) \leq \sqrt{n}C|x|\]
+\begin{equation}|T(x) \leq \sqrt{n}C|x|\end{equation}
 
 \(\reals^n\) with any of our norms is what's called a \textit{metric space}. All a metric space means is a set \(X\) together with a distance function
-\[d: X \times X \to \reals, (x, y) \mapsto d(x, y)\]
+\begin{equation}d: X \times X \to \reals, (x, y) \mapsto d(x, y)\end{equation}
 such that
 \begin{itemize}
   \item \(\forall x, y \in X, d(x, y) \geq 0\)
@@ -270,43 +270,43 @@ We begin with some examples:
 \begin{enumerate}
 
   \item Consider an ellipsoid
-  \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\]
+  \begin{equation}\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\end{equation}
   The tangent plane at a point \((x_0, y_0, z_0)\) of the ellipsoid is given by
-  \[\frac{\cancel{2}x_0}{a^2}(x - x_0) + \frac{\cancel{2}y_0}{b^2}(y - y_0) + \frac{\cancel{2}z_0}{c^2}(z - z_0) = 0\]
-  \[\frac{x_0}{a^2}x + \frac{y_0}{b^2}y + \frac{z_0}{c^2}z = 1\]
+  \begin{equation}\frac{\cancel{2}x_0}{a^2}(x - x_0) + \frac{\cancel{2}y_0}{b^2}(y - y_0) + \frac{\cancel{2}z_0}{c^2}(z - z_0) = 0\end{equation}
+  \begin{equation}\frac{x_0}{a^2}x + \frac{y_0}{b^2}y + \frac{z_0}{c^2}z = 1\end{equation}
 
   \item Let \(f(x, y) = 0\) and \(g(x, y) = 0\) be curves in \(\reals^2\). Assume the curves are smooth and intersect at point \((a, b)\). The two curves are \underline{orthogonal} at \((a, b)\) if
-  \[\prt{f}{x}\prt{g}{x} + \prt{f}{y}\prt{g}{y} = 0\]
+  \begin{equation}\prt{f}{x}\prt{g}{x} + \prt{f}{y}\prt{g}{y} = 0\end{equation}
   at \((a, b)\). The two curves are \underline{tangent} at \((a, b)\) if the gradients are proportional to each other, i.e.
-  \[\prt{f}{x}\prt{g}{y} - \prt{f}{y}\prt{g}{x} = 0\]
+  \begin{equation}\prt{f}{x}\prt{g}{y} - \prt{f}{y}\prt{g}{x} = 0\end{equation}
   at \((a, b)\).
 
   \item Consider the family of parabolas
-  \[y^2 - 2p(x + p/2) = 0\]
+  \begin{equation}y^2 - 2p(x + p/2) = 0\end{equation}
   Here, \(p\) is the parameter. These parabolas open along the \(x\) axis, either to the right or two the left, with \(x\) acting like a function of \(y\).
 
   This kind of family is what's called \textit{confocal}: these parabolas all have the same focus, 0. Of course, they don't all intersect, but all those which open to the right intersect all those which open to the left. Let's look at the intersections.
 
   If \(p_1 > 0\) and \(p_2 > 0\) then the two parabolas
-  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0, g(x, y) = y^2 - 2p_2(x + p_2/2) = 0\]
+  \begin{equation}f(x, y) = y^2 - 2p_1(x + p_1/2) = 0, g(x, y) = y^2 - 2p_2(x + p_2/2) = 0\end{equation}
   intersect where
-  \[f(x, y) = y^2 - 2p_1(x + p_1/2) = 0 = g(x, y) = y^2 - 2p_2(x + p_2/2)\]
+  \begin{equation}f(x, y) = y^2 - 2p_1(x + p_1/2) = 0 = g(x, y) = y^2 - 2p_2(x + p_2/2)\end{equation}
   Let's show that all the intersections among all these possible parabolas are right angles.
 
   Let's try to compute the inner product of the gradients. That is, we want to show
-  \[f_xg_x + f_yg_y = 0\]
+  \begin{equation}f_xg_x + f_yg_y = 0\end{equation}
   at an intersection point. So what's the product of the \(x\) derivatives? Well it'll just be
-  \[f_xg_x = (-2p_1)(-2p_2) = 4p_1p_2\]
+  \begin{equation}f_xg_x = (-2p_1)(-2p_2) = 4p_1p_2\end{equation}
   And what's the product of the \(y\) derivatives?
-  \[f_yg_y = (2y)(2y) = 4y^2\]
+  \begin{equation}f_yg_y = (2y)(2y) = 4y^2\end{equation}
   So we want to see that
-  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2\]
+  \begin{equation}f_xg_x + f_yg_y = 4p_1p_2 + 4y^2\end{equation}
   vanishes when both \(f\) and \(g\) are zero.
 
   If you take \(p_2\) times \(f\), and subtract \(p_1\) times \(g\), you get rid of the \(x\) terms:
-  \[p_2f - p_1g = p_2y^2 - 2p_2p_1(x + p_1/2) - p_1y^2 + 2p_1p_2(x + p_2/2) = (p_1 - p_2)y^2 + (p_2 - p_1)p_1p_2\]
+  \begin{equation}p_2f - p_1g = p_2y^2 - 2p_2p_1(x + p_1/2) - p_1y^2 + 2p_1p_2(x + p_2/2) = (p_1 - p_2)y^2 + (p_2 - p_1)p_1p_2\end{equation}
   So we have
-  \[f_xg_x + f_yg_y = 4p_1p_2 + 4y^2 = 4\frac{p_2f - p_1g}{p_2 - p_1} = 0\]
+  \begin{equation}f_xg_x + f_yg_y = 4p_1p_2 + 4y^2 = 4\frac{p_2f - p_1g}{p_2 - p_1} = 0\end{equation}
   Since \(f = g = 0\) and \(p_2 - p_1 \neq 0\) at the intersection point.
 
 \end{enumerate}
@@ -318,32 +318,32 @@ So these are some examples of computations with tangent spaces.
 
 
 We're going to be considering functions, for open sets \(U \subseteq \reals^n\),
-\[f: U \to \reals\]
+\begin{equation}f: U \to \reals\end{equation}
 If \(f\) has a local maximum or minimum at a point \(a\) where
-\[\prt{f}{x_i}(a)\]
+\begin{equation}\prt{f}{x_i}(a)\end{equation}
 exists, then it must be zero. This is true because the partial derivative is just the derivative along a one-dimensional subspace: a line. That is,
-\[\prt{f}{x_i}(a) = g_i'(0) = 0, g_i(t) = f(a + t\mb{e}_i)\]
+\begin{equation}\prt{f}{x_i}(a) = g_i'(0) = 0, g_i(t) = f(a + t\mb{e}_i)\end{equation}
 If \(f\) is differentiable at \(a\), what is the direction of maximum increase (we could also ask for decrease) of \(f\) at \(a\)? It's the direction of the gradient, which I guess is what's called the gradient. Why is this? If we want to look at the increase of \(f\) in a particular direction, we have to look at the value of the directional derivative of \(f\) in that particular direction. We we want to maximize
-\[D_{\mb{e}}f(a) = Df(a)(e) = \ip{\grad{f(a)}}{\mb{e}}\]
+\begin{equation}D_{\mb{e}}f(a) = Df(a)(e) = \ip{\grad{f(a)}}{\mb{e}}\end{equation}
 for some unit vector \(\mb{e}\). In general, of course, what is this inner product? It's
-\[|\mb{e}||\grad f(a)|\cos\theta = |\grad f(a)|\cos\theta\]
+\begin{equation}|\mb{e}||\grad f(a)|\cos\theta = |\grad f(a)|\cos\theta\end{equation}
 This, of course, is maximized when \(\theta = 0\), i.e. \(\mb{e}\) points in the direction of \(\grad f(a)\).
 
 What about the converse: does a point where the derivative is zero imply an extremum. Here, just like in first year, this is false, however, in this case, the converse is false \textit{even} assuming \(g_i''(0) \neq 0\). For example, consider
-\[f(x, y) = x^2 - y^2\]
+\begin{equation}f(x, y) = x^2 - y^2\end{equation}
 This graph is ``saddle shaped''. The second derivative with respect to both \(x\) and \(y\) are nonzero at the origin, the first partial derivatives are zero, and yet we have neither a local maximum or a minimum: in fact, we have a maximum in the \(y\) direction and a minimum in the \(x\) direction!
 
 Let's do an example: consider an acute angled triangle with vetices \(P_i = (x_i, y_i)\). Find a fourth point \(P = (x, y)\) such that the sum of distances to each \(P_i\) is as small as possible. We have
-\[f(x, y) = r_1 + r_2 + r_3\]
+\begin{equation}f(x, y) = r_1 + r_2 + r_3\end{equation}
 where
-\[r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\]
+\begin{equation}r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\end{equation}
 One thing that's we can see is that there \textit{is} a minimum, and it occurs on a closed disk whose boundary contains \(P_i\). \(f\) is differentiable except at \(P_i\), but the minimum can't occur at \(P_i\), since the triangle is acute, implying we can take the intersection of an edge and the perpendicular from a vertex and get a smaller value for \(f\). This isn't the only place where we'll use the fact that the triangle is acute angled, however.
 
 So we know the maximum must occur at a critical point. At a critical point:
-\[\prt{f}{x} = \frac{x - x_1}{r_1} + \frac{x - x_2}{r_2} + \frac{x - x_3}{r_3} = 0\]
-\[\prt{f}{y} = \frac{y - y_1}{r_1} + \frac{y - y_2}{r_2} + \frac{y - y_3}{r_3} = 0\]
+\begin{equation}\prt{f}{x} = \frac{x - x_1}{r_1} + \frac{x - x_2}{r_2} + \frac{x - x_3}{r_3} = 0\end{equation}
+\begin{equation}\prt{f}{y} = \frac{y - y_1}{r_1} + \frac{y - y_2}{r_2} + \frac{y - y_3}{r_3} = 0\end{equation}
 i.e. if
-\[u_i = \left(\frac{x - x_i}{r_i}, \frac{y - y_i}{r_i}\right), u_1 + u_2 + u_3 = 0\]
+\begin{equation}u_i = \left(\frac{x - x_i}{r_i}, \frac{y - y_i}{r_i}\right), u_1 + u_2 + u_3 = 0\end{equation}
 
 \TODO{rest}
 
@@ -360,21 +360,21 @@ i.e. if
 We said what the integral of a closed rectangle on \(\reals^n\) was last time, in complete analogy with first year calculus:
 \begin{definition}
   If \(f: A \to \reals\) is a bounded function on a closed rectangle \(A \subset \reals^n\), \(f\) is \underline{integrable} on \(A\) if, where \(\mc{P}\) is the set of partitions of \(A\),
-  \[\sup_{P \in \mc{P}} L(f, P) = \inf_{P \in \mc{P}} U(f, P)\]
+  \begin{equation}\sup_{P \in \mc{P}} L(f, P) = \inf_{P \in \mc{P}} U(f, P)\end{equation}
   then the common value is called the integral of \(f\) over \(A\), written
-  \[\int_Af\]
+  \begin{equation}\int_Af\end{equation}
 \end{definition}
 Throughout this lecture we'll see that most of the properties you learned in first year calculus will carry over to this more general case. One thing we'll be carrying over today is that instead of expressing things in terms of \(\sup\) and \(\inf\), we can instead express things in terms of \(\epsilon\):
 \begin{lemma}
   If \(f: A \to \reals\) is a bounded function on a closed rectangle \(A\) then \(f\) is integrable on \(A\) if and only if for every \(\epsilon > 0\), there is apartition \(P\) of \(A\) such that
-  \[U(f, P) - L(f, P) < \epsilon\]
+  \begin{equation}U(f, P) - L(f, P) < \epsilon\end{equation}
 \end{lemma}
 The proof is exactly like first year, and one direction should be immediate:
 \begin{proof}
 \begin{itemize}
   \item \(\impliedby\): if there's a partition \(P\) for every \(\epsilon\), then there's no ``room'' between the \(\sup\) and the \(\inf\)
   \item \(\implies\): if \(\sup = \inf\), then there are partitions \(P, P'\) such that
-  \[U(f, P) - \inf_{P \in \mc{P}} U(f, P) < \frac{\epsilon}{2} \land \sup_{P \in \mc{P}}L(f, P) - L(f, P') < \frac{\epsilon}{2} \implies U(f, P'') - L(f, P'') < \epsilon\]
+  \begin{equation}U(f, P) - \inf_{P \in \mc{P}} U(f, P) < \frac{\epsilon}{2} \land \sup_{P \in \mc{P}}L(f, P) - L(f, P') < \frac{\epsilon}{2} \implies U(f, P'') - L(f, P'') < \epsilon\end{equation}
   where \(P''\) is a refinement of \(P\) and \(P'\).
 \end{itemize}
 \end{proof}
@@ -382,16 +382,16 @@ Just like in first year. And also, the kind of first calculations of itnegrals t
 \begin{enumerate}
 
   \item If \(f = c\) is a constant, then \(f\) is integrable and
-  \[\int_Af = cv(A)\]
+  \begin{equation}\int_Af = cv(A)\end{equation}
   where \(v(A)\) denotes the volume of \(A\). This is because, for any subrectangle \(S\) of \(P\),
-  \[m_S(f) = c = M_S(f) \implies L(f, P) = \sum m_s(f)v(S) = c\sum v(S) = cV(A)\]
+  \begin{equation}m_S(f) = c = M_S(f) \implies L(f, P) = \sum m_s(f)v(S) = c\sum v(S) = cV(A)\end{equation}
   with an analogous calculation for \(U(f, P)\)
 
   \item Let \(f: [0, 1] \times [0, 1] \to \reals\). Then
-  \[f(x, y) = \left\{\begin{array}{cc}
+  \begin{equation}f(x, y) = \left\{\begin{array}{cc}
     0 & \text{if } x \in \rationals \\
     1 & \text{otherwise}
-  \end{array}\right.\]
+  \end{array}\right.\end{equation}
   is not integrable, since for any partition \(P\),
   \(m_S(f) = 0 \land M_S(f) = 1 \implies L(f, P) = 0 \land U(f, P) = 1\)
 
@@ -400,19 +400,19 @@ Just like in first year. And also, the kind of first calculations of itnegrals t
 \subsubsection{Basic Properties of the Integral}
 
 Suppose we have two integrable functions
-\[f, g: A \to \reals\]
+\begin{equation}f, g: A \to \reals\end{equation}
 Then
 \begin{enumerate}
 
   \item \(f + g\) is integrable and
-  \[\int_A(f + g) = \int_Af + \int_Ag\]
+  \begin{equation}\int_A(f + g) = \int_Af + \int_Ag\end{equation}
 
-  \item \[f \leq g \implies \int_Af \leq \int_Ag\]
+  \item \begin{equation}f \leq g \implies \int_Af \leq \int_Ag\end{equation}
 
   \item \(f \cdot g\) is integrable
 
-  \item \(|f|\) is integrable and \[
-  \int_A|f| \geq \left|s22\int_Af\right| \geq \int_Af\]
+  \item \(|f|\) is integrable and \begin{equation}
+  \int_A|f| \geq \left|s22\int_Af\right| \geq \int_Af\end{equation}
   It's enough to show that \(|f|\) is integrable
 
   \item Exercise: any increasing function is integrable
@@ -592,7 +592,7 @@ We went through the proof of this before, but I want to use it to compute some e
   So, what is this region? The second equation says we're inside the closed ball of radius 1 centered at the origin. The first equation is the region inside two  cones, opening up and down from the origin (kind of like an hour glass). So we want the intersection of these two regions. In terms of the theorem that we wrote down at the beginning, the set \(C\) is like the discs inside the circles formed by the intersections of the top and bottom of the cones and circles, and we're integrating on the region between the semicircles above and below the plane, and the cones above and below the plane. So what's this going to be? Well, by symmetry, it's going to be \textit{zero}.
 
   Let's make it a little harder. Let's consider only the top, i.e.
-  \[S^+ = \{(x, y, z) \in S : z \geq 0\}\]
+  \begin{equation}S^+ = \{(x, y, z) \in S : z \geq 0\}\end{equation}
   So, rewriting our integral to be over the disc \(C\), we obtain
   \begin{equation}
   \begin{split}
@@ -1316,15 +1316,15 @@ Consider the following definitions of a manifold:
 
 \begin{definition}
   A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) such that every point of \(M\) has an open neighborhood \(U\) in \(\reals^n\) such that \(M \cap U\) is the graph of a \(\mc{C}^r\) function \(z = g(y)\), \(z = (z_1,...,z_{n - k}), y = (y_1,...,y_k)\) where
-  \[(y, z) \neq (x_{\sigma(1)},...,x_{\sigma(n)})\]
+  \begin{equation}(y, z) \neq (x_{\sigma(1)},...,x_{\sigma(n)})\end{equation}
   where \(\sigma\) is a permutation of \(1,...,n\).
   \label{def:manifold2}
 \end{definition}
 
 \begin{definition}
   A \(k\)-dimensional manifold manifold is a set \(M \subseteq \reals^n\) such that for all \(a \in M\), there is an open neighborhood \(U\) of \(a\), an open set \(V \subset \reals^n\) and a \(\mc{C}^r\) \underline{diffeomorphism} (a \(\mc{C}^r\) mapping with a \(\mc{C}^r\) inverse) \(h: U \to V\) such that
-  \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\}) =
-  \{y = (y_1,...,y_n) \in V : y_{k + 1} = ... = y_n\}\]
+  \begin{equation}h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\}) =
+  \{y = (y_1,...,y_n) \in V : y_{k + 1} = ... = y_n\}\end{equation}
   \label{def:manifold3}
 \end{definition}
 \begin{claim}
@@ -1345,9 +1345,9 @@ Consider the following definitions of a manifold:
 \end{proof}
 
 To illustrate the first definition in action, consider the example of the unit sphere \(S^{n - 1} \subset \reals^n\), given by
-\[S^{n - 1} = \{x = (x_1,...,x_n) : f(x) - 1 = 0)\} \text{ where } f(x) = x_1^2 + ... + x_n^2\]
+\begin{equation}S^{n - 1} = \{x = (x_1,...,x_n) : f(x) - 1 = 0)\} \text{ where } f(x) = x_1^2 + ... + x_n^2\end{equation}
 We have
-\[\forall x \in S^{n - 1}, \grad f(x) = 2(x_1,...,x_n) = 2x \neq 0\]
+\begin{equation}\forall x \in S^{n - 1}, \grad f(x) = 2(x_1,...,x_n) = 2x \neq 0\end{equation}
 so \(f\) has rank 1 at every point of \(S^{n - 1}\). Hence \(S^{n - 1}\) is a manifold.
 
 \subsection{Tangent Spaces}
@@ -1359,18 +1359,18 @@ We now discuss the tangent space \(TM_a\) or \(M_a\) at a point \(a \in M\). If 
   \item The definition of the tangent space according to Definition \ref{def:manifold1} is \(\Ker Df(a) = Df(a)^{-1}(0)\), a vector subspace of \(\reals^n_a\)
 
   \item To think of the tangent space in terms of Definition \ref{def:manifold2}, write \(x = (y, z), a = (b, c)\). Then we can think of the tangent space as an affine space through the point \((b, c)\) by writing
-  \[z - c = Dg(b)(y - b)\]
+  \begin{equation}z - c = Dg(b)(y - b)\end{equation}
   But we want to think of it as a vector space with \(a\) as the origin, a vector subspace of \(\reals^n_a\). So we should write it as
-  \[Z = Dg(b)(Y)\]
+  \begin{equation}Z = Dg(b)(Y)\end{equation}
   where \(Z \in \reals_{f(a)}^p\), \(Y \in \reals_a^n\). This is because \(f(y, g(y)) = 0\), so
-  \[Df(a)\begin{pmatrix} I \\ Dg(b) \end{pmatrix} = 0 \implies \Ker Df(a) \supseteq \Ima\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\]
+  \begin{equation}Df(a)\begin{pmatrix} I \\ Dg(b) \end{pmatrix} = 0 \implies \Ker Df(a) \supseteq \Ima\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\end{equation}
   But in fact, they're equal, because their dimensions are the same.
 
   So the kernel of \(Df(a)\), and the image of \(\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\), are both equal to the set of points such that
-  \[Z = Dg(b)(Y)\]
+  \begin{equation}Z = Dg(b)(Y)\end{equation}
 
   \item In terms of the Definition \ref{def:manifold3}, we can write the tangent space as
-  \[Dh(a)^{-1}(\reals^k \times \{\mb{0} \in \reals^{n - k}\})\]
+  \begin{equation}Dh(a)^{-1}(\reals^k \times \{\mb{0} \in \reals^{n - k}\})\end{equation}
 
 \end{enumerate}
 
@@ -1396,25 +1396,25 @@ Note this first and last condition on \(\varphi\) are equivalent to requiring th
 We'll now show that Definition \ref{def:manifoldbycoords} implies Definition \ref{def:manifold3}:
 \begin{proof}
   Say \(a = \varphi(b)\) for some \(b \in W\). We can assume
-  \[\prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)}\]
+  \begin{equation}\prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)}\end{equation}
   has rank \(k\) on \(W\).
   Define \(\psi: W \times \reals^{n - k} \to\reals^n\) by
-  \[(y, z) \mapsto \varphi(y) + (0, z)\]
+  \begin{equation}(y, z) \mapsto \varphi(y) + (0, z)\end{equation}
   Then we get the block matrix
-  \[\psi'(y, z) = \begin{pmatrix}
+  \begin{equation}\psi'(y, z) = \begin{pmatrix}
     \prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)} & 0 \\
     * & I
-  \end{pmatrix}\]
+  \end{pmatrix}\end{equation}
   This shows that \(\psi\) has rank \(n\) for all \(y \in W\), since it's determinant is nonzero. But that means that we can apply the inverse function theorem. So by the inverse function theorem, there are open neighborhoods \(V_1'\) of \((b, 0)\) and \(U_1'\) of \(\psi(b, 0) = \varphi(b) = a\) such that \(\psi: V_1' \to U_1'\) has a \(\mc{C}^r\) inverse \(\psi^{-1}: U_1' \to V_1'\).
 
   We have that
-  \[\psi^{-1}(\varphi(y)) = (y, 0) \in V_1' = \varphi(W) \cap \widetilde U\]
+  \begin{equation}\psi^{-1}(\varphi(y)) = (y, 0) \in V_1' = \varphi(W) \cap \widetilde U\end{equation}
   where \(U\) is open in \(\reals^n\). Take \(U_1 = U_1' \cap \widetilde U\) and \(V_1 = \psi^{-1}(U_1)\). We have
-  \[M \cap U_1 = \{\varphi(y) : (y, 0) \in V_1\}\]
+  \begin{equation}M \cap U_1 = \{\varphi(y) : (y, 0) \in V_1\}\end{equation}
   So
-  \[h = \psi^{-1}|_{U_1}\]
+  \begin{equation}h = \psi^{-1}|_{U_1}\end{equation}
   satisfies the conditions implied by (3) since
-  \[h(M \cap U_1) = \psi^{-1}(M \cap U_1) = \{(y, 0) : (y, 0) \in V_1\} = V_1 \cap (\reals^k \times \{\mb{0}\})\]
+  \begin{equation}h(M \cap U_1) = \psi^{-1}(M \cap U_1) = \{(y, 0) : (y, 0) \in V_1\} = V_1 \cap (\reals^k \times \{\mb{0}\})\end{equation}
 \end{proof}
 This is quite a delicate topological argument, and gi\TODO{finish this sentence}
 
@@ -1426,17 +1426,17 @@ We begin by looking at the following two definitions for the tangent space to a 
   \label{vfdef} \(TMa = D\varphi(b)(\reals^k_b)\)
 \end{definition}
 We're forgetting about the first two definitions, but why are \textit{these} two definitions equivalent? We used \(h\) to find a coordinate map \(\varphi\) by taking \(\varphi\) to be \(h^{-1}\) restricted to \(\reals^k \times \{\mb{0}\}\). Note that definition \ref{vfdef} is independent from the choice of \(\varphi\). To understand why, consider two maps \(\varphi_1(b_1) = a = \varphi_2(b_2)\) which take some interesecting open subsets \(M_1, M_2\) of \(M\) to spaces \(W_1, W_2\). Then
-\[\varphi_1 = \varphi_2 \circ (\varphi_2^{-1} \circ \varphi_1)\]
+\begin{equation}\varphi_1 = \varphi_2 \circ (\varphi_2^{-1} \circ \varphi_1)\end{equation}
 on \(M_1 \cap M_2\), giving
-\[D\varphi_1(b_1) = D\varphi_2(b_2) \circ D(\varphi_2^{-1}\circ\varphi_1)(b_1)\]
+\begin{equation}D\varphi_1(b_1) = D\varphi_2(b_2) \circ D(\varphi_2^{-1}\circ\varphi_1)(b_1)\end{equation}
 I want to think of this in a different way now. I want to give another definition for the tangent space that doesn't depend on \(h\), doesn't depend on \(\varphi\), doesn't depend on any data other than \(M\). We give the following:
 \begin{definition}
-  \[TM_a = \{\text{tangent vectors } \gamma'(0) \text{ of } \mc{C^1} \text{ curves } \gamma: (-\delta, \delta) \to M \text{ s.t. } \gamma(0) = a\}\]
+  \begin{equation}TM_a = \{\text{tangent vectors } \gamma'(0) \text{ of } \mc{C^1} \text{ curves } \gamma: (-\delta, \delta) \to M \text{ s.t. } \gamma(0) = a\}\end{equation}
 \end{definition}
 So what does this even mean? Recall the following definition:
 \begin{definition}
   A \(\mc{C}^1\) curve in \(\reals^n\) is a \(\mc{C}^1\) mapping, for some open interval \((c, d)\),
-  \[\gamma: (c, d) \to \reals^n, \gamma(t) = (\gamma_1(t),...,\gamma_n(t))\]
+  \begin{equation}\gamma: (c, d) \to \reals^n, \gamma(t) = (\gamma_1(t),...,\gamma_n(t))\end{equation}
   \label{newdef}
 \end{definition}
 If we fix a point on \(\gamma\), what's the tangent vector to \(\gamma\) at \(\gamma(t_0)\)? It's \(\gamma'(t_0) \in T\reals^n_{\gamma(t_0)}\). We now generalize the above definition
@@ -1445,15 +1445,15 @@ If we fix a point on \(\gamma\), what's the tangent vector to \(\gamma\) at \(\g
   \label{c1mcurve}
 \end{definition}
 So why is \(\gamma'(t_0)\) an element of \(TM_{\gamma(t_0)}\)? In terms of a previous definition,
-\[TMa = \Ker Df(a)\]
+\begin{equation}TMa = \Ker Df(a)\end{equation}
 In our case, we have
-\[f(\gamma(t)) = 0 \implies Df(\gamma(t_0)) \cdot \gamma'(t_0) = 0 \implies \gamma'(t_0) \in \Ker Df(a) = TMa\]
+\begin{equation}f(\gamma(t)) = 0 \implies Df(\gamma(t_0)) \cdot \gamma'(t_0) = 0 \implies \gamma'(t_0) \in \Ker Df(a) = TMa\end{equation}
 So, considering this, why is definition \ref{newdef} the tangent space? Let's think about that, first of all, in a simple special case. What if \(M = \reals^k\)? Take \(a \in \reals^k\). We are simply asking that every vector \(v \in \reals_a^k\) through the point \(a\) is the tangent vector to some curve through \(a\), i.e. is \(\gamma'(0)\) where \(\gamma(t) = a + tv\). So if \(M = \reals^k\), for sure that's the right definition of the tangent space.
 
 So now why is this true in general? Which definition of the tangent space do you think we should use? Well, the coordinate chart definition, i.e. definition \ref{vfdef}, is the one that best fits our purposes. In general, consider a coordinate chart \(\varphi\) for \(M\) at \(a\). Say we have a \(\mc{C}^1\) curve in \(W\) such that \(\delta(0) = b\). Then
 \(\gamma(t) = (\varphi \circ \delta)(t)\)
 is a \(\mc{C}^1\) curve in \(M\) such that \(\gamma(0) = a\). So using the Chain Rule,
-\[\gamma'(0) = D\varphi(b) \circ \delta'(0)\]
+\begin{equation}\gamma'(0) = D\varphi(b) \circ \delta'(0)\end{equation}
 But any \(\mc{C}^1\) curve \(\gamma(t)\) in \(M\) such that \(\gamma(0) = b\) is of the form
 \(\gamma = \varphi \circ \delta\)
 where \(\delta\) is a \(\mc{C}^1\) curve in \(W\). We get this from the description of \(\varphi^{-1}\) as restricted to \(M\) of a \(\mc{C}^r\) function \(h\).
@@ -1474,24 +1474,24 @@ But we have one thing left to do. Usually, in mathematics, we don't just define 
 Recall the following definitions:
 \begin{definition}
   A half space \(\hlfspc^k \subset \reals^k\) is given by
-  \[\{x = (x_1,...,x_k) : x_k \geq 0\}\]
+  \begin{equation}\{x = (x_1,...,x_k) : x_k \geq 0\}\end{equation}
 \end{definition}
 \begin{definition}
   A subset \(M \subseteq \reals^n\) is a \(k\)-dimensional \(\mc{C}^r\) \underline{manifold with boundary} if for every \(a \in M\), there is an open neighborhood \(U\) of \(a\) in \(\reals^n\), an open subset \(V\) of \(\reals^n\) and a \(\mc{C}^r\) diffeomorphism \(h: U \to V\) such that either
   \begin{enumerate}[label=(\arabic*)]
 
     \item The usual condition for a manifold,
-    \[h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\})\]
+    \begin{equation}h(M \cap U) = V \cap (\reals^k \times \{\mb{0} \in \reals^{n - k}\})\end{equation}
     \label{mnfcnd}
 
     \item The manifold looks like a half space around \(a\), i.e.
-    \[h(M \cap U) = V \cap (\hlfspc^k \times \{\mb{0} \in \reals^{n - k}\}) = \{y = (y_1,...,y_n) : y_1,...,y_k \geq 0 \land y_{k + 1} = ... = y_n = 0\}\] \label{bndcnd}
+    \begin{equation}h(M \cap U) = V \cap (\hlfspc^k \times \{\mb{0} \in \reals^{n - k}\}) = \{y = (y_1,...,y_n) : y_1,...,y_k \geq 0 \land y_{k + 1} = ... = y_n = 0\}\end{equation} \label{bndcnd}
 
   \end{enumerate}
   \label{mwb}
 \end{definition}
 One thing you could ask is whether both conditions \ref{mnfcnd}, \ref{bndcnd} could be satisfied by the same point \(a\). The answer is no. To show why, suppose \(h_1: U_1 \to V_1\) satisfies \ref{mnfcnd} and \(h_2: U_2 \to V_2\) satisfies \ref{bndcnd} for some \(a\). How can we get a contradiction? If we take
-\[h_2 \circ h_1^{-1}: V_1 \to V_2\]
+\begin{equation}h_2 \circ h_1^{-1}: V_1 \to V_2\end{equation}
 we get a \(\mc{C}^r\) diffeomorphism in an open set containing \(a\) taking an open subset of \(\reals^k\) onto an open subset of \(\hlfspc^k\) which is \textit{not} open in \(\reals^k\). What we're contradicting here is the inverse function theorem, which says there would be open neighborhoods \(h_1(a)\) and \(h_2(a)\) which are mapped together with an inverse. Alternatively, we could use the topological arguments that diffeomorphisms, which are homeomorphisms, are open maps.
 
 Once we've established this result, we can really distinguish these two kinds of points. That means, precisely, that we can make the following definitions
