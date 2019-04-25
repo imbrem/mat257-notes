@@ -886,7 +886,7 @@ We can now return to the proof of the theorem: by \ref{proof:cov_p3} and \ref{pr
 \begin{equation}
   g = T \circ (T^{-1} \circ g)
 \end{equation}
-By \ref{p4}, this is true for \(T\). By 3, if this is true for \(T\) and \(T^{-1} \circ g\) then it's true for \(g\). So it's enough to prove for the case
+By \ref{proof:cov_p4}, this is true for \(T\). By 3, if this is true for \(T\) and \(T^{-1} \circ g\) then it's true for \(g\). So it's enough to prove for the case
 \begin{equation}
     (T^{-1} \circ g)' = I
 \end{equation}
@@ -1008,9 +1008,9 @@ We now discuss the tangent space \(TM_a\) or \(M_a\) at a point \(a \in M\). If 
 
 \begin{enumerate}
 
-  \item The definition of the tangent space according to the first definition is \(\Ker Df(a) = Df(a)^{-1}(0)\), a vector subspace of \(\reals^n_a\)
+  \item The definition of the tangent space according to Definition \ref{def:manifold1} is \(\Ker Df(a) = Df(a)^{-1}(0)\), a vector subspace of \(\reals^n_a\)
 
-  \item Write \(x = (y, z), a = (b, c)\). Then we can think of the tangent space as an affine space through the point \((b, c)\) by writing
+  \item To think of the tangent space in terms of Definition \ref{def:manifold2}, write \(x = (y, z), a = (b, c)\). Then we can think of the tangent space as an affine space through the point \((b, c)\) by writing
   \[z - c = Dg(b)(y - b)\]
   But we want to think of it as a vector space with \(a\) as the origin, a vector subspace of \(\reals^n_a\). So we should write it as
   \[Z = Dg(b)(Y)\]
@@ -1021,7 +1021,7 @@ We now discuss the tangent space \(TM_a\) or \(M_a\) at a point \(a \in M\). If 
   So the kernel of \(Df(a)\), and the image of \(\begin{pmatrix} I \\ Dg(b) \end{pmatrix}\), are both equal to the set of points such that
   \[Z = Dg(b)(Y)\]
 
-  \item In terms of the third definition, we can write the tangent space as
+  \item In terms of the Definition \ref{def:manifold3}, we can write the tangent space as
   \[Dh(a)^{-1}(\reals^k \times \{\mb{0} \in \reals^{n - k}\})\]
 
 \end{enumerate}
@@ -1045,7 +1045,7 @@ A \(k\)-dimensional manifold \(M \subset \reals^n\) is a set such that for all \
 \end{definition}
 Note this first and last condition on \(\varphi\) are equivalent to requiring that \(\varphi\) is a homeomorphism between the neighborhood \(M \cap U\) and \(W\).
 
-We'll now show that Definition \ref{def:bycoords} implies Definition \ref{def:manifold3}:
+We'll now show that Definition \ref{def:manifoldbycoords} implies Definition \ref{def:manifold3}:
 \begin{proof}
   Say \(a = \varphi(b)\) for some \(b \in W\). We can assume
   \[\prt{(\varphi_1,...,\varphi_k)}{(y_1,...,y_k)}\]
