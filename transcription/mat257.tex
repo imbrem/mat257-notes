@@ -450,6 +450,96 @@ We can prove this for rectangles. Then, if we want to prove it for manifolds, ag
 
 \end{proof}
 
+\subsection{Extended Definition of the Integral (``Improper Integral'')}
+Suppose that \(A\) is open and \(f\) is bounded and continuous. Then under the current definition, the expression
+\begin{equation}
+  \int_Af
+\end{equation}
+may not exist, since the boundary may not be Jordan-measurable. So we now want to try and rectify that, by attempting to extend the definition of the integral to open subsets \(A \subset \reals^n\) and \textit{locally} bounded functions \(f: A \to \reals\), i.e. for every point in \(A\), there is an open neighborhood around \(A\) such that \(f\) is bounded around \(A\). Furthermore, we assume the set of discontinuities is of measure zero.
+
+Just like the improper integral from first year calculus, it won't always exist. But we'll want to know the value when it does. We'll begin with a useful note: if \(f\) vanishes outside of a compact subset \(C\) of \(A\), then in fact \(f\) \textit{is} integrable on \(C\) (since we can put that compact subset in a big rectangle and multiply by the characteristic function). In fact, we can say that \(f\) is integrable on any bounded open subset \(U\) of \(A\) containing \(C\), for the same reason, and
+\begin{equation}
+  \int_Uf = \int_Cf
+\end{equation}
+So it makes sense to say
+\begin{equation}
+  \int_Af = \int_Cf
+  \label{conventioncompact}
+\end{equation}
+This is going to be our starting point. Now to go further, we're going to talk about a partition of unity. Let \(\mc{O}\) be an open cover of \(A\) such that \(U \subset A\) for all \(U \in \mc{O}\) and let \(\Phi\) be a partitionof unity for \(A\) subordinate to \(\mc{O}\). Note that this is the same as saying let \(\Phi\) be a partition of unity for \(A\) subordinate to \(\{A\}\), since that counts as an open covering of \(A\). As in equation \ref{conventioncompact},
+we can define, \(\forall \varphi \in \Phi\),
+\begin{equation}
+  \int_A\varphi|f|
+\end{equation}
+We can now extend the definition of the integral as follows:
+\begin{definition}
+  \(f\) is \underline{integrable} on \(A\) if
+  \begin{equation}
+    \sum_{\varphi \in \Phi}\int_A\varphi|f|
+    \label{absolute}
+  \end{equation}
+  converges. Then we define
+  \begin{equation}
+    \int_Af = \sum_{\varphi \in \Phi}\varphi f
+    \label{relative}
+  \end{equation}
+\end{definition}
+Note that equation \ref{relative} must converge, and in fact converges absolutely, if equation \ref{absolute} converges, because
+\begin{equation}
+  \sum_{\varphi \in \Phi}\left|\int_A\varphi f\right| \leq \sum_{\varphi \in \Phi}\int_A|\varphi||f| = \sum_{\varphi \in \Phi}\int_A\varphi f
+\end{equation}
+since \(\varphi\) is nonnegative.
+\begin{theorem}
+  Suppose \(A \subset \reals\) is open, \(f: A \to \reals\) is locally bounded and the set of discontinuities of \(f\) has measure 0.
+  \begin{enumerate}
+
+    \item Given partitions \(\Phi, \Psi\) as above, not necessarily subordinate to the same open covering, though this doesn't matter since both will be subordinate to \(\{A\}\), then if equation \ref{absolute} converges for \(\Phi\), then it converges for \(\Psi\) and the integral defined using \(\Phi\) and the integral defined using \(\Psi\) are equal, i.e.
+    \begin{equation}
+      \sum_{\psi \in \Psi}\int_A\psi f = \sum_{\varphi \in \Phi}\int_A\varphi f
+      \label{integralequal}
+    \end{equation}
+    Note that equation \ref{integralequal} would not necessarily be true if equation \ref{absolute} does not converge.
+
+    \item The new definition of the integral \textit{always} exists if both \(A\) and \(f\) are bounded, showing it truly generalizes the old definition. Specificially, if both \(A\) and \(f\) are bounded, whether or not the boundary of \(A\) has measure zero,
+    \begin{equation}
+      \sum_{\varphi \in \Phi}\int_A\varphi|f|
+    \end{equation}
+    (equation \ref{absolute}) converges
+
+    \item If \(A\) is Jordan-measurable and \(f\) is bounded, then
+    \begin{equation}
+      \int_Af = \sum_{\varphi \in \Phi}\int_A\varphi f
+    \end{equation}
+    where the left is as defined before.
+
+  \end{enumerate}
+\end{theorem}
+There are other ways of defining the integral, some of which look more like the improper integral from first year calculus. Another thing that you could do is the following: since you can always write an open set as a kind of ``expanding union'' of compact sets \(C_i \subseteq C_{i + 1}\), you can actually do that in such a way such that each \(C_i\) is Jordan-measurable, meaning the integral on each of these \(C_i\)'s exist. We could then define
+\begin{equation}
+  \int_Af = \lim_{i \to \infty}\int_{C_i}f
+\end{equation}
+After we finish proving this theorem, either I'll prove this or stick it on the next problem set.
+\begin{proof}
+  \begin{enumerate}
+
+    \item \(\varphi \cdot f\) vanishes outside a compact set, and only finitely many \(\psi\) are nonzero on this set. So
+    \begin{equation}
+      \sum_{\psi \in \Psi}\psi = 1
+      \implies \sum_{\varphi \in \Phi}\int_A\varphi f
+      = \sum_{\varphi \in \Phi}\int_A\left(\sum_{\psi \in \Psi}\psi\right)\varphi f
+      = \sum_{\varphi \in \Phi}\sum_{\psi \in \Psi}\int_A\varphi\psi f
+    \end{equation}
+    A priori, we don't know that we can interchange the order in the double sum of the last equal expression, but we could write down exactly the same stuff with the absolute value in it, which tells us we can. Interchanging them, we get the desired result.
+
+    \item Let \(B\) be a big rectangle containing \(A\), and assume \(|f| \leq M\) on \(A\). For any finite subset \(F\) of \(\Phi\),
+    \begin{equation}
+      \sum_{\varphi \in F}\int_A\varphi|f| \leq M\int_A\sum_{\varphi \in F}\varphi \leq MV(B)
+    \end{equation}
+    implying the desired result. We still have to show that in the situation that \(\int_Af\) is defined according to our earlier definition, we get the same result. We'll do so next time.
+
+  \end{enumerate}
+\end{proof}
+
 \TODO{rest}
 
 \subsection{Change of Variables}
