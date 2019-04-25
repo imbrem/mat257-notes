@@ -280,7 +280,90 @@ We went through the proof of this before, but I want to use it to compute some e
 
 \subsection{Partitions of Unity}
 
-\TODO{this}
+
+\subsubsection{Bump Functions}
+
+A bump function, in the one dimensional case, is a function which goes up to 1 from 0, stays there for a while, and then returns to zero. But we're interested in doing this in \(n\)-dimensions. How? Given an open \(U \subset \reals^n\), and compact \(C \subset U\), we want to construct a \(\mc{C}^\infty\) function \(f: U \to \reals\) with \(0 \leq f \leq 1\) such that \(\forall x \in C, f(x) = 1\) and \(f(x) = 0\) outside some compact subset of \(U\). So it looks like the 1-dimensional bump function, except over an \(n\)-dimensional area \(C\).
+
+How can we construct such a function? We'll do it as a kind of series of exercises, based on one particular function, which you can imagine ought to be the kind of thing that you have to build this function, that is,
+\begin{equation}
+  f(x) = \left\{\begin{array}{ccc}
+    e^{1/x^2} & \text{if} & x \neq 0 \\
+    0 & \text{if} & x = 0
+  \end{array}\right.
+  \label{bumpbuild}
+\end{equation}
+We proceed as follows, building up by steps:
+\begin{enumerate}
+
+  \item There is a \(\mc{C}^\infty\) function \(g: \reals \to \reals\) such that \(g > 0\) on \((-1, 1)\), 0 elsewhere. It's easy to write down a formula for such a function using the function given in \ref{bumpbuild}, as follows:
+  \begin{equation}
+    g(x) = \left\{\begin{array}{ccc}
+      e^{-\frac{1}{(x - 1)^2}}e^{-\frac{1}{(x + 1)^2}} & \text{if} & x \in (-1, 1) \\
+      0 & \text{if} & x \notin (-1, 1)
+    \end{array}\right.
+    \label{g}
+  \end{equation}
+  This works because \(e^{-\frac{1}{(x - 1)^2}}\) becomes completely flat at \(x = 1\), whereas \(e^{-\frac{1}{(x + 1)^2}}\) becomes completely flat at \(x = -1\).
+
+  \item Given \(a \in \reals^n, \delta > 0\), there is a \(C^\infty\) function \(g_{a, \delta}: \reals^n \to \reals\) such that
+  \begin{equation}
+    g_{a, \delta} > 0 \text{ on } |x - a| < \delta, g_{a, \delta} = 0 \text{ outside}
+  \end{equation}
+  So how could achieve this? We could use the function defined in \ref{g} to write
+  \begin{equation}
+    g_{a, \delta} = g\left(\frac{|x - a|^2}{\delta^2}\right)
+  \end{equation}
+
+  \item There is a \(\mc{C}^\infty\) function \(h: U \to \reals\) such that \(h\) is greater than 0 on \(C\) and \(h = 0\) outside a compact subset of \(U\). So how do we do this?
+
+  We could cover \(C\) with a finite set of open balls \(U_1,...,U_k\) with centers \(a_1,...,a_k\) and radii \(\delta_1,...,\delta_k\) whose closures lie in \(U\). We can do this since \(C\) is compact. Once we do this, we can define quite simply
+  \begin{equation}
+    h(x) = \sum_{i = 1}^kg_{a_k, \delta_k}(x)
+    \label{compactsum}
+  \end{equation}
+
+  \item As a fourth thing, going back to the real line, let's show that if we're given any \(\epsilon \in \reals^+\), we can find a \(\mc{C}^\infty\) function \(\psi_\epsilon\) which is zero up to 0, becomes 1 at \(\epsilon\), and then remains 1 forever after. How can we do this from what we've already done? We're going to do it starting with a \(\mc{C}^\infty\) function like that in equation \ref{g}, but instead of on \((-1, 1)\), on \((0, \epsilon)\). More generally, actually, we can use any function \(g\) such that \(g > 0\) on \((0, \epsilon)\) and is zero outside. We can then define \(\psi_\epsilon\) by
+  \begin{equation}
+    \psi_\epsilon(x) = \frac{\int_0^xg}{\int_0^\epsilon g}
+    \label{riseup}
+  \end{equation}
+
+  \item Now, putting everything together, how can we define the bump function that we wanted to begin with? We begin with the function \(h\) as defined in equation \ref{compactsum}, and we're going to modify it using equation \ref{riseup} as follows: letting \(\epsilon = \min_Ch > 0\), which exists since \(C\) is compact, let
+  \begin{equation}
+    f(x) = \psi_\epsilon \circ h
+  \end{equation}
+
+\end{enumerate}
+
+Now there are other ways of doing it. One of them is to write down one integral formula from the beginning, but it would be harderto see just where this formula comes from in the first place. We can now get to defining partitions of unity:
+\begin{theorem}
+  Given \(A \subset \reals^n\) and an open cover \(\mc{O}\) of \(A\), there is a countable collection \(\Phi\) of \(\mc{C}^\infty\) functions \(\varphi\) on \(\reals^n\) with the following properties:
+  \begin{enumerate}
+
+    \item \(0 \leq \varphi \leq 1\)
+
+    \item For all \(x \in A\), there is an open neighborhood \(V_x\) of \(x\) in \(\reals^n\) such that all but finitely many \(\varphi\) vanish on \(V_x\)
+
+    \item For all \(x \in A\), \(\sum_{\varphi \in \Phi}\varphi(x) = 1\) (sum is finite in a neighborhood of \(x\))
+
+    \item For all \(\varphi in \Phi\), there is some open \(U \in \mc{O}\) such that \(\varphi = 0\) outside a compact subset of \(U\).
+
+  \end{enumerate}
+\end{theorem}
+\begin{definition}
+  A collection \(\varphi\) satisfying (1),(2),(3) above is called a \underline{\(\mc{C}^\infty\) partition for \(A\)}. If (4) holds, this partition is called \underline{subordinate to \(\mc{O}\)}
+\end{definition}
+This is all \(\mc{C}^\infty\) stuff, but we could have made something weaker. We could have asked for a \(\mc{C}^r\) partition, or even a partition that was merely continous. So suppose we did that, and only cared about a \(\mc{C}^0\) partition. Then, we could also, though the proof will have to come next time, we could use functions that look like trapezoids, using \(|x|\) instead of \(e^{-\frac{1}{x^2}}\). If we wanted a \(\mc{C}^r\) partition of unity, then of course, we could do the same thing, but only caring about \(\mc{C}^r\) instead of \(\mc{C}^\infty\), and hence using the function given by
+\begin{equation}
+  f(x) = \left\{\begin{array}{ccc}
+    |x^{r + 1}| & \text{on} & [0, \infty) \\
+    -|x^{r + 1}| & \text{on} & (-\infty, 0]
+  \end{array}\right.
+\end{equation}
+
+
+\TODO{rest}
 
 \subsection{Change of Variables}
 
