@@ -917,7 +917,92 @@ To complete the proof, we use induction on \(n\):
 
   So we have to prove the theorem for \(h\) and for \(k\). The proof is going to be the same for both cases, so let's do it for the harder case, \(h\), which changes \(n - 1\) coordinates (versus \(k\), which changes only one).
 
-  We're going to use Fubini's theorem: we'll integrate with respect to \(x_n\). Next time...
+  We're going to use Fubini's theorem: we'll integrate with respect to \(x_n\). We've previously found that it's enough to show that, for every \(a \in A\), there is a Jordan measurable open neighborhood \(U\) of \(a\) with closure \(A\) so that the result is true on \(U\) in the case where we are integrating the function \(f = 1\). Furthermore, we have shown that we can assume that \(g'(a) = I\). We also expressed \(g\) as a composite of two functions, each of which changes fewer than \(n\) variables. More precisely, we wrote
+  \begin{equation}
+    g = (x \mapsto  (g_1(x),...,g_{n - 1}(x), x_n)) \circ (y \mapsto (y_1,...,y_{n - 1},g_n(h^{-1}(y))))
+  \end{equation}
+  We will proceed by induction, using the single variable case as a base case.
+
+  We can work with any Jordan-measurable open neighborhood of \(a\), so let's work with an open rectangle. Consider specifically an open rectangle \(W\) containing \(a\) with closure in \(A\). Since we're separating one coordinate from the other \(n - 1\) coordinates, let's write \(W\) as \(D \times (a_n, b_n)\) where \(D\) is an open rectangle in \(\reals^{n - 1}\). Note that the transformation \(h\) does not change the \(n^{th}\) coordinate of it's input. Using this, we can consider the following:
+  \begin{equation}
+    \int_{h(W)}1
+  \end{equation}
+  For a fixed \(x_n\), let's consider the function given by \(h\), depending only on \(1,...,n - 1\), written
+  \begin{equation}
+    h_{x_n} : D \to \reals^{n - 1},
+    h_{x_n}(x_1,...,x_{n - 1})(g_1(x_1,...,x_n),...,g_{n - 1}(x_1,...,x_n))
+  \end{equation}
+  This function is one to one, since we know that \(h\) is one to one, and \(h\) is just \(h_{x_n}\) with \(x_n\) appended (for each \(x_n\)), so two different values at a given \(x_n\) have got to go into different points. On the other hand, what is the determinant
+  \begin{equation}
+    (\det h'_{x_n})(x_1,...,x_{n - 1})
+  \end{equation}
+  Well, it's the same as the determinant of \(h'\), since the last row of \(h'\) is just the standard vector \(e_n\). So let's go back: first of all,
+  \begin{equation}
+    h(D \times \{x_n\}) = h_{x_n}(D) \times \{x_n\}
+  \end{equation}
+  since, like we said before, the \(n^{th}\) coordinate is unaffected. So we can proceed using Fubini's theorem,:
+  \begin{equation}
+    \int_{a_n}^{b_n}\left(\int_{h_{x_n}(D)}1\right)dx_n
+  \end{equation}
+  By induction, this is equal to
+  \begin{equation}
+    \int_{a_n}^{b_n}\int_D1|\det h'_{x_n}| = \int_{a_n}^{b_n}\int_D|\det h'| = \int_{D \times [a_n, b_n]}1 \cdot |\det h'| = \int_W 1 \cdot |\det h'|
+  \end{equation}
+  By strong induction, the theorem is also true for \(k\), giving the desired result.
+
+  Now that we finished this, what to do? We've been talking about the integral on \(\reals^n\). In the rest of the course, we're going to be talking about the integral but on a manifold.
+
+  \section{Integration on a Manifold}
+
+  We haven't talked about manifolds for a while, but I hope you can remember how to imagine one because I'm too lazy to {\LaTeX} one. So what's the point of integrating on our imaginary manifold picture? We know how to integrate on a line, and how to integrate now in \(\reals^n\), and in both cases we're integrating with some notion of \(n\)-dimensional volume. But now, on our \(k\)-dimensional manifold, we're going to have to try to figure out how to integrate using a \(k\)-dimensional measure of volume on it, which is nontrivial.
+
+  Another reason is the following: if we go back to one dimensional calculus, and we want to compue the integral of some function \(f\) from \(a\) to \(b\), the very important and aptly named Fundamental Theorem of Calculus tells us that if \(f\) has a primitive \(g\) it's integral is very easy to compute:
+  \begin{equation}
+    \int_a^bf = g(b) - g(a)
+  \end{equation}
+  We want to try to do the same thing with a manifold: generalize the fundamental theory of calculus to relate the integral of a function on the manifold to the integral of a function on the boundary. But what sense does that make? A function on a manifold, unlike that on a line, depends on many variables. So we don't have a notion of primitive like in single variable calculus, since an \(n\) dimensional function has many partial derivatives.
+
+  So those are the two things we're going to have to understand to get started:
+  \begin{itemize}
+    \item What is this \(k\) dimensional measure of volume?
+    \item What is the appropriate notion of a primitive?
+  \end{itemize}
+  But before that, we're going to do a bit of motivation, and consider the case of a one-dimensional manifold, or as you know it, a curve:
+
+  \subsection{Case of a Parametrized Curve \(C\) in \(\reals^n\)}
+
+  So what does that mean, a parametrized curve? It means \(C\) is the image of a mapping
+  \begin{equation}
+    \gamma : [a, b] \to \reals^n
+  \end{equation}
+  We could write, for example, \(x = \gamma(t)\). We're going to assume that our curves define something almost like a manifold, except we're going to allow that the curves cross each other. So assume that \(\gamma\) is \underline{piecewise \(\mc{C}^1\)}. What this means is, except for some finite number of points (since we're working on a compact interval), it's \(\mc{C}^1\). Furthermore, we assume that except for isolated points, \(\gamma' \neq 0\) and \(\gamma\) is one to one.
+  We don't want to allow, for example,
+  \begin{equation}
+    \gamma(t): [0, 3\pi] \to \reals^2 = t \mapsto (\cos t, \sin t)
+  \end{equation}
+  since we don't want a whole big region (in this case a semicircle) where \(\gamma\) overlaps itself.
+
+  So the first item of business is: what's the measure of volume on such a curve? Length, of course. Arc length, specifically. We have that
+  \begin{equation}
+    \ell(C) = \int_a^b|\gamma'(t)|dt
+  \end{equation}
+  We're not assuming that people have seen this before, so the question is, why? Let's deal with length in a more concrete, geometric way. How can you do that? In the same way that you define the integral: you try to approximate by something that is easy to compute. So one good way to approximate length is to divide up the integral into a partition and look at the corresponding line segments: we define length as the supremum of the length of polygonal approximations to the curve.
+
+  Let's let \(P = \{t_0,t_1,...,t_k\}\) be a partition of \([a, b]\), and let \(\ell_P(C)\) be the length of the associated polygonal approximation:
+  \begin{equation}
+    \ell_p(C) = \sum_{j = 1}^k|\gamma(t_j) - \gamma(t_{j - 1})|
+  \end{equation}
+  We'll say that the curve has length if the supremum of these things exists, and we'll define it as the length. Formally,
+  \begin{definition}
+    The curve \(C\) is \underline{rectifiable} if
+    \begin{equation}
+      \sup_P\ell_P(C)
+      \label{lensupremum}
+    \end{equation}
+    exists, in which case we define \ref{lensupremum} it to be the \underline{length} of \(C\), written \(\ell_P(C)\).
+  \end{definition}
+  Here's a brief homework exercise: prove that if \(\gamma\) is piecewise \(\mc{C}^1\), then \(C\) is rectifiable and \(\ell(C)\) is given by equation \ref{lensupremum}. This is a first year calculus exercise using Riemann sums (I think it's in Spivak), so it shouldn't be too hard.
+
 \end{itemize}
 
 
