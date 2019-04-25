@@ -86,7 +86,36 @@ This document is a collection of notes for the course MAT257: Analysis II, as ta
 
 \subsection{Extremum Problems}
 
-\TODO{this}
+
+We're going to be considering functions, for open sets \(U \subseteq \reals^n\),
+\[f: U \to \reals\]
+If \(f\) has a local maximum or minimum at a point \(a\) where
+\[\prt{f}{x_i}(a)\]
+exists, then it must be zero. This is true because the partial derivative is just the derivative along a one-dimensional subspace: a line. That is,
+\[\prt{f}{x_i}(a) = g_i'(0) = 0, g_i(t) = f(a + t\mb{e}_i)\]
+If \(f\) is differentiable at \(a\), what is the direction of maximum increase (we could also ask for decrease) of \(f\) at \(a\)? It's the direction of the gradient, which I guess is what's called the gradient. Why is this? If we want to look at the increase of \(f\) in a particular direction, we have to look at the value of the directional derivative of \(f\) in that particular direction. We we want to maximize
+\[D_{\mb{e}}f(a) = Df(a)(e) = \ip{\grad{f(a)}}{\mb{e}}\]
+for some unit vector \(\mb{e}\). In general, of course, what is this inner product? It's
+\[|\mb{e}||\grad f(a)|\cos\theta = |\grad f(a)|\cos\theta\]
+This, of course, is maximized when \(\theta = 0\), i.e. \(\mb{e}\) points in the direction of \(\grad f(a)\).
+
+What about the converse: does a point where the derivative is zero imply an extremum. Here, just like in first year, this is false, however, in this case, the converse is false \textit{even} assuming \(g_i''(0) \neq 0\). For example, consider
+\[f(x, y) = x^2 - y^2\]
+This graph is ``saddle shaped''. The second derivative with respect to both \(x\) and \(y\) are nonzero at the origin, the first partial derivatives are zero, and yet we have neither a local maximum or a minimum: in fact, we have a maximum in the \(y\) direction and a minimum in the \(x\) direction!
+
+Let's do an example: consider an acute angled triangle with vetices \(P_i = (x_i, y_i)\). Find a fourth point \(P = (x, y)\) such that the sum of distances to each \(P_i\) is as small as possible. We have
+\[f(x, y) = r_1 + r_2 + r_3\]
+where
+\[r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\]
+One thing that's we can see is that there \textit{is} a minimum, and it occurs on a closed disk whose boundary contains \(P_i\). \(f\) is differentiable except at \(P_i\), but the minimum can't occur at \(P_i\), since the triangle is acute, implying we can take the intersection of an edge and the perpendicular from a vertex and get a smaller value for \(f\). This isn't the only place where we'll use the fact that the triangle is acute angled, however.
+
+So we know the maximum must occur at a critical point. At a critical point:
+\[\prt{f}{x} = \frac{x - x_1}{r_1} + \frac{x - x_2}{r_2} + \frac{x - x_3}{r_3} = 0\]
+\[\prt{f}{y} = \frac{y - y_1}{r_1} + \frac{y - y_2}{r_2} + \frac{y - y_3}{r_3} = 0\]
+i.e. if
+\[u_i = \left(\frac{x - x_i}{r_i}, \frac{y - y_i}{r_i}\right), u_1 + u_2 + u_3 = 0\]
+
+\TODO{rest}
 
 \subsection{Multivariate Taylor Series}
 
