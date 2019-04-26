@@ -2907,7 +2907,17 @@ as expected. For \(k = 0\), by our convention that a \(0\) form \(\omega\) is a 
 
 \subsubsection{Stokes' Theorem for \(k\)-chains}
 
+\begin{theorem}[Stoke's Theorem]
 
+Let \(\omega\) be a \(\mc{C}^1\) \(k - 1\) form on an open subset \(A\) of \(\reals^n\) and \(c\) be a \(k\)-chain in \(A\) (which is at least \(\mc{C}^1\)). Then
+\begin{equation}
+  \int_cd\omega = \int_{dc}\omega
+\end{equation}
+
+\end{theorem}
+\begin{proof}
+  \TODO{this}
+\end{proof}
 
 Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point I left off last time.
 
@@ -3131,7 +3141,7 @@ As a mapping, \(c\) is orientation preserving if and only if \(\xi\) is orientat
   \begin{equation}
     (f \circ g)|\det g'|dx_1 \wedge ... \wedge dx_k = \int_{c_1}\omega
   \end{equation}
-  as desired. TODO: check
+  as desired. \TODO{check}
 
 \end{proof}
 We now want to define the integral of a form over a manifold:
