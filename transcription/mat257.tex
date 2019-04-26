@@ -2808,7 +2808,106 @@ is indepenent of the choice of (orientation preserving) parametrization \(\gamma
   \int_{\Gamma}\omega
 \end{equation}
 
-\subsection{Integral of a \(k\)-form over a \(k\)-cube}
+\subsection{Integral of a \(k\)-form over a \(k\)-chain}
+
+\subsubsection{\(k\)-cubes and \(k\)-chains}
+
+Let \(A \subseteq \reals^n\) be open.
+
+\begin{definition}
+  A \underline{singular \(k\)-cube} in \(A\) is a continuous function
+  \begin{equation}
+    c: [0, 1]^k \to A
+  \end{equation}
+\end{definition}
+Note we assume the convention that \([0, 1]^0 = \reals^0 = \{0\}\), i.e. a 0-cube in \(A\) is a point \(a \in A\). One example of a \(k\)-cube is the \underline{standard \(k\)-cube}
+\begin{equation}
+  I^k: [0, 1]^k \to \reals^k
+\end{equation}
+given by the identity function.
+\begin{definition}
+  A \underline{\(k\)-chain} is a formal sum of singular \(k\)-cubes, i.e. \(3c_1 + 4c_2 + c_3\)
+\end{definition}
+\(k\)-chains can be added, and multiplied by integes.
+A \(k\)-chain \(c\) yields a \(k - 1\) chain \(\partial c\), the \underline{boundary of \(c\)}
+Let's try to compute \(\partial I^k\). The \underline{faces} of \(I^k\) are singluar \(k - 1\) cubes
+\begin{equation}
+  I_{(i, 0)}^k,....,I^k_{i, 1} \text{ for } i = 1,...,k
+\end{equation}
+given by
+\begin{equation}
+\begin{split}
+  I^k_{(i, 0)}(x) = I^k(x_1,...,x_{i - 1},0,x_i,...,x_{k - 1}) = (x_1,...,x_{i - 1},0,x_i,...,x_{k - 1}) \\
+  I^k_{(i, 1)}(x) = I^k(x_1,...,x_{i - 1},1,x_i,...,x_{k - 1}) = (x_1,...,x_{i - 1},1,x_i,...,x_{k - 1})
+\end{split}
+\end{equation}
+for \(x = (x_1,...,x_{k - 1}) \in \reals^{k - 1}\).
+\begin{definition}
+  We define
+  \begin{equation}
+    \partial I^k = \sum_{i = 1}^k\sum_{\alpha = 0, 1}(-i)^{i + \alpha}I^k_{(i, \alpha)}
+  \end{equation}
+\end{definition}
+\begin{definition}
+  For a general singular \(k\)-cube \(c: [0, 1]^k \to A\), we define the \underline{\((i, \alpha)\)-face} to be
+  \begin{equation}
+    c_{(i, \alpha)} = c \circ I^k_{(i, \alpha)}
+  \end{equation}
+  and define the \underline{boundary}
+  \begin{equation}
+    \partial c = \sum_{i = 1}^k\sum_{\alpha = 0, 1}(-1)^{i + \alpha}c_{(i, \alpha)}
+  \end{equation}
+\end{definition}
+\begin{definition}
+  The \underline{boundary of a \(k\)-chain} is given by
+  \begin{equation}
+    \partial\left(\sum a_ic_i \right) = \sum a_i\partial c_i
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  \(\partial^2 = 0\), i.e. if \(c\) is a \(k\)-chain in \(A\) then \(\partial(\partial c) = 0\)
+\end{proposition}
+\begin{proof}
+  Calculation. We won't use this property.
+\end{proof}
+Note that the converse is false: if \(\partial c = 0\), in general there is no \(k\)-chain \(d\) such that \(c = \partial d\).
+
+\subsubsection{Integration}
+
+From now on, we will assume that all singular \(k\)-cubes are at least \(\mc{C}^1\). Assume \(\omega\) is a \(k\)-form on \([0, 1]^k \subset \reals^k\) such that
+\begin{equation}
+  \omega = fdx_1 \wedge ... \wedge dx_k
+\end{equation}
+Note that \(f\) is unique here.
+\begin{definition}
+  Define
+  \begin{equation}
+    \int_{[0, 1]^k}\omega = \int_{[0, 1]^k}f
+  \end{equation}
+  i.e.
+  \begin{equation}
+    \int_{[0, 1]^k}f dx_1 \wedge ... \wedge dx_n = \int_{[0, 1]^k}f(x_1,...,x_n)dx_1...dx_n
+  \end{equation}
+\end{definition}
+We now generalize to arbitrary \(k\)-cubes:
+\begin{definition}
+  Assume \(\omega\) is a \(k\)-form on \(A \subseteq \reals^n\), and \(c\) is a singular \(k\)-cube in \(A\). Define
+  \begin{equation}
+    \int_c\omega = \int_{[0, 1]^k}c^*\omega
+  \end{equation}
+\end{definition}
+For example, this gives
+\begin{equation}
+  \int_{I^k}fdx_1 \wedge ... \wedge x_k = \int_{[0, 1]^k}(I^k)^*(f dx_1 \wedge ... \wedge dx_k) = \int_{[0, 1]^k}f(x_1,...,x_k)dx_1...dx_k
+\end{equation}
+as expected. For \(k = 0\), by our convention that a \(0\) form \(\omega\) is a function and \(c: \{0\} \to A\) is a signular 0-cube,
+\begin{equation}
+  \int_c\omega = \omega(c(0))
+\end{equation}
+
+\subsubsection{Stokes' Theorem for \(k\)-chains}
+
+
 
 Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point I left off last time.
 
