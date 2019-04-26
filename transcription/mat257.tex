@@ -2919,9 +2919,15 @@ Let \(\omega\) be a \(\mc{C}^1\) \(k - 1\) form on an open subset \(A\) of \(\re
   \TODO{this}
 \end{proof}
 
-Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point I left off last time.
+\TODO{compare}
+
+\subsubsection{Example: Asteroid}
+
+\TODO{this}
 
 \subsubsection{Independence of Parametrization}
+
+Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point about integration over \(k\)-chains.
 
 Let's say \(c\) is a \(\mc{C}^1\) singular \(k\)-cube in \(\reals^n\), and we want to look at a re-parametrization, i.e. a map
 \begin{equation}
@@ -3043,7 +3049,7 @@ We used this to conclude that \(\varphi^*\) is \(\mc{C}^r\) if and only if \(\ps
   So we can just call this \(d\omega\).
 \end{proof}
 
-\subsubsection{Orientiation of a sumbanifold \(M\) of \(\reals^n\)}
+\subsubsection{Orientation of a sumbanifold \(M\) of \(\reals^n\)}
 means there is a \underline{consistent} orientiation \(\mu_x\) on every tangent space \(M_x \subset \reals^k\). This means for every coordinate system \(\varphi: W \to \reals^n\), any two points \(a, b \in W\),
 \begin{equation}
   [\varphi_{*a}(e_{1,a}),...,\varphi_{*a}(e_{k,a})] = \mu_{\varphi(a)} \iff [\varphi_{*b}(e_{1,b}),...,\varphi_{*b}(e_{k,b})] = \mu_{\varphi(b)}]
@@ -3072,12 +3078,74 @@ If \(M\) is orientable, then a particular choice of consistent orientations \(\m
 Let's now look at an example: the Möbius strip is \underline{not} orientable:s
 \begin{proof} (Sketch): consider an orientation at one point along the strip. Move it along the strip until it returns back to where it started. Now it's reversed, so we have an inconsistency.
 \end{proof}
-Obviously, this is not very rigorous, but we'll look at another approach next time.
-
+Obviously, this is not very rigorous, but we'll look at another approach later.
 
 \subsection{Manifolds with Boundary}
 
-\TODO{this}
+Recall the definition of a manifold with boundary.  Note that \((\partial M)_x\) is a \((k - 1)\)-dimensional subspace of \(M_x\).
+
+As we can see, the definitions for vector fields, forms, and orientations all make sense in this new context. There are furthermore 2 unit vectors in \(M_x\) perpendicular to \((\partial M)_x\) (pointing in exactly opposite directions). Let
+\begin{equation}
+  \varphi: W \cap \hlfspc^k \to \reals^n
+\end{equation}
+be a coordinate system for \(M\), where \(W \subseteq \reals^k\), and assume
+\begin{equation}
+  \varphi(a) = x \in \partial M
+\end{equation}
+Then exactly one of these unit vectors is
+\begin{equation}
+  \varphi_{(*, a)}(v_a), v_a \in \reals^k_a, v_a^k < 0
+\end{equation}
+\begin{definition}
+  We define this vector to be the \underline{outward unit normal} at \(x\), \(n(x)\)
+  \label{def:outwardnormal}
+\end{definition}
+Note that this definition is independent of the coordinate system chosen.
+
+Suppose now \(\mu\) is an orientation of a \(k\)-dimensional manifold with boundary \(M\).
+\begin{definition}
+  The \underline{induced orientation} of \(\partial M\) is given by, for each \(a \in \partial M\), choosing
+  \begin{equation}
+    v_1,...,v_{k - 1} \in (\partial M)_a
+  \end{equation}
+  such that
+  \begin{equation}
+    [n(a), v_1,...,v_{k - 1}] = \mu_a
+  \end{equation}
+
+  Note that
+  \begin{equation}
+    [n(a), w_1,...,w_{k - 1}] = \mu_a \implies [w_1,...,w_{k - 1}] = [v_1,...,v_{k - 1}]
+  \end{equation}
+  i.e. the two are the same orientations of \((\partial M)_a\). Call this orientation \((\partial\mu)_a\).
+\end{definition}
+We can show that choosing the orientation \((\partial\mu)_a\) for each \(a \in \partial M\) gives a consistent orientation on \(\partial M\). That is,
+\begin{proposition}
+  If \(M\) is orientable, then \(\partial M\) is orientable and the orientation \(\mu\) of \(M\) determines the orientation \(\partial\mu\) for \(\partial M\)
+\end{proposition}
+
+\subsubsection{Examples}
+
+\begin{enumerate}
+
+  \item \(\hlfspc^k\) with the usual orientation:
+
+  \TODO{this}
+
+  \item The standard \(k\)-cube \(I^k: [0, 1]^k \to [0, 1]^k \subset \reals^k\):
+
+  \TODO{this}
+
+\end{enumerate}
+
+\subsubsection{Outward Normals for Manifolds}
+
+We remark briefly that for an oriented \((n - 1)\)-dimensional manifold \(M\) in \(\reals^n\), an analogue of the outward normal can be defined, although \(M\) need not be the body of a manifold. If \(M\) \textit{is} the body of a manifold, however, we can show that the outward normal we derive agrees with Definition \ref{def:outwardnormal} above.
+
+Specifically, choose \(n(x) \bot M_x\) such that if \([v_1,...,v_{n - 1}] = \mu_x\), then \([n(x), v_1,...,v_{n - 1}]\) is the usual orientation of \(\reals^n\).
+Conversely, if we have a certain normal \(n(x)\) defined on \(M\), we can determine an orientation of \(M\).
+
+\TODO{Mobius strip impossible}.
 
 \subsection{Stoke's Theorem on Manifolds}
 
