@@ -3394,16 +3394,50 @@ Let's look at some examples:
   \begin{equation}
     \varphi^*dV = h(x)dx_1 \wedge ... \wedge dx_k
   \end{equation}
-  How do we compute \(h(x)\). It's:
+  How do we compute \(h(x)\)? It's:
   \begin{equation}
     (\varphi^*dV)(x)(e_{1,x},...,e_{k,x})
   \end{equation}
+
+  \TODO{finish}
+
+  \item \TODO{this}
 
 \end{enumerate}
 
 \subsubsection{The Volume Element of an Oriented Surface in \(\reals^3\)}
 
-\TODO{this}
+\begin{proposition}
+Let \(M\) be an oriented surface in \(\reals^3\) and \(n(x) = (n_1, n_2, n_3)\) be the unit outward normal at \(x \in M\). Then
+\begin{equation}
+  dA = n_1 dy \wedge dz + n_2 dz \wedge dx + n_3 dx \wedge dy
+\end{equation}
+Moreover,
+\begin{equation}
+  n_1dA = dy \wedge dz, n_2dA = dz \wedge dx, n_3dA = dx \wedge dy
+\end{equation}
+\end{proposition}
+\begin{proof}
+  \TODO{this}
+\end{proof}
+Example:
+
+\TODO{copy example}
+
+We can generalize this with the following lemma:
+\begin{lemma}
+  Let \(M\) be an oriented hypersurface on \(\reals^n\) (with or without boundary) and \(n(x)\) be its outward unit normal. Then
+  \begin{equation}
+    dV = \sum_{i = 1}^n(-1)^{i - 1}n_i dx_1 \wedge ... \wedge dx_{i - 1} \wedge dx_{i + 1} \wedge ... \wedge dx_n
+  \end{equation}
+  Moreover,
+  \begin{equation}
+    \forall i, n_idV = (-1)^{i - 1}dx_1 \wedge ... \wedge dx_{i - 1} \wedge dx_{i + 1} \wedge ... \wedge dx_n
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  \TODO{this}
+\end{proof}
 
 \subsubsection{Gauss's Theorem}
 
