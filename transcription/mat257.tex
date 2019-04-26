@@ -2728,8 +2728,6 @@ The differential operator \(d\) takes \(k\)-forms to \(k + 1\)-forms, generalizi
   \TODO{this}
 \end{proof}
 
-\TODO{rest}
-
 \section{Integration on Manifolds}
 
 We haven't talked about manifolds for a while, but I hope you can remember how to imagine one because I'm too lazy to {\LaTeX} one. So what's the point of integrating on our imaginary manifold picture? We know how to integrate on a line, and how to integrate now in \(\reals^n\), and in both cases we're integrating with some notion of \(n\)-dimensional volume. But now, on our \(k\)-dimensional manifold, we're going to have to try to figure out how to integrate using a \(k\)-dimensional measure of volume on it, which is nontrivial.
@@ -2780,6 +2778,35 @@ We'll say that the curve has length if the supremum of these things exists, and 
   exists, in which case we define \ref{lensupremum} it to be the \underline{length} of \(C\), written \(\ell_P(C)\).
 \end{definition}
 Here's a brief homework exercise: prove that if \(\gamma\) is piecewise \(\mc{C}^1\), then \(C\) is rectifiable and \(\ell(C)\) is given by equation \ref{lensupremum}. This is a first year calculus exercise using Riemann sums (I think it's in Spivak), so it shouldn't be too hard.
+
+\subsubsection{Line Integrals with Forms}
+
+More generally, let \(\omega\) be a \(\mc{C}^0\) \(1\)-form on an open subset \(A\) of \(\reals^n\), and let \(\gamma: [0, 1] \to A\) be a \(\mc{C}^1\) curve.
+\begin{definition}
+
+We define the \underline{line integral} of \(\omega\) over the curve \(\gamma\) to be
+\begin{equation}
+  \int_{\gamma}\omega = \int_{[0, 1]}\gamma^*\omega
+\end{equation}
+
+\end{definition}
+Note that
+\begin{equation}
+  \omega = \sum\omega_idx_i \implies \gamma^*\omega = \sum\omega_i(\gamma(t))\gamma_i'(t)dt
+\end{equation}
+for \(\gamma = (\gamma_1,...,\gamma_n)\). If \(\omega\) is exact, i.e.  if we can find \(f\) such that \(\omega = df\), then
+\begin{equation}
+  \int_\gamma df = \int_{[0, 1]}\gamma^*(df) = \int_{[0, 1]}d(\gamma^*(f)) = \int_{[0, 1]}d(f \circ \gamma) = \int_{\partial[0, 1]}f \circ \gamma = f(\gamma(1)) - f(\gamma(0))
+\end{equation}
+
+Clasically, a \underline{piecewise smooth curve} \(\Gamma\) in \(\reals^n\) from \(a\) to \(b\) means the image of continuous \(\gamma: [0, 1] \to \reals^n\) such that \(\gamma(0) = a, \gamma(1) = b\). The value of
+\begin{equation}
+  \int_\gamma\omega
+\end{equation}
+is indepenent of the choice of (orientation preserving) parametrization \(\gamma\) of \(\Gamma\) (by integration by substitution), so we also write it as
+\begin{equation}
+  \int_{\Gamma}\omega
+\end{equation}
 
 \subsection{Integral of a \(k\)-form over a \(k\)-cube}
 
