@@ -2687,6 +2687,49 @@ Let's get to the proof:
   \end{equation}
 \end{proof}
 
+
+\subsection{The Differential Operator}
+
+The differential operator \(d\) takes \(k\)-forms to \(k + 1\)-forms, generalizing the definition for \(df\).
+\begin{definition}
+  For a \(k\)-form
+  \begin{equation}
+    \omega = \sum_{i_1 < ... < i_k}\omega_{i_1,...,i_k}\varphi_{i_1} \wedge ... \wedge \varphi_{i_k} = \sum_{i_1 < ... < i_k}\omega_{i_1,...,i_k}dx_{i_1} \wedge ... \wedge dx_{i_k}
+  \end{equation}
+  we define
+  \begin{equation}
+    d\omega = \sum_{i_1 < ... < i_k}\sum_{\alpha = 1}^n\prt{\omega_{i_1,...,i_k}}{x_\alpha} dx_\alpha \wedge dx_{i_1} \wedge ... \wedge dx_{i_k} = \sum_{i_1 < ... < i_k}d\omega_{i_1,...,i_k} \wedge dx_{i_1} \wedge ... \wedge dx_{i_k}
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  We have that
+  \begin{enumerate}
+
+    \item \(d\) distributes over addition:
+    \begin{equation}
+      d(\omega + \eta) = d\omega + d\eta
+    \end{equation}
+
+    \item For a \(k\)-form \(\omega\) and an \(\ell\)-form \(\eta\),
+    \begin{equation}
+      d(\omega \wedge \eta) = d\omega \wedge \eta + (-1)^k\omega \wedge d\eta
+    \end{equation}
+
+    \item \(d(d\omega) = 0\), i.e. \(d^2 = 0\)
+
+    \item For a \(k\)-form \(\omega\) on \(\reals^p\) and a differentiable function \(f: \reals^n \to \reals^p\),
+    \begin{equation}
+      f^*(d\omega) = d(f^*\omega)
+    \end{equation}
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \TODO{this}
+\end{proof}
+
+\TODO{rest}
+
 \section{Integration on Manifolds}
 
 We haven't talked about manifolds for a while, but I hope you can remember how to imagine one because I'm too lazy to {\LaTeX} one. So what's the point of integrating on our imaginary manifold picture? We know how to integrate on a line, and how to integrate now in \(\reals^n\), and in both cases we're integrating with some notion of \(n\)-dimensional volume. But now, on our \(k\)-dimensional manifold, we're going to have to try to figure out how to integrate using a \(k\)-dimensional measure of volume on it, which is nontrivial.
@@ -2737,10 +2780,6 @@ We'll say that the curve has length if the supremum of these things exists, and 
   exists, in which case we define \ref{lensupremum} it to be the \underline{length} of \(C\), written \(\ell_P(C)\).
 \end{definition}
 Here's a brief homework exercise: prove that if \(\gamma\) is piecewise \(\mc{C}^1\), then \(C\) is rectifiable and \(\ell(C)\) is given by equation \ref{lensupremum}. This is a first year calculus exercise using Riemann sums (I think it's in Spivak), so it shouldn't be too hard.
-
-\subsection{The Differential Operator}
-
-\TODO{this}
 
 \subsection{Integral of a \(k\)-form over a \(k\)-cube}
 
