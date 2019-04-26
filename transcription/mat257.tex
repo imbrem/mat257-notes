@@ -3302,7 +3302,22 @@ So
 
 \subsubsection{Green's Theorem}
 
-\TODO{this}
+We will conclude this discussion by deducing a classical version of Stokes' Theorem: Green's Theorem.
+\begin{theorem}[Green's Theorem]
+  Let \(M \subset \reals^2\) be a compact 2-dimensional manifold with boundary and let \(\alpha, \beta : M \to \reals\) be \(\mc{C}^1\). Then
+  \begin{equation}
+      \int_{\partial M}\alpha dx + \beta dy = \iint_M\left(\prt{\beta}{x} - \prt{\alpha}{y}\right)dxdy
+  \end{equation}
+  \end{theorem}
+\begin{proof}
+  Let \(\omega = \alpha dx + \beta dy\). We have
+  \begin{equation}
+    \int_Md\omega = \int_M\left(\prt{\beta}{x} - \prt{\alpha}{y}\right)dx \wedge dy
+  \end{equation}
+  by Stokes' theore.
+\end{proof}
+
+For the other classical versions, we'll need to figure out how to integrate over \underline{volume}.
 
 \subsection{The Volume Element}
 
