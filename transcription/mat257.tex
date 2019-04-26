@@ -894,7 +894,104 @@ Today, we'll do some example problems regarding Lagrange's method:
 
 \subsection{Multivariate Taylor Series}
 
-\TODO{this}
+
+\subsubsection{Review of Single Variable Taylor Series}
+Recall the definition of the \(n^{th}\) degree Taylor polynomial of \(f\) centered at \(a\)
+\[P_{n, a}(f) = \sum_{k = 0}^n\frac{f^{(k)}(a)}{k!}(x - a)^k\]
+We define \(R_{n, a}\) to be the ``remainder'', the difference between \(P_{n, a}\) and \(f\). We can write this remainder in ``Lagrange form'' as
+\[\frac{f^{(n + 1)}(t)}{(n + 1)!}(x - a)^{n + 1}\]
+Clearly,
+\[\lim_{x \to a}\frac{R_{n, a}(x)}{(x - a)^n} = 0\]
+We can now define the \underline{Taylor series} of \(f\) at \(a\) to be
+\[T_af = \sum_{k = 0}^\infty\frac{f^{(k)}(a)}{k!}(x - a)^k\]
+Why these coefficients?
+Suppose
+\[f(x) = \sum_{k = 0}^\infty a_k(x - a)^k\]
+Note
+\[\frac{d^n}{dx^n}(x - a)^k = \left\{\begin{array}{cc}
+  0 & \text{if } k < n \\
+  k! & \text{if } n = k \\
+  k(k - 1)...(k - n + 1)(x - a)^{k - n} & \text{if } k > n
+\end{array}\right.\]
+
+\subsubsection{Multivariable Case}
+For example: What's your favorite polynomial? Zero? I'm sure you meant something more like
+\[f(x, y, z) = a_{12,8,2}x^{12}y^8z^2 + a_{0,22,0}y^{22} + a_{0,0,1}z + a_{20,20,20}x^{20}y^{20}z^{20}\]
+How to do spot \(a_{12, 8, 2}\)? Apply:
+\[\left.\frac{\partial^{22}f}{\partial x^2 \partial y^8 \partial z^2}\right|_{(x, y, z) = (0, 0, 0)} = a_{12, 8, 2}12!8!2!\]
+In general, if \(f\) is a sum of terms like
+\[a_{\alpha_1,...,\alpha_n}x^{\alpha_1}....x^{\alpha_n}\]
+Then
+\[a_{\alpha_1,...,\alpha_n} = \left.\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\right|_{(x_1,...,x_n) = (0,...,0)}\frac{1}{\alpha_1!...\alpha_n!}\]
+
+\subsubsection{Multi-index notation}
+We're mathematicians here, and what do mathematicians do, we generalize. But we generalize in such a way such that the general case looks like the specialized case so we don't have to remember different notation when teaching first-years and when doing research. Multi-index notation is a prime example. Compare:
+\begin{itemize}
+
+  \item Let \(f: \reals \to \reals\). Then
+  \[f = \sum_{k \in \nats}\frac{1}{k!}f^{(k)}(a)(x - a)^k\]
+
+  \item Let \(f: \reals^n \to \reals\). Then
+  \[f = \sum_{\alpha \in \nats^n}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}}{\partial x^\alpha}(a)(x - a)^\alpha\]
+
+\end{itemize}
+To make this to work, all we have to do is define, for
+\[\alpha = (\alpha_1,...,\alpha_n) \in \nats^n\]
+the notation
+\[\alpha! = \alpha_1!...\alpha_n!\]
+\[|\alpha| = \alpha_1 + ... + \alpha_n\]
+\[\partial x^\alpha = \partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}\]
+\[(x - a)^\alpha = (x_1 - a_1)^{\alpha_1}...(x_n - a_n)^{\alpha_n}\]
+Now, for some examples
+\begin{enumerate}
+
+  \item
+  \[\frac{1}{6!y!}12x^6y^7 = \frac{12}{(6, 7)!}(x, y)^{6, 7}\]
+
+  \item
+  \[x^5 + x^4y + x^3y^2 + ... + y^5 = \sum_{\beta + \gamma = 5}(x, y)^{(\beta, \gamma)} = \sum_{|\alpha| = 5}(x, y)^\alpha\]
+  Note that we're assuming here \(\beta, \gamma\) are non-negative. On good days you can just do what we did above, but if it worries you, write it down.
+
+  \item
+  \[a_{0, 0} + a_{1, 0}x + a_{0, 1}y + a_{1, 1}xy + a_{2, 0}x^2 + a_{0, 2}y^2 = \sum_{|\alpha| \leq 2}a_{\alpha}(x, y)^{\alpha}\]
+
+\end{enumerate}
+
+\subsubsection{Multivariable Taylor Series}
+
+\begin{theorem}
+  If \(f: \reals^n \to \reals\) is \(\mc{C}^{k + 1}\) then
+  \[f(a + h) = \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{x^\alpha}(a)h^\alpha + \sum\_{|\alpha| = k + 1}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a + \theta h)h^\alpha\]
+  where \(\theta \in (0, 1)\)
+\end{theorem}
+\begin{proof}
+  The key idea is
+  \[F(t) = f(a + th)(\text{Old Taylor } + \text{ Chain Rule})\]
+  More rigorously, we know from single variable calculus that
+  \[F(t) = F(0) + \frac{F'(0)}{1!}t + ... + \frac{F^{(k)}(0)}{k!}t^k + \frac{F^{k + 1}(\theta)}{(k + 1)!}t^{k + 1}\]
+  Set \(t = 1\) to get \(F(1) = f(a + h)\).
+  We know \(F(0) = f(a)\). We have
+  \[\left.\frac{dF}{dt}\right|_{t = 0} = \left.\frac{d}{dt}f(a + th)\right|_{t = 0} = \sum_{i = 1}^n\left.\prt{f}{x}(a + th)\right|_{t = 0}\prt{x_i}{t} = \sum_{i = 1}^n\left[\left.\prt{f}{x_i}(a + th)\right|_{t = 0}\right]h_i
+  = \sum_{i = 1}^n\prt{f}{x_i}(a)h_i\]
+  We have
+  \[\left.\frac{d^2F}{dt}\right|_{t = 0} = \sum_{i = 1}^n\left[
+    \sum_{j = 1}^n\frac{\partial^2f}{\partial x_j \partial x_i}(a)h_j
+  \right]h_i\]
+  By the magical process of ...,
+  \[\left.\frac{d^kF}{dt^k}\right|_{t = 0} = \sum_{i_1,...,i_k = 1}^n\frac{\partial^kf}{\partial x_{i_1} ... \partial x_{i_k}}(a)h_{i_1}...h_{i_k}\]
+  Now all we need is some combinatorics, combined with the equality of mixed partials (for \(\mc{C}^{k + 1}\) functions), to complete the proof. Recall the \textit{multinomial coefficient}
+  \[{{|\alpha|} \choose {\alpha_1,...,\alpha_n}} = \frac{|\alpha|!}{\alpha_1!...\alpha_n!}\]
+  is the number of ways of taking \(|\alpha|\) things and making \(k\) groups of size \(\alpha_1,...,\alpha_n\).
+  We can use this to rewrite the above as
+  \[F^{(S)}(0) = \sum_{|\alpha| = S}\frac{S!}{\alpha_1!...\alpha_S!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\]
+  So plugging this into our original expression for the Taylor series of \(F\), where we divide the \(S^{th}\) term by \(\frac{1}{S!}\), we have
+  \[F(t) = F(0) + \sum_{i = 1}^k\sum_{|\alpha| = i}\frac{1}{\alpha_1!...\alpha_k!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha
+  = f(a) + \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\]
+  as desired.
+
+\end{proof}
+
+\TODO{fill in here}
 
 \section{Integration}
 
