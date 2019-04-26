@@ -2592,6 +2592,176 @@ Obviously, this is not very rigorous, but we'll look at another approach next ti
 
 \subsection{Stoke's Theorem on Manifolds}
 
-\TODO{this}
+
+We now want to try to prove the general form of Stokes' theorem:
+\begin{theorem}[Stokes' Theorem]
+
+  Let \(M\) be a compact oriented \(k\)-dimensional manifold with boundary (which is at least
+  \(\mc{C}^2\)) and \(\omega\) be a \((k - 1)\)-form on \(M\) (which is at least \(\mc{C}^1\)). Then
+  \begin{equation}
+    \int_Md\omega = \int_{\partial M}\omega
+    \label{stokes}
+  \end{equation}
+  where \(\partial M\) has induced orientation
+\end{theorem}
+The problem is, the integrals in equation \ref{stokes} are yet to be defined. So that's what we're going to be working up to today.
+Consider a singular \(p\)-cube \(c: [0, 1]^k \to M\) in \(M\). If \(\omega\) is a \(p\)-form on \(M\), then we define
+\begin{equation}
+  \int_c\omega = \int_{[0, 1]^p}c^*\omega
+\end{equation}
+Integrals over \(p\)-chains are defined as before. In the case that \(p = k\) (e.g. in theorem) we'll assume that our \(k\)-cubes \(c:[0, 1]^k \to M\) satisfy the following condition: there is a coordinate chart \(\xi: W \to M\) such that \([0, 1]^k \subset W\) and
+\begin{equation}
+  c = \xi|_{[0, 1]^k}
+\end{equation}
+As a mapping, \(c\) is orientation preserving if and only if \(\xi\) is orientation preserving.
+\begin{lemma}
+  Let \(M\) be an oriented \(k\)-dimensional manifold (with or without boundary), and let \(c_1, c_2: [0, 1]^k \to M\) be orientation-preserving singular \(k\)-cubes, with the above assumption holding. If \(\omega\) is a \(k\)-form on \(M\) such that \(\omega = 0\) outside \(c_1([0, 1]^k) \cap c_2([0, 1]^k)\) then
+  \begin{equation}
+    \int_{c_1}\omega = \int_{c_2}\omega
+  \end{equation}
+  \label{cind}
+\end{lemma}
+\begin{proof}
+  By definition, we have that
+  \begin{equation}
+    \int_{c_1}\omega = \int_{[0, 1]^k}c_1^*\omega
+    \label{defncube}
+  \end{equation}
+  Using the fact that
+  \begin{equation}
+    c_1 = c_2 \circ (c_2^{-1} \circ c_1)
+    \label{composedinv}
+  \end{equation}
+  Of course, ordinarily we can't talk about inverses when we're talking about cubes, but \(c_1, c_2\) have inverses since they are assumed to be the restrictions of a diffeomorphism. If you want, you can even write that
+  \begin{equation}
+    c_1^*\omega = \xi^*\omega
+  \end{equation}
+  Plugging equation \ref{composedinv} into equation \ref{defncube}, we obtain
+  \begin{equation}
+    \int_{[0, 1]^k}(c_2^{-1} \circ c_1)^*(c_2^*\omega)
+  \end{equation}
+  We have that
+  \begin{equation}
+    c_2^*\omega = f(\omega)dx_1 \wedge ... \wedge dx_k
+  \end{equation}
+  Let \(g = c_2^{-1} \circ c_1\). We then have that
+  \begin{equation}
+    (c_1^{-1} \circ c_2)^*(c_2^*\omega) = g^*(f dx_1 \wedge ... \wedge dx_k) = (f \circ g)\det g'dx_1 \wedge ... \wedge dx_k
+  \end{equation}
+  Suince \(g\) is orientation preserving, we get that \(\deg g' = |\det g'|\), implying the above is equal to
+  \begin{equation}
+    (f \circ g)|\det g'|dx_1 \wedge ... \wedge dx_k = \int_{c_1}\omega
+  \end{equation}
+  as desired. TODO: check
+
+\end{proof}
+We now want to define the integral of a form over a manifold:
+\begin{definition}
+  Let \(M\) be an oriented \(k\)-dimensional manifold and \(\omega\) be a \(k\)-form on \(M\).
+  \begin{enumerate}
+
+    \item If there is an orientation preserving \(k\)-cube \(c\) on \(M\) such that \(\omega = 0\) outside \(c([0, 1]^j)\) we define
+    \begin{equation}
+      \int_M\omega \int_c\omega
+    \end{equation}
+    which is independent of the choice of \(c\) by Lemma \ref{cind} as long as \(\omega\) vanishes outside it.
+
+    \item In the general case, there exists an open cover \(\mc{O}\) of \(M \subset \reals^n\) such that for all \(U \in \mc{O}\), thee is an orientation preserving \(k\)-cube \(c_U\) in \(M\) such that
+    \begin{equation}
+      U \cap M \subset c_U([0, 1]^k)
+    \end{equation}
+    Now, let's let \(\Phi\) be a \(\mc{C}^2\) partition of unity subordinate to \(\mc{O}\). We define
+    \begin{equation}
+      \int_M\omega = \sum_{\varphi \in \Phi}\int_{M}\varphi \circ \omega
+    \end{equation}
+    If \(M\) is compact, this sum is finite, but in general, the definition still works out.
+
+  \end{enumerate}
+\end{definition}
+
+
+\section{The Volume Element}
+
+We already talked about the volume element in the context of alternating tensors. Of course, we're going to apply that to the tangent space at every point of an oriented \(k\)-dimensional manifold \(M \subseteq \reals^n\) (with or without bound). Consider a particular orientation \(\mu\). If we look at the tangent space \(M_x\) at a point \(x \in M\), it has an orientation \(\mu_x\) and also has an inner product \(T_x\) given by the standard inner product in \(\reals^n\).
+
+These two things, as we saw before, are what we need to talk about a volume element (at the point \(x\)), which is an alternating \(k\)-tensor on the tangent space
+\begin{equation}
+  \omega(x) \in \Omega^k(M_x)
+\end{equation}
+which is the unique element in the space of alternating \(k\)-tensors such that if \(v_1,...,v_k\) is a positively oriented orthonormal basis of \(M_x\),
+\begin{equation}
+  \omega(x)(v_1,...,v_k) = 1
+\end{equation}
+In particular, for any \(w_1,...,w_k \in M_x\),
+\begin{equation}
+  \omega(x)(w_1,...,w_k)
+\end{equation}
+is the \textit{oriented} \(k\)-dimensional volume of the parallelopiped determined by \(w_1,...,w_k\), implying it's absolute value is the \(k\)-dimensional volume of the parallelopiped determined by \(w_1,...,w_k\). I didn't say these \(w_1,...,w_k\) were linearly independent, but if they weren't the \(k\)-dimensional volume would be zero. Also notice that if \(w_1,...,w_k\) are linearly independent, then
+\begin{equation}
+  [w_1,...,w_k] = [v_1,...,v_k] \implies \omega(x)(w_1,...,w_k) > 0
+\end{equation}
+For an example, note that \(\det\) is the volume element of \(\reals^n\) (at every point) with the standard inner product and orientation.
+Note that, taken over the whole manifold, \(\omega\) is by definition a (nonzero, and \(\mc{C}^r\) if \(M\) is \(\mc{C}^r\)) \(k\)-form. We often call this form \(dV\), but be careful: it's not necessarily the differential of some \((k - 1)-\) form ``\(V\)''. In low dimensions,
+\begin{itemize}
+  \item Where \(k = 1\), \(dV\) is often written \(ds\) for \underline{length}
+  \item Where \(k = 2\), \(dV\) is often written \(dA\) or \(dS\) for \underline{surface area}
+\end{itemize}
+We're going to use these for specific versions of Stokes' Theorem.
+
+\subsubsection{The Volume of \(M\)}
+\begin{definition}
+  Provided it exists (e.g., if \(M\) is compact), we define the \underline{volume} of \(M\) to be
+  \begin{equation}
+    \int_MdV
+  \end{equation}
+\end{definition}
+Let's look at some examples:
+\begin{enumerate}
+
+  \item Let \(M\) be some \(n\)-dimensional submanifold of \(\reals^n\) with the standard orientation. Then
+  \begin{equation}
+    dV = dx_1 \wedge ... \wedge dx^n
+  \end{equation}
+  Hence we have that
+  \begin{equation}
+    \int_MdV = \int_M1
+  \end{equation}
+  giving us that the volume of \(M\) agrees with our old definition.
+
+  \item Another situation that we've looked at before is the case where \(M\) is a \(1\)-dimensional oriented submanifold of \(\reals^n\) (a curve). Note that all \(1\)-dimensional submanifolds are orientable.
+
+  It doesn't make sense in general to say ``let's compute the length of this'', because the length may not even be finite. But let's compute the length of a finite piece. This means in general that we'll be looking at an oriented 1-cube in \(M\)
+  \begin{equation}
+    c: [0, 1] \to M
+  \end{equation}
+  Let's try to compute the length of \(c([0, 1])\), i.e. just that piece. That means we're going to integrate
+  \begin{equation}
+    \int_{c([0, 1])}ds = \int_{c}ds = \int_{[0, 1]}c^*(ds) = \int_{[0, 1]}\sqrt{\dot{c_1}^2 + ... + \dot{c_n}^2}
+  \end{equation}
+  Why? Say \(c^*(ds) = f(t)dt\). That means that
+  \begin{equation}
+    f(t) = c^*(ds)(t)(e_{1, t}) = ds(c(t))(c_{*,t}(e_{1, t})) = ds(c(t))(c'(t)_{c(t)}) = |c'(t)|
+  \end{equation}
+
+  \item Let's see how to compute \(k\)-dimensional volume (in fact, the integral of a \(k\)-form in general) on a \(k\)-dimensional manifold: let \(M\) be a \(k\)-dimensional oriented submanifold of \(\reals^n\) with orientation \(\mu\), and let \(\omega\) be a \(k\)-form on \(M\). We can write
+  \begin{equation}
+    \omega = \lambda dV
+  \end{equation}
+  where \(\lambda\) is a function on \(M\). Let \(\varphi: W \to M\) be a \(\mc{C}^{r + 1}\) one-to-one function of constant rank \(k\) (e.g. a coordinate chart). Provided the integral exists, then, we have
+  \begin{equation}
+    \int_{\varphi(W)}\omega = \int\omega\varphi^*(\omega) = \int_W\lambda \circ \varphi\varphi^*dV
+  \end{equation}
+  Say, for \(x \in W\),
+  \begin{equation}
+    \varphi^*dV = h(x)dx_1 \wedge ... \wedge dx_k
+  \end{equation}
+  How do we compute \(h(x)\). It's:
+  \begin{equation}
+    (\varphi^*dV)(x)(e_{1,x},...,e_{k,x})
+  \end{equation}
+
+\end{enumerate}
+
+
 
 \end{document}
