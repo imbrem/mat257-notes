@@ -40,6 +40,8 @@
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\Vol}{vol}
 \DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Sgn}{sgn}
+\DeclareMathOperator{\Alt}{Alt}
 
 \newcommand{\reals}[0]{\mathbb{R}}
 \newcommand{\nats}[0]{\mathbb{N}}
@@ -2156,9 +2158,10 @@ We're going to be interested in manifolds because they generalize the idea of in
 
 \subsection{Multilinear Algebra}
 
-In this section, we will explore \underline{multilinear algebra}, that is, the algebra of tensors.
+In this section, we will explore \underline{multilinear algebra}, that is, the algebra of tensors. For this discussion, let \(V\) be a vector space over \(\reals\), and consider elements of \(V^k = V \times ... \times V\) (\(k\)-times).
 
-For this discussion, let \(V\) be a vector space over \(\reals\), and consider elements of \(V^k = V \times ... \times V\) (\(k\)-times).
+\subsubsection{Tensors}
+
 \begin{definition}
   We say that a function \(T: V^k \to \reals\) is \underline{multilinear} if
   \begin{equation}
@@ -2192,6 +2195,64 @@ Note that \(\otimes\) is not commutative. However, we can show that it:
   \end{equation}
   forms a basis for \(\mc{T}^k(V)\). In particular, \(\dim\mc{T}^k(V) = n^k\).
 \end{proposition}
+\begin{proof}
+  \TODO{this}
+\end{proof}
+
+\begin{definition}
+A linear transformation \(f: V \to W\) induces a linear transformation \(f^*: \mc{T}^k(W) \to \mc{T}^k(V)\) defined pointwise by
+\begin{equation}
+  (f^*T)(v_1,...,v_k) = T(f(v_1),...,f(v_k))
+\end{equation}
+\end{definition}
+We have that, for each linear transformation \(f\), \(f^*\) commutes with \(\otimes\), that is,
+\begin{equation}
+  f^*(S \otimes T) = f^*(S) \otimes f^*(T)
+\end{equation}
+We now consider a very important class of tensor which should be familiar to you from linear algebra:
+\begin{definition}
+  An \underline{inner product} on \(V\) is a 2-tensor \(T \in \mc{T}^2(V)\) which is:
+  \begin{itemize}
+
+    \item Symmetric: \(T(v, w) = T(w, v)\)
+
+    \item Positive definite: \(T(v, v) > 0 \forall v \neq 0\)
+
+  \end{itemize}
+\end{definition}
+Let \(T\) be an inner product on \(V\). Then, we know from linear algebra (via the Gram-Schmidt process) that there is an orthonormal basis with respect to \(T\), i.e. a basis \(v_1,...,v_n\) such that
+\begin{equation}
+  T(v_i, v_j) = \delta_{ij}
+\end{equation}
+An orthonormal basis provides an isomorphism \(f: \reals^n \to V\) such that \(f^*T = \ip{}{}\), i.e.
+\begin{equation}
+  T(f(x), f(y)) = \ip{x}{y}
+\end{equation}
+given by
+\begin{equation}
+  f(x_1,...,x_n) = \sum x_iv_i
+\end{equation}
+
+\subsubsection{Alternating Tensors}
+
+\begin{definition}
+  An \underline{alternating \(k\)-tensor} \(\omega \in \mc{T}^k(V)\) is a \(k\)-tensor such that
+  \begin{equation}
+    \forall i, j, \omega(...,v_i,...,v_j,...) = \omega(...,v_j,...,v_i,...)
+  \end{equation}
+  We denote the \underline{subspace} of all alternating \(k\)-tensors \(\Omega^k(V) \subset \mc{T}^k(V)\)
+\end{definition}
+Note again that \(\Omega^1(V) = V^*\), since all 1-tensors are vacuously alternating.
+\begin{definition}
+  We define a function \(\Alt: \mc{T}^k(V) \to \Omega^k(V)\) pointwise by
+  \begin{equation}
+    \Alt T(v_1,...,v_k) = \frac{1}{k!}\sum_{\sigma \in S_k}\Sgn\sigma T(v_{\sigma(1)},...,v_{\sigma(k)})
+  \end{equation}
+  \(\Alt T\) is called the \underline{alternator} of \(T\).
+\end{definition}
+\begin{claim}
+  \(\forall T \in \mc{T}^k(V), \Alt T \in \Omega^k(V)\)
+\end{claim}
 \begin{proof}
   \TODO{this}
 \end{proof}
