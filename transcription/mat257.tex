@@ -3149,6 +3149,7 @@ Conversely, if we have a certain normal \(n(x)\) defined on \(M\), we can determ
 
 \subsection{Stoke's Theorem on Manifolds}
 
+\subsubsection{Statement and Definitions}
 
 We now want to try to prove the general form of Stokes' theorem:
 \begin{theorem}[Stokes' Theorem]
@@ -3223,7 +3224,7 @@ We now want to define the integral of a form over a manifold:
     \end{equation}
     which is independent of the choice of \(c\) by Lemma \ref{cind} as long as \(\omega\) vanishes outside it.
 
-    \item In the general case, there exists an open cover \(\mc{O}\) of \(M \subset \reals^n\) such that for all \(U \in \mc{O}\), thee is an orientation preserving \(k\)-cube \(c_U\) in \(M\) such that
+    \item In the general case, there exists an open cover \(\mc{O}\) of \(M \subset \reals^n\) such that for all \(U \in \mc{O}\), there is an orientation preserving \(k\)-cube \(c_U\) in \(M\) such that
     \begin{equation}
       U \cap M \subset c_U([0, 1]^k)
     \end{equation}
@@ -3233,9 +3234,26 @@ We now want to define the integral of a form over a manifold:
     \end{equation}
     If \(M\) is compact, this sum is finite, but in general, the definition still works out.
 
+    An argument as before shows this definition is independent of both \(\mc{O}\) and \(\Phi\).
+
   \end{enumerate}
 \end{definition}
 
+Suppose \(M\) is a \(k\)-dimensional manifold with boundary, and \(\mu\) is an orientation for \(M\). Let \(\partial M\) be given the induced orientation \(\partial\mu\). Consider an orientation preserving \(k\)-cube \(c\) in \(M\) such that \(c_{(k, 0)}\) lies in \(\partial M\) and is the only face having interior points in \(\partial M\).
+\(c_{(k, 0)}\) is orientation preserving if \(k\) is even, otherwise, \((-1)^kc_{(k, 0)}\) is orientation preserving.
+
+Suppose now \(\omega\) is a \((k - 1)\)-form on \(M\) which is zero outside \(c([0, 1]^k)\). Then
+\begin{equation}
+  \int_{c_{(k, 0)}}\omega = (-1)^k\int_{\partial M}\omega
+\end{equation}
+So
+\begin{equation}
+  \int_{\partial c}\omega = \int_{(-1)^kc_{(k, 0)}}\omega = (-1)^k\int_{c_{(k, 0)}}\omega = \int_{\partial M}\omega
+\end{equation}
+
+\subsubsection{Proof of Stokes' Theorem}
+
+\TODO{this}
 
 \subsection{The Volume Element}
 
