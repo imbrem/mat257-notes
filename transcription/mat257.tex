@@ -2256,8 +2256,44 @@ Note again that \(\Omega^1(V) = V^*\), since all 1-tensors are vacuously alterna
 \begin{proof}
   \TODO{this}
 \end{proof}
+\begin{definition}
+  We define the \underline{wedge product} \(\wedge : \Omega^k(V) \times \Omega^\ell(V) \to \Omega^{k + \ell}(V)\) by
+  \begin{equation}
+    \omega \wedge \eta = \frac{(k + \ell)!}{k!\ell!}\Alt(\omega \otimes \eta)
+  \end{equation}
+\end{definition}
+Some properties of the wedge product include
+\begin{itemize}
 
-\TODO{rest}
+  \item It distributes over addition:
+  \begin{equation}
+    (\omega_1 + \omega_2) \wedge \eta = \omega_1 \wedge \eta + \omega_2 \wedge \eta, \omega \wedge(\eta_1 + \eta_2) = \omega \wedge \eta_1 + \omega \wedge \eta_2
+  \end{equation}
+
+  \item It commutes with scalar multiplication:
+  \begin{equation}
+    (a\omega) \wedge \eta = a(\omega \wedge \eta) = \omega \wedge (a\eta)
+  \end{equation}
+
+  \item It is ``almost commutative'':
+  \begin{equation}
+    \omega \wedge \eta = (-1)^{k\ell}\eta \wedge \omega
+  \end{equation}
+
+  \item It commutes with \(f^*\):
+  \begin{equation}
+    f^*(\omega \wedge \eta) = f^*(\omega) \wedge f^*(\eta)
+  \end{equation}
+
+\end{itemize}
+\begin{claim}
+  \(\wedge\) is associative
+\end{claim}
+\begin{proof}
+  \TODO{this}
+\end{proof}
+
+
 
 \subsection{Vector Fields and Differential Forms}
 
