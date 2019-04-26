@@ -2156,7 +2156,36 @@ We're going to be interested in manifolds because they generalize the idea of in
 
 \subsection{Multilinear Algebra}
 
-\TODO{this}
+In this section, we will explore \underline{multilinear algebra}, that is, the algebra of tensors.
+
+For this discussion, let \(V\) be a vector space over \(\reals\), and consider elements of \(V^k = V \times ... \times V\) (\(k\)-times).
+\begin{definition}
+  We say that a function \(T: V^k \to \reals\) is \underline{multilinear} if
+  \begin{equation}
+    \forall i, T(v_1,...,v_i + v_i',...,v_k) = T(v_1,...,v_i,...,v_k) + T(v_1,...,v_i',...,v_k), T(v_1,...,av_i,...,v_k) = aT(v_1,...,v_k)
+  \end{equation}
+  In this case we call \(T\) a \underline{multilinear function} or a \underline{covariant \(k\)-tensor}. We define \(\mc{T}^k(V)\) to be the set of all \(k\)-tensors.
+\end{definition}
+Note that \(\mc{T}^1(V) = V^*\), the dual space. In general, we have that \(\mc{T}^k(V)\) forms a vector space under addition (of real-valued functions) and scalar multiplication by real constants.
+\begin{definition}
+  We define the \underline{tensor product} \(\otimes: \mc{T}^k(V) \times \mc{T}^\ell(V) \to \mc{T}^{k + \ell}(V)\) pointwise by
+  \begin{equation}
+    (S \otimes T)(v_1,...,v_{k + \ell}) = S(v_1,...,v_k)T(v_{k + 1},...,v_{k + \ell})
+  \end{equation}
+\end{definition}
+Note that \(\otimes\) is not commutative. However, we can show that it:
+\begin{itemize}
+  \item Distributes over addition:
+  \begin{equation}
+    (S_1 + S_2) \otimes T = S_1 \otimes T + S_2 \otimes T, S \otimes (T_1 + T_2) = S \otimes T_1 + S \otimes T_2
+  \end{equation}
+  \item Is associative
+  \begin{equation}
+    (S \otimes T) \otimes U = S \otimes (T \otimes U) = S \otimes T \otimes U
+  \end{equation}
+\end{itemize}
+
+\TODO{rest}
 
 \subsection{Vector Fields and Differential Forms}
 
