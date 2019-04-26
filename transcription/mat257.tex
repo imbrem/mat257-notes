@@ -2408,7 +2408,7 @@ Then there is a unique \(z \in V\) such that \(\varphi(w) = \langle z, w \rangle
 So we'll call \(z\) the \underline{cross product} of \(v_1,...,v_{n - 1}\), \(v_1 \times v_2 \times ... \times v_{n - 1}\).
 Note that the cross product is an alternating multilinear form. It also satisfies the distributive property.
 
-Wh do we want to use this? Well, we want to start proving the following:
+Why do we want to use this? Well, we want to start proving the following:
 \begin{equation}
   \int_{\text{cube}}f(x_1,...,x_n)dx_1 \wedge ... \wedge dx_n = \int_{\text{cube}}f dx_1...dx_n
 \end{equation}
@@ -2566,14 +2566,14 @@ for \(v_a = (v_1,...,v_n)\). In other words, \(dx_i(a)\) gives a dual basis \(g_
   df = \sum_{i = 1}^n\prt{f}{x_i}dx_i
 \end{equation}
 
-\subsection{The Differential Operator}
-
-\TODO{this}
-
 \subsection{Pullbacks and Pushforwards}
 
+Vector fields act on functions:
+\begin{equation}
+  v_a(f) = df(a)(v_a) = \sum\prt{f}{x_i}(a)v_i
+\end{equation}
 
-Let's begin with a \(\mc{C}^r\) mapping \(f: \reals^n \to \reals^p\). Well first of all, we know what the tangent mapping is, or rather we know what the derivative is. And we want to interpret this derivative as a linear mapping induced by \(f\)
+More generally, condieer a \(\mc{C}^r\) mapping \(f: \reals^n \to \reals^p\). First of all, we know what the tangent mapping is, or rather we know what the derivative is. And we want to interpret this derivative as a linear mapping induced by \(f\)
 \begin{equation}
   f_{*a}: \reals^n_a \to \reals^p_{f(a)}, f_{*a}(v_a) = Df(a)(v)_{f(a)}
 \end{equation}
@@ -2738,7 +2738,9 @@ We'll say that the curve has length if the supremum of these things exists, and 
 \end{definition}
 Here's a brief homework exercise: prove that if \(\gamma\) is piecewise \(\mc{C}^1\), then \(C\) is rectifiable and \(\ell(C)\) is given by equation \ref{lensupremum}. This is a first year calculus exercise using Riemann sums (I think it's in Spivak), so it shouldn't be too hard.
 
+\subsection{The Differential Operator}
 
+\TODO{this}
 
 \subsection{Integral of a \(k\)-form over a \(k\)-cube}
 
