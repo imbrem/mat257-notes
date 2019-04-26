@@ -2523,7 +2523,48 @@ We're going to prove a very general version of Stokes' theorem, but we want to s
 \subsubsection{Vector Fields on a Submanifold \(M\) of \(\reals^n\)}
 
 Let \(F: x \in M \mapsto F(x) \in TM_x\) be a function. This would be easier to write out with a depenent type, but I digress. If \(\varphi: W \to \reals^n\) is a \(\mc{C}^r\) coordinate system for \(M\) then there exists a unique vector field \(G\) on \(W\) such that
+\begin{equation}
+  \forall a \in W, \varphi_{*,a}G(a) = F(\varphi(a))
+\end{equation}
+We say \(F\) is \(\mc{C}^r\) if \(G\) is \(\mc{C}^r\). Note that the definition is indepenent of coordinate systems: if \(\varphi, \psi\) are coordinate systems and
+\begin{equation}
+  \varphi_{*, a}G(a) = F(\varphi(a)), \psi_{*, a}H(b) = F(\psi(b))
+\end{equation}
+then
+\begin{equation}
+  b = \varphi^{-1}(\varphi(a)) \implies H(b) = (\varphi^{-1} \circ \varphi)_{(*, a)}G(a)
+\end{equation}
 
+\subsubsection{Differential Forms}
+
+\begin{definition}
+  A \underline{differential \(k\)-form} or \underline{\(k\)-form} on \(\reals^n\) is a function such that
+  \begin{equation}
+    \forall a \in \reals^n, \omega(a) \in \Omega^k(\reals_a^n)
+  \end{equation}
+\end{definition}
+Let \(\varphi_1(a),...,\varphi_n(a)\) be the dual basis to \(e_{1,a},...,e_{n,a}\). Then we can write, for a \(k\)-form \(\omega\),
+\begin{equation}
+  \omega(a) = \sum_{i_1 < ... < i_k}\omega_{i_1,...,i_k}\bigwedge_{j = 1}^k\varphi_{i_j}(a)
+\end{equation}
+\begin{definition}
+  We say that \(\omega\) is \underline{\(\mc{C}^r\)} if and only if each coefficient \(\omega_{i_1,...,i_k}\) is.
+\end{definition}
+\(\omega + \eta, f \cdot \omega, \omega \wedge \eta\) are defined pointwise.
+A function \(f: \reals^n \to \reals\) is considered a \underline{0-form}, since instead of assigning a \(k\)-tensor to every point in \(\reals^n\) it assigns a scalar (a ``\(0\)-tensor''): write \(f\omega = f \wedge \omega\)
+
+A \(\mc{C}^r\) function \(f: \reals^n \to \reals\) determines a \(\mc{C}^{r + 1}\) 1-form \(df\) defined by
+\begin{equation}
+  df(a)(v_a) = Df(a)(v)
+\end{equation}
+For example, for \(x_i = \pi_i : \reals^n \to \reals\), we have
+\begin{equation}
+  dx_i(a)(v_a) = d\pi_i(a)(v_a) = v_i
+\end{equation}
+for \(v_a = (v_1,...,v_n)\). In other words, \(dx_i(a)\) gives a dual basis \(g_i(a)\) to \(e_{i, a}\). This gives the identity
+\begin{equation}
+  df = \sum_{i = 1}^n\prt{f}{x_i}dx_i
+\end{equation}
 
 \subsection{The Differential Operator}
 
