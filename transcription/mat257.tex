@@ -3257,11 +3257,44 @@ So
 
 \begin{enumerate}
 
-  \item \TODO{this}
+  \item If there exists an orientation preserving singular \(k\)-cube \(c\) in \(M \setminus \partial M\) such that \(\omega = 0\) outside \(c([0, 1]^k)\), then
+  \begin{equation}
+    \int_Md\omega = \int_c d\omega = \int_{I^k}c^*(d\omega) = \int_{I^k}d(c^*\omega) = \int_{[0, 1]^k}c^*(d\omega) = \int_{[0, 1]^k}d(c^*\omega) = \int_{\partial I^k}c^*\omega = \int_{\partial c}\omega = 0
+  \end{equation}
+  since \(\omega = 0\) on \(\partial c\).
+  \begin{equation}
+    \int_{\partial M}\omega = 0 \impliedby \omega = 0 \text{ on } \partial M
+  \end{equation} \label{proof:stokes_1}
 
-  \item \TODO{this}
+  \item Next suppose there exists an orientation preserving singular \(k\)-cube in \(M\) such that \(c_{(k, 0)}\) is the only face in \(\partial M\) and \(\omega = 0\) outside \(c([0, 1]^k)\).
+  Then, by Stokes' Theorem for \(k\)-chains,
+  \begin{equation}
+    \int_Md\omega = \int_cd\omega = \int_{\partial c}\omega = \int_{\partial M}\omega
+  \end{equation} \label{proof:stokes_2}
 
-  \item \TODO{this}
+  \item In the general case, there exists an open cover \(\mc{O}\) of \(M\) and a partition of unity \(\Phi\) subordinate to \(\mc{O}\) such that, for all \(\varphi \in \Phi\), \(\varphi\cdot\omega\) is of the type in \ref{proof:stokes_1} or that in \ref{proof:stokes_2}.
+  Hence, we have
+  \begin{equation}
+    \int_{\partial M}\omega = \sum_{\varphi \in \Phi}\int_{\partial M}\varphi \cdot \omega
+    \label{proof:stokes_sum}
+  \end{equation}
+  This sum is finite since \(M\) is compact, implying \(\partial M\) is compact. By parts \ref{proof:stokes_1} and \ref{proof:stokes_2}, we get that the sum in Equation \ref{proof:stokes_sum} is equal to
+  \begin{equation}
+    \sum_{\varphi \in \Phi}\int_Md(\varphi \cdot \omega)
+    = \sum_{\varphi \in \Phi}\int_M(d\varphi \wedge \omega + \varphi \cdot d\omega)
+    = \sum_{\varphi \in \Phi}\int_M\varphi \cdot d\omega + \int_M \sum_{\varphi \in \Phi}d\varphi \wedge \omega
+    \label{proof:stokes_split}
+  \end{equation}
+  We have that
+  \begin{equation}
+    \sum_{\varphi \in \Phi}d\varphi = d\left(\sum_{\varphi \in \Phi}\varphi\right)
+    = d1 = 0 \implies \sum_{\varphi \in \Phi}d\varphi \wedge \omega = 0
+  \end{equation}
+  Hence we can remove the right hand side of Equation \ref{proof:stokes_split} to obtain
+  \begin{equation}
+    \sum_{\varphi \in \Phi}\int_M\varphi \cdot d\omega = \int_MdM
+  \end{equation}
+  as desired.
 
 \end{enumerate}
 
