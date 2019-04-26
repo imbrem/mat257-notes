@@ -49,7 +49,7 @@
 \contentsline {subsection}{\numberline {4.6}Multilinear Algebra}{48}{subsection.4.6}
 \contentsline {subsubsection}{\numberline {4.6.1}Tensors}{48}{subsubsection.4.6.1}
 \contentsline {subsubsection}{\numberline {4.6.2}Alternating Tensors}{49}{subsubsection.4.6.2}
-\contentsline {subsection}{\numberline {4.7}Vector Fields and Differential Forms}{49}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.7}Vector Fields and Differential Forms}{50}{subsection.4.7}
 \contentsline {subsection}{\numberline {4.8}The Differential Operator}{51}{subsection.4.8}
 \contentsline {subsection}{\numberline {4.9}Pullbacks and Pushforwards}{51}{subsection.4.9}
 \contentsline {section}{\numberline {5}Integration on Manifolds}{53}{section.5}
