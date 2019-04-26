@@ -66,9 +66,12 @@
 
 \maketitle
 
-\tableofcontents
 
 This document is a collection of notes for the course MAT257: Analysis II, as taught by Professor Edward Bierstone in 2018 at the University of Toronto. The notes are a combination of notes I made in class (which can be found in their original form in the \verb|notes| folder in this repository) and scans of handwritten notes which Professor Bierstone has generously given me the permission to use.
+
+
+
+\tableofcontents
 
 \section{Introduction}
 
@@ -2342,7 +2345,7 @@ In general, this shows us that if \(\dim V = n\), any nonzero \(\omega \in \Omeg
 \end{itemize}
 Another way of saying the same thing without using differential forms is saying that \((v_1,...,v_n)\) can be put into the same group as \((\omega_1,...,\omega_n)\) if one can be transformed into the other with a matrix \(A\) having positive determinant.
 
-\section{Orientations of \(V\)}
+\subsubsection{Orientations of \(V\)}
 
 \begin{definition}
 Define an \underline{orientation of \(V\)} to be a choice of one of these two groups.
@@ -2515,7 +2518,12 @@ There are several very important classical operations we're going to be interest
     \curl F = \nabla \times F = (\D_2F_3 - \D_3F_2)e_1 + (\D_3F_1 - \D_1F_2)e_2 + (\D_1F_2 - \D_2F_1)e_3
   \end{equation}
 \end{definition}
-We're going to prove a very general version of Stokes' theorem, but we want to see what holds in these special cases. Maybe that's enough for today
+We're going to prove a very general version of Stokes' theorem, but we want to see what holds in these special cases.
+
+\subsubsection{Vector Fields on a Submanifold \(M\) of \(\reals^n\)}
+
+Let \(F: x \in M \mapsto F(x) \in TM_x\) be a function. This would be easier to write out with a depenent type, but I digress. If \(\varphi: W \to \reals^n\) is a \(\mc{C}^r\) coordinate system for \(M\) then there exists a unique vector field \(G\) on \(W\) such that
+
 
 \subsection{The Differential Operator}
 
@@ -2943,7 +2951,7 @@ We now want to define the integral of a form over a manifold:
 \end{definition}
 
 
-\section{The Volume Element}
+\subsection{The Volume Element}
 
 We already talked about the volume element in the context of alternating tensors. Of course, we're going to apply that to the tangent space at every point of an oriented \(k\)-dimensional manifold \(M \subseteq \reals^n\) (with or without bound). Consider a particular orientation \(\mu\). If we look at the tangent space \(M_x\) at a point \(x \in M\), it has an orientation \(\mu_x\) and also has an inner product \(T_x\) given by the standard inner product in \(\reals^n\).
 

@@ -49,19 +49,20 @@
 \contentsline {subsection}{\numberline {4.6}Multilinear Algebra}{48}{subsection.4.6}
 \contentsline {subsubsection}{\numberline {4.6.1}Tensors}{48}{subsubsection.4.6.1}
 \contentsline {subsubsection}{\numberline {4.6.2}Alternating Tensors}{49}{subsubsection.4.6.2}
-\contentsline {section}{\numberline {5}Orientations of \(V\)}{50}{section.5}
-\contentsline {subsubsection}{\numberline {5.0.1}The Cross Product}{51}{subsubsection.5.0.1}
-\contentsline {subsection}{\numberline {5.1}Vector Fields and Differential Forms}{51}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}The Differential Operator}{53}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Pullbacks and Pushforwards}{53}{subsection.5.3}
-\contentsline {section}{\numberline {6}Integration on Manifolds}{55}{section.6}
-\contentsline {subsection}{\numberline {6.1}Integration of Parametrized Curves}{56}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Integral of a \(k\)-form over a \(k\)-cube}{56}{subsection.6.2}
-\contentsline {subsubsection}{\numberline {6.2.1}Independence of Parametrization}{57}{subsubsection.6.2.1}
-\contentsline {subsection}{\numberline {6.3}Integration of Differential Forms on Manifolds}{57}{subsection.6.3}
-\contentsline {subsubsection}{\numberline {6.3.1}Vector Fields and Differential Forms on a submanifold \(M\) of \(\mathbb {R}^n\)}{57}{subsubsection.6.3.1}
-\contentsline {subsubsection}{\numberline {6.3.2}Orientiation of a sumbanifold \(M\) of \(\mathbb {R}^n\)}{59}{subsubsection.6.3.2}
-\contentsline {subsection}{\numberline {6.4}Manifolds with Boundary}{59}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Stoke's Theorem on Manifolds}{59}{subsection.6.5}
-\contentsline {section}{\numberline {7}The Volume Element}{61}{section.7}
-\contentsline {subsubsection}{\numberline {7.0.1}The Volume of \(M\)}{61}{subsubsection.7.0.1}
+\contentsline {subsubsection}{\numberline {4.6.3}Orientations of \(V\)}{50}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}The Cross Product}{51}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {4.7}Vector Fields and Differential Forms}{51}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}Vector Fields on a Submanifold \(M\) of \(\mathbb {R}^n\)}{53}{subsubsection.4.7.1}
+\contentsline {subsection}{\numberline {4.8}The Differential Operator}{53}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Pullbacks and Pushforwards}{53}{subsection.4.9}
+\contentsline {section}{\numberline {5}Integration on Manifolds}{55}{section.5}
+\contentsline {subsection}{\numberline {5.1}Integration of Parametrized Curves}{56}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Integral of a \(k\)-form over a \(k\)-cube}{56}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Independence of Parametrization}{57}{subsubsection.5.2.1}
+\contentsline {subsection}{\numberline {5.3}Integration of Differential Forms on Manifolds}{57}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Vector Fields and Differential Forms on a submanifold \(M\) of \(\mathbb {R}^n\)}{57}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}Orientiation of a sumbanifold \(M\) of \(\mathbb {R}^n\)}{59}{subsubsection.5.3.2}
+\contentsline {subsection}{\numberline {5.4}Manifolds with Boundary}{59}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Stoke's Theorem on Manifolds}{59}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}The Volume Element}{61}{subsection.5.6}
+\contentsline {subsubsection}{\numberline {5.6.1}The Volume of \(M\)}{61}{subsubsection.5.6.1}
