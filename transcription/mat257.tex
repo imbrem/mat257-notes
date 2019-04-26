@@ -2430,11 +2430,161 @@ Here's a brief homework exercise: prove that if \(\gamma\) is piecewise \(\mc{C}
 
 \subsection{Integral of a \(k\)-form over a \(k\)-cube}
 
-\TODO{this}
+Talking about Stoke's theorem, what we're really interested in is not Stoke's theorem on \(k\)-cubes or on chains but on \textit{manifolds}, where we're going to be comparing the integral on a manifold to the integral on it's boundary. To do that, we're going to have to adapt all our machinery for differential forms to work with manifolds. But first, let's cover an important point I left off last time.
+
+\subsubsection{Independence of Parametrization}
+
+Let's say \(c\) is a \(\mc{C}^1\) singular \(k\)-cube in \(\reals^n\), and we want to look at a re-parametrization, i.e. a map
+\begin{equation}
+  p : [0, 1]^k \to [0, 1]^k
+\end{equation}
+which is \(\mc{C}^1\), one-to-one, onto, and \(\det p'(x) \geq 0\), i.e. the Jacobian does not reverse orientations.
+If \(\omega\) is a \(k\)-form then
+\begin{equation}
+  \int_c\omega = \int_{c \circ p}\omega
+\end{equation}
+You should compare this with the situation with functions: what if we were integrating a function over \(p([0, 1]^k) = [0, 1]^k\). You'd have to say there's a change of variable formula
+\begin{equation}
+  \int_{[0, 1]^k}f \circ p|\det p'| = \int_{p([0, 1]^k)}f
+\end{equation}
+This is clearly a very different case, and indeed why differential forms are the ``natural'' thing to integrate over: the forumla for change of variables is ``built in'' to the definition. Let's see how:
+\begin{proof}
+  By definition,
+  \begin{equation}
+    \int_{c \circ p}\omega = \int_{[0, 1]^k}(c \circ p)^*\omega = \int_{[0, 1]^k}p^*(c^*\omega)
+    \label{intdef}
+  \end{equation}
+  \(c^*\omega\) is a \(k\)-form on \([0, 1]^k\), so we know it looks like
+  \begin{equation}
+    c^*\omega = f(x)\bigwedge_{i = 1}^kdx_i \implies p^*(c^*\omega) = (f \circ p)\det p' \bigwedge_{i = 1}^k dx_i
+  \end{equation}
+  So we can rewrite equation \ref{intdef} as
+  \begin{equation}
+    \int_{[0, 1]^k}(f \circ p)\det p'dx_1 \wedge ... dx_k = \int_{[0, 1]^k}(f \circ p)\det p'
+  \end{equation}
+  Since \(\det p' \geq 0\), the above becomes
+  \begin{equation}
+    \int_{[0, 1]^k}(f \circ p)|\det p'| = \int_{p([0, 1]^k)}f = \int_{[0, 1]^k}fdx_1 \wedge ... \wedge dx_k = \int_{[0, 1]^k}c^*\omega = \int_c\omega
+  \end{equation}
+
+\end{proof}
 
 \subsection{Integration of Differential Forms on Manifolds}
 
-\TODO{this}
+\subsubsection{Vector Fields and Differential Forms on a submanifold \(M\) of \(\reals^n\)}
+
+We haven't talked about manifolds in a while, since differential calculus, and now we want to talk about them in terms of integral calculus. So let's start off with the definitions:
+\begin{definition}
+  A \underline{vector field \(F\) on \(M\)} is a function \(F\) defined on \(M\) such that
+  \begin{equation}
+    \forall x \in M, F(x) \in TM_x
+  \end{equation}
+\end{definition}
+Recall the definition of a \(\mc{C}^r\) coordinate chart \(\varphi: W \subset \reals^k \to M \subset \reals^n\), where \(M\) has dimension \(k\). The derivative gives an isomorphism of vector spaces
+\begin{equation}
+  \varphi_{*a} : \reals_a^k \to TM_{\varphi(a)}
+\end{equation}
+If \(\varphi\) is a coordinate chart for \(M\) then there is a vector field \(G\) on \(W\) such that
+\begin{equation}
+  \varphi_{*a}(G(a)) = F(\varphi(a))
+\end{equation}
+With this in mind, how should we say what it means for \(F\) to be \(\mc{C}^r\)? We know what it means for \(G\) to be \(\mc{C}^r\), so we'll say that \(F\) is \(\mc{C}^r\) if \(G\) is \(\mc{C}^r\) for any coordinate chart \(\varphi: W \to M\). Note that this definition is independent of the choice of coordinate chart: suppose we have two \(\mc{C}^r\) coordinate charts \(\varphi: W \to M\), \(\psi : V \to M\) such that
+\begin{equation}
+  \varphi(a) = \psi(b)
+\end{equation}
+We can say that there are vector fields \(G\) on \(W\) and \(H\) on \(V\) such that
+\begin{equation}
+  \varphi_{*\xi}(G(\xi)) = F(\varphi(\xi)), \psi_{*\eta}(H(\eta)) = F(\psi(\eta))
+\end{equation}
+If \(\varphi(a) = \psi(b)\) then we have that
+\begin{equation}
+  \varphi_{*a}(G(a) = F(\varphi(a))) = F(\psi(b)) = \psi_{*b}(H(b))
+\end{equation}
+So
+\begin{equation}
+  H(b) = \psi_{*b}^{-1}(F(\psi(b)))
+\end{equation}
+But \(\psi = \varphi \circ \varphi^{-1} \circ \psi\), giving
+\begin{equation}
+  \psi_{*b} = \varphi_{*a} \circ (\varphi^{-1} \circ \psi)_{*b}
+\end{equation}
+Hence,
+\begin{equation}
+  H(b) = \psi_{*b}^{-1}(F(\psi(b))) = ((\varphi^{-1} \circ \psi)_{*b})^{-1} \circ \varphi^{-1}_{*a}(F(\psi(b))) = (\psi^{-1} \circ \varphi)_{*a}(G(a))
+\end{equation}
+It's better not to try to write this down in complete detail (this was about the third attempt)...
+
+
+Let's take off from last time: assume \(\omega\) is a \(p\)-form on a \(\mc{C}^{r+1}\) submanifold \(M\) of \(\reals^n\). That means that \(\omega\) maps each point \(a \in M\) to an alternating \(p\)-tensor \(\omega(a)\) on the tangent space to the manifold at \(a\), i.e.
+\begin{equation}\omega : a \mapsto \omega(a) \in \Omega^p(M_a)\end{equation}
+Consider two coordinate charts
+\begin{equation}\varphi: W \to M, \psi: V \to M\end{equation}
+We have, on the intersection \(\varphi(W) \cap \psi(V)\),
+\begin{equation}\psi = \varphi \circ (\varphi^{-1} \circ \psi) \implies \psi^*\omega = (\varphi^{-1} \circ \psi)^*(\varphi^*\omega)\end{equation}
+We used this to conclude that \(\varphi^*\) is \(\mc{C}^r\) if and only if \(\psi^*\) is \(\mc{C}^r\). So we say \(\omega\) is \(\mc{C}^r\) if \(\varphi^*\omega\) is \(\mc{C}^r\) for every coordinate chart \(\varphi\).
+\begin{proposition}
+  If \(\omega\) is a \(\mc{C}^r\) \(p\)-form on \(M\) then there is a unique \(\mc{C}^{r - 1}\) \((p + 1)\) form \(d\omega\) on \(M\) such that
+  \begin{equation}
+    \varphi^*(d\omega) = d(\varphi*\omega)
+  \end{equation}
+  for every coordinate chart \(\varphi\)
+\end{proposition}
+\begin{proof}
+  Given \(\varphi\), we define \(d\omega\) on \(\varphi(W)\) by the formula
+  \begin{equation}
+    d\omega(a)(v_1,...,v_{p + 1}) = d(\varphi^*\omega)(x)(w_1,...,w_{p + 1})
+    \label{dphi}
+  \end{equation}
+  where \(a = \varphi(x)\) and each \(w_i\) is the thing that the tangent mapping takes to \(v_i\), i.e.
+  \begin{equation}
+    v_i = \varphi_{*x}(w_i)
+  \end{equation}
+  For the skeptics among you, let's call equation \ref{dphi} \(d^\varphi\omega\), since it might depend on \(\varphi\). Last time, we observed that \(d^\varphi\omega\) is the unique \(p + 1\) form such that
+  \begin{equation}
+    \varphi^*(d^\varphi\omega) = d(\varphi^*\omega) \label{pullback}
+  \end{equation}
+  In the overlap of two charts \(\varphi: W \to \reals^n\), \(\psi: V \to \reals^n\), we have
+  \begin{equation}
+    \psi^*(d^\varphi\omega) = ((\varphi^{-1} \circ \psi)^* \circ \varphi^*)(d^\varphi\omega) = (\varphi^{-1} \circ \psi^{-1})^*d(\varphi^*\omega) = d((\varphi^{-1} \circ \psi)^* \circ \varphi^*\omega) = d(\psi^*\omega)
+  \end{equation}
+  But remember, \(d^\psi\omega\) was the unique thing satisfying equation \ref{pullback} substituting \(\psi\) for \(\varphi\). And hence we have that
+  \begin{equation}
+    d^\varphi\omega = d^\psi\omega
+  \end{equation}
+  So we can just call this \(d\omega\).
+\end{proof}
+
+\subsubsection{Orientiation of a sumbanifold \(M\) of \(\reals^n\)}
+means there is a \underline{consistent} orientiation \(\mu_x\) on every tangent space \(M_x \subset \reals^k\). This means for every coordinate system \(\varphi: W \to \reals^n\), any two points \(a, b \in W\),
+\begin{equation}
+  [\varphi_{*a}(e_{1,a}),...,\varphi_{*a}(e_{k,a})] = \mu_{\varphi(a)} \iff [\varphi_{*b}(e_{1,b}),...,\varphi_{*b}(e_{k,b})] = \mu_{\varphi(b)}]
+  \label{forevery}
+\end{equation}
+\begin{definition}
+  An \underline{orientable manifold} is a manifold \(M\) for which it's possible to choose consistent orientations \(\mu_x\) at every point.
+\end{definition}
+Suppose the orientations \(\mu_x\) can be chosen consistently. Given any coordinate chart, we're going to call it either \underline{orientation preserving} or \underline{orientation reversing}. Specifically,
+\begin{definition}
+  A coordinate chart \(\varphi: W \to \reals^k\) is \underline{orientation preserving} if
+  \begin{equation}
+    [\varphi_{*a}(e_{1,a}),...,\varphi_{*a}(e_{k, a})] = \mu_{\varphi(a)}
+  \end{equation}
+  for one point \(a\) or every point \(a\) (these are equivalent by equation \ref{forevery}).
+  If \(\varphi: W \to \reals^k\) is \underline{orientation reversing} (i.e. not orientation preserving), then if \(T: \reals^k \to \reals^k\) is a linear transformation with \(\det T < 0\), then \(\varphi \circ T\) is orientation preserving.
+\end{definition}
+So, every orientable manifold can be covered by orientation preserving coordinate charts (i.e. orientation preserving with respect to a consistent choice of orientations). Suppose now \(\varphi, \psi\) are two coordinate systems such that \(\varphi(a) = \psi(b)\) and
+\begin{equation}
+  [\varphi_{*a}(e_{1,a}),...,\varphi_{*b}(e_{k, a})] = \mu_x = [\psi_{*b}(e_{1,b}),...,\psi_{*b}(e_{k,b})]
+\end{equation}
+then \(\det(\varphi^{-1}, \psi)'(b) > 0\) (at every point in the overlap \(\varphi(W) \cap \psi(V)\)). We now obtain the following definitions:
+\begin{definition}
+If \(M\) is orientable, then a particular choice of consistent orientations \(\mu_x\) for \(x \in M\) is called an \underline{orientation of \(M\)}. An \underline{oriented manifold} \(M\) is a manifold together with an orientation.
+\end{definition}
+Let's now look at an example: the Möbius strip is \underline{not} orientable:s
+\begin{proof} (Sketch): consider an orientation at one point along the strip. Move it along the strip until it returns back to where it started. Now it's reversed, so we have an inconsistency.
+\end{proof}
+Obviously, this is not very rigorous, but we'll look at another approach next time.
+
 
 \subsection{Manifolds with Boundary}
 
