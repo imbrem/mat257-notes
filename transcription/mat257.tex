@@ -652,6 +652,80 @@ Take \(V = f^{-1}(A) \cap B\), \(W = A\). Then
 \[x \in V \implies f(x) \in A\]
 and \(x\) is the unique element of \(B\) such that \(g(f(x)) = 0\), i.e. \(x = g(f(x))\).
 
+\subsubsection{Proof of the Inverse Function Theorem}
+
+Let \(f: \reals^n \to \reals^n\) be \(\mc{C}^1\) on an open set containing \(a \in \reals^n\) and let \[\det f'(a) \neq 0\]
+We can assume, as shown in last lecture, that \(f'(a) = I\).
+We show that there are open \(V, W\) containing \(a\) and \(f(a)\) respectively such that \(f: V \to W\) with a continuous inverse \(f': W \to V\)
+
+We will begin by showing that we can't have \(f(x) = f(a)\) if \(x \neq a\) is sufficiently close to \(a\):
+\[f'(a) = I \land Ih = h \implies \lim_{h \to 0}\frac{|f(a + h) - f(a) - h|}{|h|} = 0\]
+If \(f(a + h) = f(a)\) then the quotient is 1. So the quotient being zero means that there exists a closed ball \(B\) centered at \(a\) such that
+\[x \in B \setminus \{a\} \implies f(x) \neq f(a)\]
+But that's not enough to mean that \(f\) is one to one in \(B\): it could be, for example, that \(f(\partial B)\), the image of the boundary of \(B\), intersects itself, for example. What we want to do is find an even smaller ball where \(f\) really is one-to-one. So, since \(f\) is \(\mc{C}^1\) in a neighborhood of \(a\) we can also assume:
+\begin{enumerate}
+
+  \item \(x \in B \implies \det f'(x) \neq 0\) since \(f'\) is continuous
+
+  \item Given \(\epsilon\), we can make, for all \(i, j\), \[
+    \left|\prt{f_i}{x_j}(x) - \prt{f_i}{x_j}(a)\right| < \epsilon
+  \]
+  Note that, by our previous assumption that \(f'(a) = I\),
+  \[\prt{f_i}{x_j}(a) = I_{ij}\]
+
+\end{enumerate}
+Apply the Mean Value Theorem to \(g(x) = f(x) - x\). According to the MVT, we can also assume that
+\[|g(x_1) - g(x_2)| \leq cb|x_1 - x_2|\]
+where \(c\) is a constant and \(b\) is a bound on the partial derivatives of \(g\). But what is \(\prt{g_i}{x_j}\)? It's the same as what's in the absolute value brackets in assumption (2), since
+\[\prt{x_i}{x_j} = \delta_{ij} = \prt{f_i}{x_j}\]
+So we have that
+\[|g(x_1) - g(x_2)| \leq c\epsilon|x_1 - x_2|\]
+for some constant \(c\). That was for any given \(\epsilon\). Let's choose \(\epsilon\) such that \(c\epsilon = \frac{1}{2}\), giving
+\[|g(x_1) - g(x_2)| \leq \frac{1}{2}|x_1 - x_2|\]
+If you remember that problem we did on the MVT, we gave a precise bound on \(\epsilon\), specifically it suffices to choose \(\epsilon = \frac{1}{2n}\). So what does this tell us?
+\[|f(x_1) - x_1 - f(x_2) + x_2| \leq \frac{1}{2}|x_1 - x_2|\]
+using the Triangle Inequality, we obtain
+\[|x_1 - x_2| \leq 2|f(x_1) - f(x_2)|\]
+So what does \textit{this} tell us? It tells us that \(f\) is one-to-one on \(B\), since if \(f(x_1) = f(x_2)\) and \(x_1 \neq x_2\) then
+\[|x_1 - x_2| > 2|f(x_1) - f(x_2)| = 0\]
+We have that \(f(\partial B)\) is a compact set not including \(a\). So we have that
+\[d = d(f(a), f(\partial B)) > 0\]
+Let
+\[W = \{y : |y - f(a)| \leq d/2\}\]
+Then if \(y \in W\), \(x \in \partial B\), then what's the relationship between
+\(|y - f(a)|\) and \(|y - f(x)|\)? Since \(W\) is the ball of radius \(\frac{d}{2}\), we have that
+\[|y - f(a)| < |y - f(x)|\]
+This tells us that \(W\) is completely in the image of \(B\). It follows that for all \(y \in W\), there is some \(x \in \Int B\) such that \(f(x) = y\). I could have said unique \(x\), but I didn't bother because it must be unique anyways since we already checked one to one. But let's check this. We're going to do so by solving an extreme value problem. Let's define \(h: B \to \reals\) by
+\[x \mapsto |y - f(x)|^2 = \sum_{i = 1}^n|y_i - f_i(x)|^2\]
+\(h\) is continuous, and therefore it has a minimum on the compact set \(B\). So this is the usual business of a max-min problem: it could be that the minimum occurs on the bounary. So can it? No, since, as we saw above,
+\[\forall y \in W, |y - f(a)| < |y - f(x)|\]
+So that means it occurs at the interior, and since \(f\) and hence \(|y - f(x)|^2\) is differentiable, at a critical point, a point where all the partial derivatives are zero, \(x \in \Int B\). But what does the following exactly mean:
+\[\prt{h}{x_j}(x) = 0\]
+Expanding, we get
+\[\forall j \in \{1,...,n\}, \sum_{i = 1}^n2(y_i - f_i(x))\prt{f_i}{x_j}(x) = 0\]
+So what does this tell us? This is a system of \(n\) equations linear in \(y_i - f_i(x)\) with coefficients \(\prt{f_i}{x_j}(x)\). But since the matrix
+\[\left(\prt{f_i}{x_j}\right)\]
+is invertible, since \(\det f'(x) \neq 0\), we have
+\[[\forall i \in \{1,...,n\}, (y_i - f_i(x)) = 0] \iff y = f(x)\]
+which is what we wanted to show.
+
+So back to what we wanted to do, we wanted to find those open sets \(V\) and \(W\). So what should we use as \(V\)?
+\[V = f^{-1}(W) \cap \Int B\]
+Then \(f: V \to W\) has an inverse \(f^{-1}: W \to V\), since \(f\) is one to one. We also wanted to show that the inverse is continuous. So how do we see that? Well, we go back to what we showed above:
+\[\forall x_1, x_2 \in V, |x_1 - x_2| \leq 2|f(x_1) - f(x_2)| \implies \forall y_1, y_2 \in W, |f^{-1}(y_1) - f^{-1}(y_2)| \leq 2|y_1 - y_2|\]
+implying \(f^{-1}\) is continuous. So the only thing remaining is to show that \(f^{-1}\) is differentiable. So let's take a point \(x_0 \in V\), \(y_0 = f(x_0)\). Call \(\mu = Df(x_0)\). We'll show \(f^{-1}\) is differentiable at \(y_0\) and \((f^{-1})'(y_0) = \mu^{-1}\). So what do we know. We know that
+\[f(x) = f(x_0) + \mu(x - x_0) + \varphi(x)\]
+where
+\[\lim_{x \to x_0}\frac{|\varphi(x)|}{|x - x_0|} = 0\]
+Each \(y \in W\) can be written \(y = f(x), x \in V\). We have
+\[\mu^{-1}(y - y_0) = \mu^{-1}(f(x) - f(x_0)) = x - x_0 + \mu^{-1}\varphi(x)\]
+So what this says is that
+\[f^{-1}(y) = f^{-1}(y_0) + \mu^{-1}(y - y_0) - \mu^{-1}\varphi(f^{-1}(y))\]
+That's like what we need to show that \(f^{-1}\) is differentiable. Specifically, we have to show
+\[\lim_{y \to y_0}\frac{\mu^{-1}\varphi(f^{-1}(y))}{|y - y_0|} = 0\]
+We have
+\[\frac{\varphi(f^{-1}(y))}{|y - y_0|} = \frac{\varphi(f^{-1}(y))}{|f^{-1}(y) - f^{-1}(y_0)|} \cdot \frac{|f^{-1}(y) - f^{-1}(y_0)|}{|y - y_0|} \leq 2\frac{\varphi(f^{-1}(y_0))}{|f^{-1}(y) - f^{-1}(y_0)}\]
+And that's the proof of the inverse function theorem, and hence the implicit function theorem.
 
 
 \subsection{Tangent Space}
