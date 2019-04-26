@@ -811,6 +811,87 @@ i.e. if
 
 \TODO{rest}
 
+\subsubsection{Lagrange's Method}
+
+
+Today, we'll do some example problems regarding Lagrange's method:
+
+\begin{enumerate}
+
+  \item Prove that
+  \[uv \leq \frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta\]
+  for all \(u, v \in \reals^+_0\), \(\alpha, \beta \in \reals^+\) such that \(\frac{1}{\alpha} + \frac{1}{\beta} = 1\).
+  \begin{proof}
+    This is trivially true if \(u = 0\) or \(v = 0\), so we can assume \(uv \neq 0\).
+
+    The enequality holds for \(u, v\) if and only if it holds for \(ut^{1/\alpha}\), \(vt^{1/\beta}\),
+    \[(ut^{1/\alpha})(vt^{1/\beta}) = 1 \iff t = \frac{1}{uv}\]
+    So it's enough to show that
+    \[1 \leq \frac{1}{\alpha}u^{\alpha} + \frac{1}{\beta}v^{\beta}\]
+    for all \(u, v \in \reals^+\) such that \(uv = 1\).
+    We have that
+    \[\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta \to \infty\]
+    on \(uv = 1\) when either \(u \to \infty\) or \(v \to \infty\). So there is a minimum at a finite point.
+    The critical points of
+    \[\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta + \lambda(uv - 1)\]
+    are given by
+    \[u^{\alpha - 1} + \lambda v = 0 \land v^{\beta - 1} + \lambda u = 0 \implies u^\alpha = v^\beta = -\lambda\]
+    This gives, combined with condition \(uv = 1\), solution
+    \[u = v = 1\]
+    So the minimum value of
+    \[\frac{1}{\alpha}v^\alpha + \frac{1}{\beta}v^\beta\]
+    is simply
+    \[\frac{1}{\alpha} + \frac{1}{\beta} = 1\]
+    which implies the above inequality and hence what we desired to prove. We will use these kinds of techniques to prove a veriety of different problems.
+  \end{proof}
+
+  \item Prove \underline{Holder's inequality}:
+  \[\sum_{i = 1}^nu_iv_i \leq \left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}\]
+  where \(u_i, v_i \in \reals^+_0\), \(\alpha, \beta \in \reals^+\) such that
+  \[\frac{1}{\alpha} + \frac{1}{\beta} = 1\]
+
+  \begin{proof}
+    It's a good observation that this is similar to what we did before (1), and in fact we can deduce it just from what we did before instead of starting from scratch.
+
+    We begin by assuming
+    \[\sum_{i = 1}^nu_i^\alpha, \sum_{i = 1}^nv_i\alpha \neq 0\]
+    since if either are zero then the inequality holds trivially.
+
+    We can now apply the preceding inequality to
+    \[u = \frac{u_i}{\left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}}, v = \frac{v_i}{\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}}\]
+    for each \(u_i, v_i\), from which the result follows.
+  \end{proof}
+
+  \item An example from last year's term test: find the rectangular parallelepiped of greatest volume inscribed in an ellipsoid
+  \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\]
+  Some people in MAT257 last year didn't like this question. That was true for most of the questions. But part of the reason why they didn't like this question is that they looked at it in a way which was more difficult than I intended, because I was essentially thinking that you should assume that the rectangular parallelepiped is situated in a standard way within the ellipse. We will do it this way.
+
+  In fact, maybe there's an ambiguity in the meaning of the question, because what do you mean by a rectangular parallelepiped inscribed in an ellipse. Like, I thought that meant that all four vertices lied on the ellipse. If you want to do the exercise, it's a good geometric exercise, but it's not a required part of the exercise, to show that if you do have all vertices on the ellipse, it has to be centered at the origin.
+
+  So let's begin. Let \((x, y, z)\) be the vertex in the positive orthent (like the positive quadrant but in 3D). So what's the problem we have to solve? First of all, what's the volume in terms of this vertex?
+  \[(2x)(2y)(2z) = 8xyz\]
+  So we have to maximize \(8xyz\), which is the same as maximizing \(xyz\), on the ellipsoid  given, with \(x, y, z \in \reals^+\).
+
+  This means we have to find the critical points. This (the ellipse) is a nice smooth surface of course, technically this is something you need to check, in that its gradient is nonzero at every point. To find the extrema, we hence need to find the critical points of
+  \[F(x, y, z) = xyz + \lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1\right)\]
+  This means we need to find the derivatives in terms of \((x, y, z)\) and set them to zero, which are
+  \[F_x = yz + 2\lambda\frac{x}{a^2} = F_y = xz + 2\lambda\frac{y}{b^2} = F_z = xy = 2\lambda\frac{z}{c^2} = 0\]
+  So we have four equations in three unknowns: these equations together with the equation of the ellipsoid.
+
+  We multiply the first equation by \(x\), the second by \(y\) and the third by \(z\) to obtain
+  \[xyz + 2\lambda\frac{x^2}{a^2} = 0, xyz + 2\lambda\frac{y^2}{b^2} = 0, xyz + 2\lambda\frac{z^2}{b^2} = 0\]
+  and add them up to obtain
+  \[3xyz + 2\lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}\right) = 0\]
+  Plugging in the equation of the ellipse, we get
+  \[3xyz + 2\lambda = 0\]
+  To solve this for \(x, y, z\), we begin solving for \(x\) by substituting \(yz\) for \(-2\lambda\frac{x}{a^2}\) (from the first equation) to get
+  \[-3\frac{x^2}{a^2} + 1 = 0 \implies x = \frac{a}{\sqrt{3}}\]
+  Likewise,
+  \[y = \frac{b}{\sqrt{3}}, z = \frac{c}{\sqrt{3}}\]
+  We know this is not a minimu, since the volume of the minimum is zero.
+
+\end{enumerate}
+
 \subsection{Multivariate Taylor Series}
 
 \TODO{this}
