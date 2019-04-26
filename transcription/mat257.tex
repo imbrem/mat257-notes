@@ -595,7 +595,7 @@ This relationship, of course, defines the unit circle. Can we solve for \(y\) at
 If we pick a point \((a, b) \in \reals^2\) however, and assume \(a \neq \pm 1\), then there are open intervals \(I, J\) such that for every \(x \in I\), there is a unique \(y = g(x) \in J\) such that \(f(x, y) = 0\).
 
 Let's restrict our attention to a small enough interval such that \(b > 0\). Of course, then, we can explicitly write down what the solution is:
-\[g(x) = \sqrt{1 - x^2}\]
+\begin{equation}g(x) = \sqrt{1 - x^2}\end{equation}
 
 Sometimes in this context people say that one of the variables is dependent and the other is independent. Which is which? How should you understand that language? Well, the dependent variable is the one that is determined by the independent one you specify. But that notion, it depends on where you are: at the poles \(x = \pm 1\), we can only solve for \(x\), whereas at the poles \(y \pm 1\), we can only solve for \(y\).
 
@@ -603,11 +603,11 @@ Furthermore, we may not be able to find a nice formula for \(g\). However, by wh
 
 \subsubsection{Implicit Differentiation}
 Let's assume we have a function
-\[F(x, g(x)) = 0\]
+\begin{equation}F(x, g(x)) = 0\end{equation}
 Whether or not we have a formula for \(g\), we can use the chain rule to obtain
-\[\frac{d}{dx}F(x, g(x)) = \partial_1(x, g(x)) + \partial_2(x, g(x))g'(x) = 0\]
+\begin{equation}\frac{d}{dx}F(x, g(x)) = \partial_1(x, g(x)) + \partial_2(x, g(x))g'(x) = 0\end{equation}
 So we find that
-\[g'(x) = -\frac{\partial_1(x, g(x))}{\partial_2(x, g(x))}\]
+\begin{equation}g'(x) = -\frac{\partial_1(x, g(x))}{\partial_2(x, g(x))}\end{equation}
 Now this formula depends on \(g\). Is this weird or expected? Well, it makes sense. Consider the example above: we might have two solutions (points on the circle) on top of each other for a given \(x\)-coordinate. This formula works for \textit{both} of them.
 
 
@@ -619,23 +619,23 @@ Now this formula depends on \(g\). Is this weird or expected? Well, it makes sen
 We have to start with the hypotheses of the implicit function theorem: given a \(\mc{C}^r\) (where \(r \geq 1\)) function
 \(f: U \to \reals^n\)
 where \(U \in \reals^{m + n}\), \(f(a, b) = 0\) and \(\det M \neq 0\), where
-\[M = \left(\prt{f_i}{y_j}(a, b)\right)\]
+\begin{equation}M = \left(\prt{f_i}{y_j}(a, b)\right)\end{equation}
 Define
-\[F: U \to \reals^m\times\reals^n, (x, y) \mapsto (x, f(x, y))\]
+\begin{equation}F: U \to \reals^m\times\reals^n, (x, y) \mapsto (x, f(x, y))\end{equation}
 In particular,
-\[F(a, b) = (a, 0)\]
+\begin{equation}F(a, b) = (a, 0)\end{equation}
 This is what we're going to apply the inverse function theorem to. So we've got to show that this function satisfies the hypotheses of the inverse function theorem. So we've got to show that its derivative matrix at the point \((a, b)\) is invertable. So let's compute: the derivative is given by
-\[F'(a, b) = \left(\begin{array}{c|c} I & 0 \\ \hline * & M \end{array}\right) \implies \det F'(a, b) = \det I \det M = \det M \neq 0\]
+\begin{equation}F'(a, b) = \left(\begin{array}{c|c} I & 0 \\ \hline * & M \end{array}\right) \implies \det F'(a, b) = \det I \det M = \det M \neq 0\end{equation}
 These are the conditions under which we can apply the inverse function theorem. So by the inverse function theorem, there exists an open neighborhood \(V\) of \((a, b)\), and an open neighborhood \(W\) of \((0, 0)\) so that \(F: V \to W\) has a \(\mc{C}^r\) inverse
 \(F^{-1}: W \to V\). We can assume \(V = A \times B\), where \(A, B\) are open neighborhoods of \(a, b\). \(F^{-1}(u, v)\) has the form \((u, h(u, v))\). So
-\[F(F^{-1}(u, v)) = F(u, h(u, v)) = (u, f(u, h(u, v))) = (u, v) \implies f(u, h(u, v)) = v\]
-\[\implies f(u, h(u, 0)) = 0\]
+\begin{equation}F(F^{-1}(u, v)) = F(u, h(u, v)) = (u, f(u, h(u, v))) = (u, v) \implies f(u, h(u, v)) = v\end{equation}
+\begin{equation}\implies f(u, h(u, 0)) = 0\end{equation}
 Let \(g(x) = h(x, 0)\), which is \(\mc{C}^r\). Then
-\[f(x, g(x)) = 0\]
+\begin{equation}f(x, g(x)) = 0\end{equation}
 Remark: we can find \(g'(x)\) by \underline{implicit differentiation}. We have
-\[\forall i \in \{1,...,n\}, f_i(x, g(x)) = 0\]
+\begin{equation}\forall i \in \{1,...,n\}, f_i(x, g(x)) = 0\end{equation}
 We can write
-\[\prt{f_i}{x_j}(x, g(x)) + \sum_{k = 1}^n\prt{f_i}{y_k}(x, g(x))\prt{g_k}{x_j}(x) = 0\]
+\begin{equation}\prt{f_i}{x_j}(x, g(x)) + \sum_{k = 1}^n\prt{f_i}{y_k}(x, g(x))\prt{g_k}{x_j}(x) = 0\end{equation}
 We can solve for \(\prt{g_k}{x_j}\) because \(\left(\prt{f_i}{y_k}(x, y)\right)\) is invertible near \((a, b)\).
 
 \subsubsection{The Implicit Function Theorem Implies the Inverse Function Theorem}
@@ -643,88 +643,88 @@ We can solve for \(\prt{g_k}{x_j}\) because \(\left(\prt{f_i}{y_k}(x, y)\right)\
 This time, we start with the hypotheses of the \textit{inverse} function theorem. So here we have a \(\mc{C}^r\) function \(f: U \to \reals^n\) with \(\det f'(a) \neq 0\).
 
 Let \(b = f(a)\), and define
-\[F(x, y) = y - f(x)\]
+\begin{equation}F(x, y) = y - f(x)\end{equation}
 This is a \(\mc{C}^r\) function of \((a, b)\) and \(F(a, b) = 0\). We have
-\[\prt{F}{x}(a, b) = \det(-f'(a)) \neq 0\]
+\begin{equation}\prt{F}{x}(a, b) = \det(-f'(a)) \neq 0\end{equation}
 By the implicit function theorem there exist open neighborhoods \(A, B\) of \(a, b\) respectively such that for all \(y \in A\), there is a unique \(\mc{C}^r\) \(x = g(y)\) in \(B\) such that
-\[F(g(y), y) = 0 \iff y - f(g(y)) = 0\]
+\begin{equation}F(g(y), y) = 0 \iff y - f(g(y)) = 0\end{equation}
 Take \(V = f^{-1}(A) \cap B\), \(W = A\). Then
-\[x \in V \implies f(x) \in A\]
+\begin{equation}x \in V \implies f(x) \in A\end{equation}
 and \(x\) is the unique element of \(B\) such that \(g(f(x)) = 0\), i.e. \(x = g(f(x))\).
 
 \subsubsection{Proof of the Inverse Function Theorem}
 
-Let \(f: \reals^n \to \reals^n\) be \(\mc{C}^1\) on an open set containing \(a \in \reals^n\) and let \[\det f'(a) \neq 0\]
+Let \(f: \reals^n \to \reals^n\) be \(\mc{C}^1\) on an open set containing \(a \in \reals^n\) and let \begin{equation}\det f'(a) \neq 0\end{equation}
 We can assume, as shown in last lecture, that \(f'(a) = I\).
 We show that there are open \(V, W\) containing \(a\) and \(f(a)\) respectively such that \(f: V \to W\) with a continuous inverse \(f': W \to V\)
 
 We will begin by showing that we can't have \(f(x) = f(a)\) if \(x \neq a\) is sufficiently close to \(a\):
-\[f'(a) = I \land Ih = h \implies \lim_{h \to 0}\frac{|f(a + h) - f(a) - h|}{|h|} = 0\]
+\begin{equation}f'(a) = I \land Ih = h \implies \lim_{h \to 0}\frac{|f(a + h) - f(a) - h|}{|h|} = 0\end{equation}
 If \(f(a + h) = f(a)\) then the quotient is 1. So the quotient being zero means that there exists a closed ball \(B\) centered at \(a\) such that
-\[x \in B \setminus \{a\} \implies f(x) \neq f(a)\]
+\begin{equation}x \in B \setminus \{a\} \implies f(x) \neq f(a)\end{equation}
 But that's not enough to mean that \(f\) is one to one in \(B\): it could be, for example, that \(f(\partial B)\), the image of the boundary of \(B\), intersects itself, for example. What we want to do is find an even smaller ball where \(f\) really is one-to-one. So, since \(f\) is \(\mc{C}^1\) in a neighborhood of \(a\) we can also assume:
 \begin{enumerate}
 
   \item \(x \in B \implies \det f'(x) \neq 0\) since \(f'\) is continuous
 
-  \item Given \(\epsilon\), we can make, for all \(i, j\), \[
+  \item Given \(\epsilon\), we can make, for all \(i, j\), \begin{equation}
     \left|\prt{f_i}{x_j}(x) - \prt{f_i}{x_j}(a)\right| < \epsilon
-  \]
+  \end{equation}
   Note that, by our previous assumption that \(f'(a) = I\),
-  \[\prt{f_i}{x_j}(a) = I_{ij}\]
+  \begin{equation}\prt{f_i}{x_j}(a) = I_{ij}\end{equation}
 
 \end{enumerate}
 Apply the Mean Value Theorem to \(g(x) = f(x) - x\). According to the MVT, we can also assume that
-\[|g(x_1) - g(x_2)| \leq cb|x_1 - x_2|\]
+\begin{equation}|g(x_1) - g(x_2)| \leq cb|x_1 - x_2|\end{equation}
 where \(c\) is a constant and \(b\) is a bound on the partial derivatives of \(g\). But what is \(\prt{g_i}{x_j}\)? It's the same as what's in the absolute value brackets in assumption (2), since
-\[\prt{x_i}{x_j} = \delta_{ij} = \prt{f_i}{x_j}\]
+\begin{equation}\prt{x_i}{x_j} = \delta_{ij} = \prt{f_i}{x_j}\end{equation}
 So we have that
-\[|g(x_1) - g(x_2)| \leq c\epsilon|x_1 - x_2|\]
+\begin{equation}|g(x_1) - g(x_2)| \leq c\epsilon|x_1 - x_2|\end{equation}
 for some constant \(c\). That was for any given \(\epsilon\). Let's choose \(\epsilon\) such that \(c\epsilon = \frac{1}{2}\), giving
-\[|g(x_1) - g(x_2)| \leq \frac{1}{2}|x_1 - x_2|\]
+\begin{equation}|g(x_1) - g(x_2)| \leq \frac{1}{2}|x_1 - x_2|\end{equation}
 If you remember that problem we did on the MVT, we gave a precise bound on \(\epsilon\), specifically it suffices to choose \(\epsilon = \frac{1}{2n}\). So what does this tell us?
-\[|f(x_1) - x_1 - f(x_2) + x_2| \leq \frac{1}{2}|x_1 - x_2|\]
+\begin{equation}|f(x_1) - x_1 - f(x_2) + x_2| \leq \frac{1}{2}|x_1 - x_2|\end{equation}
 using the Triangle Inequality, we obtain
-\[|x_1 - x_2| \leq 2|f(x_1) - f(x_2)|\]
+\begin{equation}|x_1 - x_2| \leq 2|f(x_1) - f(x_2)|\end{equation}
 So what does \textit{this} tell us? It tells us that \(f\) is one-to-one on \(B\), since if \(f(x_1) = f(x_2)\) and \(x_1 \neq x_2\) then
-\[|x_1 - x_2| > 2|f(x_1) - f(x_2)| = 0\]
+\begin{equation}|x_1 - x_2| > 2|f(x_1) - f(x_2)| = 0\end{equation}
 We have that \(f(\partial B)\) is a compact set not including \(a\). So we have that
-\[d = d(f(a), f(\partial B)) > 0\]
+\begin{equation}d = d(f(a), f(\partial B)) > 0\end{equation}
 Let
-\[W = \{y : |y - f(a)| \leq d/2\}\]
+\begin{equation}W = \{y : |y - f(a)| \leq d/2\}\end{equation}
 Then if \(y \in W\), \(x \in \partial B\), then what's the relationship between
 \(|y - f(a)|\) and \(|y - f(x)|\)? Since \(W\) is the ball of radius \(\frac{d}{2}\), we have that
-\[|y - f(a)| < |y - f(x)|\]
+\begin{equation}|y - f(a)| < |y - f(x)|\end{equation}
 This tells us that \(W\) is completely in the image of \(B\). It follows that for all \(y \in W\), there is some \(x \in \Int B\) such that \(f(x) = y\). I could have said unique \(x\), but I didn't bother because it must be unique anyways since we already checked one to one. But let's check this. We're going to do so by solving an extreme value problem. Let's define \(h: B \to \reals\) by
-\[x \mapsto |y - f(x)|^2 = \sum_{i = 1}^n|y_i - f_i(x)|^2\]
+\begin{equation}x \mapsto |y - f(x)|^2 = \sum_{i = 1}^n|y_i - f_i(x)|^2\end{equation}
 \(h\) is continuous, and therefore it has a minimum on the compact set \(B\). So this is the usual business of a max-min problem: it could be that the minimum occurs on the bounary. So can it? No, since, as we saw above,
-\[\forall y \in W, |y - f(a)| < |y - f(x)|\]
+\begin{equation}\forall y \in W, |y - f(a)| < |y - f(x)|\end{equation}
 So that means it occurs at the interior, and since \(f\) and hence \(|y - f(x)|^2\) is differentiable, at a critical point, a point where all the partial derivatives are zero, \(x \in \Int B\). But what does the following exactly mean:
-\[\prt{h}{x_j}(x) = 0\]
+\begin{equation}\prt{h}{x_j}(x) = 0\end{equation}
 Expanding, we get
-\[\forall j \in \{1,...,n\}, \sum_{i = 1}^n2(y_i - f_i(x))\prt{f_i}{x_j}(x) = 0\]
+\begin{equation}\forall j \in \{1,...,n\}, \sum_{i = 1}^n2(y_i - f_i(x))\prt{f_i}{x_j}(x) = 0\end{equation}
 So what does this tell us? This is a system of \(n\) equations linear in \(y_i - f_i(x)\) with coefficients \(\prt{f_i}{x_j}(x)\). But since the matrix
-\[\left(\prt{f_i}{x_j}\right)\]
+\begin{equation}\left(\prt{f_i}{x_j}\right)\end{equation}
 is invertible, since \(\det f'(x) \neq 0\), we have
-\[[\forall i \in \{1,...,n\}, (y_i - f_i(x)) = 0] \iff y = f(x)\]
+\begin{equation}[\forall i \in \{1,...,n\}, (y_i - f_i(x)) = 0] \iff y = f(x)\end{equation}
 which is what we wanted to show.
 
 So back to what we wanted to do, we wanted to find those open sets \(V\) and \(W\). So what should we use as \(V\)?
-\[V = f^{-1}(W) \cap \Int B\]
+\begin{equation}V = f^{-1}(W) \cap \Int B\end{equation}
 Then \(f: V \to W\) has an inverse \(f^{-1}: W \to V\), since \(f\) is one to one. We also wanted to show that the inverse is continuous. So how do we see that? Well, we go back to what we showed above:
-\[\forall x_1, x_2 \in V, |x_1 - x_2| \leq 2|f(x_1) - f(x_2)| \implies \forall y_1, y_2 \in W, |f^{-1}(y_1) - f^{-1}(y_2)| \leq 2|y_1 - y_2|\]
+\begin{equation}\forall x_1, x_2 \in V, |x_1 - x_2| \leq 2|f(x_1) - f(x_2)| \implies \forall y_1, y_2 \in W, |f^{-1}(y_1) - f^{-1}(y_2)| \leq 2|y_1 - y_2|\end{equation}
 implying \(f^{-1}\) is continuous. So the only thing remaining is to show that \(f^{-1}\) is differentiable. So let's take a point \(x_0 \in V\), \(y_0 = f(x_0)\). Call \(\mu = Df(x_0)\). We'll show \(f^{-1}\) is differentiable at \(y_0\) and \((f^{-1})'(y_0) = \mu^{-1}\). So what do we know. We know that
-\[f(x) = f(x_0) + \mu(x - x_0) + \varphi(x)\]
+\begin{equation}f(x) = f(x_0) + \mu(x - x_0) + \varphi(x)\end{equation}
 where
-\[\lim_{x \to x_0}\frac{|\varphi(x)|}{|x - x_0|} = 0\]
+\begin{equation}\lim_{x \to x_0}\frac{|\varphi(x)|}{|x - x_0|} = 0\end{equation}
 Each \(y \in W\) can be written \(y = f(x), x \in V\). We have
-\[\mu^{-1}(y - y_0) = \mu^{-1}(f(x) - f(x_0)) = x - x_0 + \mu^{-1}\varphi(x)\]
+\begin{equation}\mu^{-1}(y - y_0) = \mu^{-1}(f(x) - f(x_0)) = x - x_0 + \mu^{-1}\varphi(x)\end{equation}
 So what this says is that
-\[f^{-1}(y) = f^{-1}(y_0) + \mu^{-1}(y - y_0) - \mu^{-1}\varphi(f^{-1}(y))\]
+\begin{equation}f^{-1}(y) = f^{-1}(y_0) + \mu^{-1}(y - y_0) - \mu^{-1}\varphi(f^{-1}(y))\end{equation}
 That's like what we need to show that \(f^{-1}\) is differentiable. Specifically, we have to show
-\[\lim_{y \to y_0}\frac{\mu^{-1}\varphi(f^{-1}(y))}{|y - y_0|} = 0\]
+\begin{equation}\lim_{y \to y_0}\frac{\mu^{-1}\varphi(f^{-1}(y))}{|y - y_0|} = 0\end{equation}
 We have
-\[\frac{\varphi(f^{-1}(y))}{|y - y_0|} = \frac{\varphi(f^{-1}(y))}{|f^{-1}(y) - f^{-1}(y_0)|} \cdot \frac{|f^{-1}(y) - f^{-1}(y_0)|}{|y - y_0|} \leq 2\frac{\varphi(f^{-1}(y_0))}{|f^{-1}(y) - f^{-1}(y_0)}\]
+\begin{equation}\frac{\varphi(f^{-1}(y))}{|y - y_0|} = \frac{\varphi(f^{-1}(y))}{|f^{-1}(y) - f^{-1}(y_0)|} \cdot \frac{|f^{-1}(y) - f^{-1}(y_0)|}{|y - y_0|} \leq 2\frac{\varphi(f^{-1}(y_0))}{|f^{-1}(y) - f^{-1}(y_0)}\end{equation}
 And that's the proof of the inverse function theorem, and hence the implicit function theorem.
 
 
@@ -819,75 +819,75 @@ Today, we'll do some example problems regarding Lagrange's method:
 \begin{enumerate}
 
   \item Prove that
-  \[uv \leq \frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta\]
+  \begin{equation}uv \leq \frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta\end{equation}
   for all \(u, v \in \reals^+_0\), \(\alpha, \beta \in \reals^+\) such that \(\frac{1}{\alpha} + \frac{1}{\beta} = 1\).
   \begin{proof}
     This is trivially true if \(u = 0\) or \(v = 0\), so we can assume \(uv \neq 0\).
 
     The enequality holds for \(u, v\) if and only if it holds for \(ut^{1/\alpha}\), \(vt^{1/\beta}\),
-    \[(ut^{1/\alpha})(vt^{1/\beta}) = 1 \iff t = \frac{1}{uv}\]
+    \begin{equation}(ut^{1/\alpha})(vt^{1/\beta}) = 1 \iff t = \frac{1}{uv}\end{equation}
     So it's enough to show that
-    \[1 \leq \frac{1}{\alpha}u^{\alpha} + \frac{1}{\beta}v^{\beta}\]
+    \begin{equation}1 \leq \frac{1}{\alpha}u^{\alpha} + \frac{1}{\beta}v^{\beta}\end{equation}
     for all \(u, v \in \reals^+\) such that \(uv = 1\).
     We have that
-    \[\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta \to \infty\]
+    \begin{equation}\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta \to \infty\end{equation}
     on \(uv = 1\) when either \(u \to \infty\) or \(v \to \infty\). So there is a minimum at a finite point.
     The critical points of
-    \[\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta + \lambda(uv - 1)\]
+    \begin{equation}\frac{1}{\alpha}u^\alpha + \frac{1}{\beta}v^\beta + \lambda(uv - 1)\end{equation}
     are given by
-    \[u^{\alpha - 1} + \lambda v = 0 \land v^{\beta - 1} + \lambda u = 0 \implies u^\alpha = v^\beta = -\lambda\]
+    \begin{equation}u^{\alpha - 1} + \lambda v = 0 \land v^{\beta - 1} + \lambda u = 0 \implies u^\alpha = v^\beta = -\lambda\end{equation}
     This gives, combined with condition \(uv = 1\), solution
-    \[u = v = 1\]
+    \begin{equation}u = v = 1\end{equation}
     So the minimum value of
-    \[\frac{1}{\alpha}v^\alpha + \frac{1}{\beta}v^\beta\]
+    \begin{equation}\frac{1}{\alpha}v^\alpha + \frac{1}{\beta}v^\beta\end{equation}
     is simply
-    \[\frac{1}{\alpha} + \frac{1}{\beta} = 1\]
+    \begin{equation}\frac{1}{\alpha} + \frac{1}{\beta} = 1\end{equation}
     which implies the above inequality and hence what we desired to prove. We will use these kinds of techniques to prove a veriety of different problems.
   \end{proof}
 
   \item Prove \underline{Holder's inequality}:
-  \[\sum_{i = 1}^nu_iv_i \leq \left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}\]
+  \begin{equation}\sum_{i = 1}^nu_iv_i \leq \left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}\end{equation}
   where \(u_i, v_i \in \reals^+_0\), \(\alpha, \beta \in \reals^+\) such that
-  \[\frac{1}{\alpha} + \frac{1}{\beta} = 1\]
+  \begin{equation}\frac{1}{\alpha} + \frac{1}{\beta} = 1\end{equation}
 
   \begin{proof}
     It's a good observation that this is similar to what we did before (1), and in fact we can deduce it just from what we did before instead of starting from scratch.
 
     We begin by assuming
-    \[\sum_{i = 1}^nu_i^\alpha, \sum_{i = 1}^nv_i\alpha \neq 0\]
+    \begin{equation}\sum_{i = 1}^nu_i^\alpha, \sum_{i = 1}^nv_i\alpha \neq 0\end{equation}
     since if either are zero then the inequality holds trivially.
 
     We can now apply the preceding inequality to
-    \[u = \frac{u_i}{\left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}}, v = \frac{v_i}{\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}}\]
+    \begin{equation}u = \frac{u_i}{\left(\sum_{i = 1}^nu_i^\alpha\right)^{1/\alpha}}, v = \frac{v_i}{\left(\sum_{i = 1}^nv_i^\beta\right)^{1/\beta}}\end{equation}
     for each \(u_i, v_i\), from which the result follows.
   \end{proof}
 
   \item An example from last year's term test: find the rectangular parallelepiped of greatest volume inscribed in an ellipsoid
-  \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\]
+  \begin{equation}\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1\end{equation}
   Some people in MAT257 last year didn't like this question. That was true for most of the questions. But part of the reason why they didn't like this question is that they looked at it in a way which was more difficult than I intended, because I was essentially thinking that you should assume that the rectangular parallelepiped is situated in a standard way within the ellipse. We will do it this way.
 
   In fact, maybe there's an ambiguity in the meaning of the question, because what do you mean by a rectangular parallelepiped inscribed in an ellipse. Like, I thought that meant that all four vertices lied on the ellipse. If you want to do the exercise, it's a good geometric exercise, but it's not a required part of the exercise, to show that if you do have all vertices on the ellipse, it has to be centered at the origin.
 
   So let's begin. Let \((x, y, z)\) be the vertex in the positive orthent (like the positive quadrant but in 3D). So what's the problem we have to solve? First of all, what's the volume in terms of this vertex?
-  \[(2x)(2y)(2z) = 8xyz\]
+  \begin{equation}(2x)(2y)(2z) = 8xyz\end{equation}
   So we have to maximize \(8xyz\), which is the same as maximizing \(xyz\), on the ellipsoid  given, with \(x, y, z \in \reals^+\).
 
   This means we have to find the critical points. This (the ellipse) is a nice smooth surface of course, technically this is something you need to check, in that its gradient is nonzero at every point. To find the extrema, we hence need to find the critical points of
-  \[F(x, y, z) = xyz + \lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1\right)\]
+  \begin{equation}F(x, y, z) = xyz + \lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1\right)\end{equation}
   This means we need to find the derivatives in terms of \((x, y, z)\) and set them to zero, which are
-  \[F_x = yz + 2\lambda\frac{x}{a^2} = F_y = xz + 2\lambda\frac{y}{b^2} = F_z = xy = 2\lambda\frac{z}{c^2} = 0\]
+  \begin{equation}F_x = yz + 2\lambda\frac{x}{a^2} = F_y = xz + 2\lambda\frac{y}{b^2} = F_z = xy = 2\lambda\frac{z}{c^2} = 0\end{equation}
   So we have four equations in three unknowns: these equations together with the equation of the ellipsoid.
 
   We multiply the first equation by \(x\), the second by \(y\) and the third by \(z\) to obtain
-  \[xyz + 2\lambda\frac{x^2}{a^2} = 0, xyz + 2\lambda\frac{y^2}{b^2} = 0, xyz + 2\lambda\frac{z^2}{b^2} = 0\]
+  \begin{equation}xyz + 2\lambda\frac{x^2}{a^2} = 0, xyz + 2\lambda\frac{y^2}{b^2} = 0, xyz + 2\lambda\frac{z^2}{b^2} = 0\end{equation}
   and add them up to obtain
-  \[3xyz + 2\lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}\right) = 0\]
+  \begin{equation}3xyz + 2\lambda\left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}\right) = 0\end{equation}
   Plugging in the equation of the ellipse, we get
-  \[3xyz + 2\lambda = 0\]
+  \begin{equation}3xyz + 2\lambda = 0\end{equation}
   To solve this for \(x, y, z\), we begin solving for \(x\) by substituting \(yz\) for \(-2\lambda\frac{x}{a^2}\) (from the first equation) to get
-  \[-3\frac{x^2}{a^2} + 1 = 0 \implies x = \frac{a}{\sqrt{3}}\]
+  \begin{equation}-3\frac{x^2}{a^2} + 1 = 0 \implies x = \frac{a}{\sqrt{3}}\end{equation}
   Likewise,
-  \[y = \frac{b}{\sqrt{3}}, z = \frac{c}{\sqrt{3}}\]
+  \begin{equation}y = \frac{b}{\sqrt{3}}, z = \frac{c}{\sqrt{3}}\end{equation}
   We know this is not a minimu, since the volume of the minimum is zero.
 
 \end{enumerate}
@@ -897,63 +897,63 @@ Today, we'll do some example problems regarding Lagrange's method:
 
 \subsubsection{Review of Single Variable Taylor Series}
 Recall the definition of the \(n^{th}\) degree Taylor polynomial of \(f\) centered at \(a\)
-\[P_{n, a}(f) = \sum_{k = 0}^n\frac{f^{(k)}(a)}{k!}(x - a)^k\]
+\begin{equation}P_{n, a}(f) = \sum_{k = 0}^n\frac{f^{(k)}(a)}{k!}(x - a)^k\end{equation}
 We define \(R_{n, a}\) to be the ``remainder'', the difference between \(P_{n, a}\) and \(f\). We can write this remainder in ``Lagrange form'' as
-\[\frac{f^{(n + 1)}(t)}{(n + 1)!}(x - a)^{n + 1}\]
+\begin{equation}\frac{f^{(n + 1)}(t)}{(n + 1)!}(x - a)^{n + 1}\end{equation}
 Clearly,
-\[\lim_{x \to a}\frac{R_{n, a}(x)}{(x - a)^n} = 0\]
+\begin{equation}\lim_{x \to a}\frac{R_{n, a}(x)}{(x - a)^n} = 0\end{equation}
 We can now define the \underline{Taylor series} of \(f\) at \(a\) to be
-\[T_af = \sum_{k = 0}^\infty\frac{f^{(k)}(a)}{k!}(x - a)^k\]
+\begin{equation}T_af = \sum_{k = 0}^\infty\frac{f^{(k)}(a)}{k!}(x - a)^k\end{equation}
 Why these coefficients?
 Suppose
-\[f(x) = \sum_{k = 0}^\infty a_k(x - a)^k\]
+\begin{equation}f(x) = \sum_{k = 0}^\infty a_k(x - a)^k\end{equation}
 Note
-\[\frac{d^n}{dx^n}(x - a)^k = \left\{\begin{array}{cc}
+\begin{equation}\frac{d^n}{dx^n}(x - a)^k = \left\{\begin{array}{cc}
   0 & \text{if } k < n \\
   k! & \text{if } n = k \\
   k(k - 1)...(k - n + 1)(x - a)^{k - n} & \text{if } k > n
-\end{array}\right.\]
+\end{array}\right.\end{equation}
 
 \subsubsection{Multivariable Case}
 For example: What's your favorite polynomial? Zero? I'm sure you meant something more like
-\[f(x, y, z) = a_{12,8,2}x^{12}y^8z^2 + a_{0,22,0}y^{22} + a_{0,0,1}z + a_{20,20,20}x^{20}y^{20}z^{20}\]
+\begin{equation}f(x, y, z) = a_{12,8,2}x^{12}y^8z^2 + a_{0,22,0}y^{22} + a_{0,0,1}z + a_{20,20,20}x^{20}y^{20}z^{20}\end{equation}
 How to do spot \(a_{12, 8, 2}\)? Apply:
-\[\left.\frac{\partial^{22}f}{\partial x^2 \partial y^8 \partial z^2}\right|_{(x, y, z) = (0, 0, 0)} = a_{12, 8, 2}12!8!2!\]
+\begin{equation}\left.\frac{\partial^{22}f}{\partial x^2 \partial y^8 \partial z^2}\right|_{(x, y, z) = (0, 0, 0)} = a_{12, 8, 2}12!8!2!\end{equation}
 In general, if \(f\) is a sum of terms like
-\[a_{\alpha_1,...,\alpha_n}x^{\alpha_1}....x^{\alpha_n}\]
+\begin{equation}a_{\alpha_1,...,\alpha_n}x^{\alpha_1}....x^{\alpha_n}\end{equation}
 Then
-\[a_{\alpha_1,...,\alpha_n} = \left.\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\right|_{(x_1,...,x_n) = (0,...,0)}\frac{1}{\alpha_1!...\alpha_n!}\]
+\begin{equation}a_{\alpha_1,...,\alpha_n} = \left.\frac{\partial^{\alpha_1 + ... + \alpha_n}f}{\partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}}\right|_{(x_1,...,x_n) = (0,...,0)}\frac{1}{\alpha_1!...\alpha_n!}\end{equation}
 
 \subsubsection{Multi-index notation}
 We're mathematicians here, and what do mathematicians do, we generalize. But we generalize in such a way such that the general case looks like the specialized case so we don't have to remember different notation when teaching first-years and when doing research. Multi-index notation is a prime example. Compare:
 \begin{itemize}
 
   \item Let \(f: \reals \to \reals\). Then
-  \[f = \sum_{k \in \nats}\frac{1}{k!}f^{(k)}(a)(x - a)^k\]
+  \begin{equation}f = \sum_{k \in \nats}\frac{1}{k!}f^{(k)}(a)(x - a)^k\end{equation}
 
   \item Let \(f: \reals^n \to \reals\). Then
-  \[f = \sum_{\alpha \in \nats^n}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}}{\partial x^\alpha}(a)(x - a)^\alpha\]
+  \begin{equation}f = \sum_{\alpha \in \nats^n}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}}{\partial x^\alpha}(a)(x - a)^\alpha\end{equation}
 
 \end{itemize}
 To make this to work, all we have to do is define, for
-\[\alpha = (\alpha_1,...,\alpha_n) \in \nats^n\]
+\begin{equation}\alpha = (\alpha_1,...,\alpha_n) \in \nats^n\end{equation}
 the notation
-\[\alpha! = \alpha_1!...\alpha_n!\]
-\[|\alpha| = \alpha_1 + ... + \alpha_n\]
-\[\partial x^\alpha = \partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}\]
-\[(x - a)^\alpha = (x_1 - a_1)^{\alpha_1}...(x_n - a_n)^{\alpha_n}\]
+\begin{equation}\alpha! = \alpha_1!...\alpha_n!\end{equation}
+\begin{equation}|\alpha| = \alpha_1 + ... + \alpha_n\end{equation}
+\begin{equation}\partial x^\alpha = \partial x_1^{\alpha_1} ... \partial x_n^{\alpha_n}\end{equation}
+\begin{equation}(x - a)^\alpha = (x_1 - a_1)^{\alpha_1}...(x_n - a_n)^{\alpha_n}\end{equation}
 Now, for some examples
 \begin{enumerate}
 
   \item
-  \[\frac{1}{6!y!}12x^6y^7 = \frac{12}{(6, 7)!}(x, y)^{6, 7}\]
+  \begin{equation}\frac{1}{6!y!}12x^6y^7 = \frac{12}{(6, 7)!}(x, y)^{6, 7}\end{equation}
 
   \item
-  \[x^5 + x^4y + x^3y^2 + ... + y^5 = \sum_{\beta + \gamma = 5}(x, y)^{(\beta, \gamma)} = \sum_{|\alpha| = 5}(x, y)^\alpha\]
+  \begin{equation}x^5 + x^4y + x^3y^2 + ... + y^5 = \sum_{\beta + \gamma = 5}(x, y)^{(\beta, \gamma)} = \sum_{|\alpha| = 5}(x, y)^\alpha\end{equation}
   Note that we're assuming here \(\beta, \gamma\) are non-negative. On good days you can just do what we did above, but if it worries you, write it down.
 
   \item
-  \[a_{0, 0} + a_{1, 0}x + a_{0, 1}y + a_{1, 1}xy + a_{2, 0}x^2 + a_{0, 2}y^2 = \sum_{|\alpha| \leq 2}a_{\alpha}(x, y)^{\alpha}\]
+  \begin{equation}a_{0, 0} + a_{1, 0}x + a_{0, 1}y + a_{1, 1}xy + a_{2, 0}x^2 + a_{0, 2}y^2 = \sum_{|\alpha| \leq 2}a_{\alpha}(x, y)^{\alpha}\end{equation}
 
 \end{enumerate}
 
@@ -961,32 +961,32 @@ Now, for some examples
 
 \begin{theorem}
   If \(f: \reals^n \to \reals\) is \(\mc{C}^{k + 1}\) then
-  \[f(a + h) = \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{x^\alpha}(a)h^\alpha + \sum\_{|\alpha| = k + 1}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a + \theta h)h^\alpha\]
+  \begin{equation}f(a + h) = \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{x^\alpha}(a)h^\alpha + \sum\_{|\alpha| = k + 1}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a + \theta h)h^\alpha\end{equation}
   where \(\theta \in (0, 1)\)
 \end{theorem}
 \begin{proof}
   The key idea is
-  \[F(t) = f(a + th)(\text{Old Taylor } + \text{ Chain Rule})\]
+  \begin{equation}F(t) = f(a + th)(\text{Old Taylor } + \text{ Chain Rule})\end{equation}
   More rigorously, we know from single variable calculus that
-  \[F(t) = F(0) + \frac{F'(0)}{1!}t + ... + \frac{F^{(k)}(0)}{k!}t^k + \frac{F^{k + 1}(\theta)}{(k + 1)!}t^{k + 1}\]
+  \begin{equation}F(t) = F(0) + \frac{F'(0)}{1!}t + ... + \frac{F^{(k)}(0)}{k!}t^k + \frac{F^{k + 1}(\theta)}{(k + 1)!}t^{k + 1}\end{equation}
   Set \(t = 1\) to get \(F(1) = f(a + h)\).
   We know \(F(0) = f(a)\). We have
-  \[\left.\frac{dF}{dt}\right|_{t = 0} = \left.\frac{d}{dt}f(a + th)\right|_{t = 0} = \sum_{i = 1}^n\left.\prt{f}{x}(a + th)\right|_{t = 0}\prt{x_i}{t} = \sum_{i = 1}^n\left[\left.\prt{f}{x_i}(a + th)\right|_{t = 0}\right]h_i
-  = \sum_{i = 1}^n\prt{f}{x_i}(a)h_i\]
+  \begin{equation}\left.\frac{dF}{dt}\right|_{t = 0} = \left.\frac{d}{dt}f(a + th)\right|_{t = 0} = \sum_{i = 1}^n\left.\prt{f}{x}(a + th)\right|_{t = 0}\prt{x_i}{t} = \sum_{i = 1}^n\left[\left.\prt{f}{x_i}(a + th)\right|_{t = 0}\right]h_i
+  = \sum_{i = 1}^n\prt{f}{x_i}(a)h_i\end{equation}
   We have
-  \[\left.\frac{d^2F}{dt}\right|_{t = 0} = \sum_{i = 1}^n\left[
+  \begin{equation}\left.\frac{d^2F}{dt}\right|_{t = 0} = \sum_{i = 1}^n\left[
     \sum_{j = 1}^n\frac{\partial^2f}{\partial x_j \partial x_i}(a)h_j
-  \right]h_i\]
+  \right]h_i\end{equation}
   By the magical process of ...,
-  \[\left.\frac{d^kF}{dt^k}\right|_{t = 0} = \sum_{i_1,...,i_k = 1}^n\frac{\partial^kf}{\partial x_{i_1} ... \partial x_{i_k}}(a)h_{i_1}...h_{i_k}\]
+  \begin{equation}\left.\frac{d^kF}{dt^k}\right|_{t = 0} = \sum_{i_1,...,i_k = 1}^n\frac{\partial^kf}{\partial x_{i_1} ... \partial x_{i_k}}(a)h_{i_1}...h_{i_k}\end{equation}
   Now all we need is some combinatorics, combined with the equality of mixed partials (for \(\mc{C}^{k + 1}\) functions), to complete the proof. Recall the \textit{multinomial coefficient}
-  \[{{|\alpha|} \choose {\alpha_1,...,\alpha_n}} = \frac{|\alpha|!}{\alpha_1!...\alpha_n!}\]
+  \begin{equation}{{|\alpha|} \choose {\alpha_1,...,\alpha_n}} = \frac{|\alpha|!}{\alpha_1!...\alpha_n!}\end{equation}
   is the number of ways of taking \(|\alpha|\) things and making \(k\) groups of size \(\alpha_1,...,\alpha_n\).
   We can use this to rewrite the above as
-  \[F^{(S)}(0) = \sum_{|\alpha| = S}\frac{S!}{\alpha_1!...\alpha_S!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\]
+  \begin{equation}F^{(S)}(0) = \sum_{|\alpha| = S}\frac{S!}{\alpha_1!...\alpha_S!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\end{equation}
   So plugging this into our original expression for the Taylor series of \(F\), where we divide the \(S^{th}\) term by \(\frac{1}{S!}\), we have
-  \[F(t) = F(0) + \sum_{i = 1}^k\sum_{|\alpha| = i}\frac{1}{\alpha_1!...\alpha_k!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha
-  = f(a) + \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\]
+  \begin{equation}F(t) = F(0) + \sum_{i = 1}^k\sum_{|\alpha| = i}\frac{1}{\alpha_1!...\alpha_k!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha
+  = f(a) + \sum_{|\alpha| \leq k}\frac{1}{\alpha!}\frac{\partial^{|\alpha|}f}{\partial x^\alpha}(a)h^\alpha\end{equation}
   as desired.
 
 \end{proof}
