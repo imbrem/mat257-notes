@@ -3441,10 +3441,58 @@ We can generalize this with the following lemma:
 
 \subsubsection{Gauss's Theorem}
 
-\TODO{this}
+\begin{theorem}[Gauss's Theorem (Divergence Theorem)]
+
+  Let \(M \subset \reals^n\) be a compact \(n\)-dimensional manifold with boundary, \(n\) be it's unit outward normal on \(\partial M\) and \(F\) be a \(\mc{C}^1\) vector field on \(M\). Then
+  \begin{equation}
+    \int_M\div F dV = \int_{\partial M}\ip{F}{n}dV
+  \end{equation}
+  i.e.
+  \begin{equation}
+    \int_M\left(\sum_{i = 1}^n\prt{F_i}{x_n}\right) = \int_{\partial M}\left(\sum_{i = 1}^nn_iF_i\right)dV
+  \end{equation}
+
+\end{theorem}
+\begin{proof}
+  Define
+  \begin{equation}
+    \omega = \sum_{i = 1}^n(-1)^{i - 1}F_i dx_1 \wedge ... \wedge dx_{i - 1} \wedge dx_{i + 1} \wedge ... \wedge dx_n
+  \end{equation}
+  on \(M\). Then
+  \begin{equation}
+    d\omega = \div F dx_1 \wedge ... \wedge dx_n = \div F dV
+  \end{equation}
+  On \(\partial M\),
+  \begin{equation}
+    \ip{F}{n}dV = \sum_{i = 1}^nF_in_idV = \sum_{i = 1}^n(-1)^{i - 1}F_i dx_1 \wedge ... \wedge dx_{i - 1} \wedge dx_{i + 1} \wedge ... \wedge dx_n = \omega
+  \end{equation}
+  Hence by Stokes' Theorem
+  \begin{equation}
+    \int_M\div FdV = \int_Md\omega = \int_{\partial M}\omega = \int_{\partial M}\ip{F}{n}dV
+  \end{equation}
+\end{proof}
 
 \subsubsection{Examples}
 
 \TODO{this}
+
+\subsubsection{The Original Stokes' Theorem}
+\begin{theorem}[Stoke's Theorem]
+
+Let \(M \subset \reals^3\) be a compact oriented 2-dimensional manifold with boundary and \(n\) be the unit outward normal on \(M\) determined by the orientation of \(M\). Give \(\partial M\) the induced orientation, and let \(T\) be the vector field on \(\partial M\) with \(ds(T) = 1\), i.e. positively oriented unit tangent vector, i.e. if \(c\) is an orientation preserving \(\mc{C}^1\) curve in \(\partial M\) (which is one to one),
+\begin{equation}
+  ds(c'(t)) = \sqrt{|c'(t)|^2}, T_{c(t)} = \frac{c'(t)}{|c'(t)|}
+\end{equation}
+Let \(F\) be a \(\mc{C}^1\) vector field in an open set containing \(M\). Then
+\begin{equation}
+  \int_M\ip{\curl F}{n}dA = \int_M\ip{\nabla \times F}{n}dA = \int_{\partial M}\ip{F}{T}ds = \int_{\partial M}F_1dx + F_2dy + F_3dz
+\end{equation}
+
+\end{theorem}
+\begin{proof}
+
+\TODO{this}
+
+\end{proof}
 
 \end{document}
